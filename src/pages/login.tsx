@@ -1,53 +1,37 @@
 import React, { useRef } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import LoadingSpinner from '../components/common/LoadingSpinner';
-import { useCreateNewAccount } from '../hooks/auth.hook';
+import MyLink from '../components/common/MyLink';
+import { useNavigate } from 'react-router';
+import { login } from '../networks/auth';
 
-const Register = () => {
+const Login = () => {
   const navigate = useNavigate();
-  const userNameInputRef = useRef<HTMLInputElement>(null);
   const emailInputRef = useRef<HTMLInputElement>(null);
   const passWordInputRef = useRef<HTMLInputElement>(null);
 
-  const { mutate: signUp, error, status,isLoading } = useCreateNewAccount();
-
-  const submitSignup = async () => {
-    const newAccountData = {
+  const loginSubmit = async () => {
+    const response = await login({
       user: {
-        username: userNameInputRef.current?.value as string,
         email: emailInputRef.current?.value as string,
-        password:passWordInputRef.current?.value as string,
-      }
-    }
-    await signUp(newAccountData);
+        password: passWordInputRef.current?.value as string,
+      },
+    });
+    console.log(response);
     navigate('/');
+  };
 
-  }
-
-  if(status === 'loading') return <LoadingSpinner />
-  if(status === 'error') return <>{error}</>
   return (
     <>
       <div className="auth-page">
         <div className="container page">
           <div className="row">
             <div className="col-md-6 offset-md-3 col-xs-12">
-              <h1 className="text-xs-center">Sign Up</h1>
+              <h1 className="text-xs-center">Sign In</h1>
               <p className="text-xs-center">
-                <Link to="/login">Have an account?</Link>
+                <MyLink href="/signUp">Need an account?</MyLink>
               </p>
 
-              <form onSubmit={submitSignup}>
+              <form onSubmit={loginSubmit}>
                 <fieldset>
-                  <fieldset className="form-group">
-                    <input
-                      className="form-control form-control-lg"
-                      type="text"
-                      placeholder="Username"
-                      ref={userNameInputRef}
-                    />
-                  </fieldset>
-
                   <fieldset className="form-group">
                     <input
                       className="form-control form-control-lg"
@@ -61,13 +45,14 @@ const Register = () => {
                     <input
                       className="form-control form-control-lg"
                       type="password"
+                      autoComplete="on"
                       placeholder="Password"
                       ref={passWordInputRef}
                     />
                   </fieldset>
 
-                  <button className="btn btn-lg btn-primary pull-xs-right" type="submit" onClick={submitSignup} disabled={isLoading}>
-                    Sign up
+                  <button className="btn btn-lg btn-primary pull-xs-right" type="submit" onClick={loginSubmit}>
+                    Sign in
                   </button>
                 </fieldset>
               </form>
@@ -79,4 +64,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default Login;
