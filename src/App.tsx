@@ -2,7 +2,6 @@ import React, { Suspense } from 'react';
 import { hot } from 'react-hot-loader/root';
 import './reset.scss';
 import { Route, Routes, BrowserRouter } from 'react-router-dom';
-
 import Home from './pages/Home';
 
 const NotFound = () => {
@@ -16,6 +15,10 @@ const NotFound = () => {
 const App: React.FC = () => {
   return (
     <BrowserRouter>
+      <head>
+        <title>RealWorld | TaurusBoong</title>
+        <link rel="stylesheet" href="//demo.productionready.io/main.css" />
+      </head>
       <Suspense fallback={<></>}>
         <Routes>
           <Route path="/" element={<Home />} />
