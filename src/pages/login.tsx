@@ -1,20 +1,23 @@
 import React, { useRef } from 'react';
 import MyLink from '../components/common/MyLink';
 import { useNavigate } from 'react-router';
-import { login } from '../networks/auth';
+import { useLogin } from '../hooks/auth.hook';
 
 const Login = () => {
   const navigate = useNavigate();
   const emailInputRef = useRef<HTMLInputElement>(null);
   const passWordInputRef = useRef<HTMLInputElement>(null);
 
+  const { mutate: login, status } = useLogin();
+
   const loginSubmit = async () => {
-    const response = await login({
+    const loginData = {
       user: {
         email: emailInputRef.current?.value as string,
         password: passWordInputRef.current?.value as string,
       },
-    });
+    };
+    const response = await login(loginData);
     console.log(response);
     navigate('/');
   };

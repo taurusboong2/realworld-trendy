@@ -1,14 +1,15 @@
-import React, { FC,Suspense } from 'react';
+import React, { FC, Suspense } from 'react';
 import { hot } from 'react-hot-loader/root';
 import './reset.scss';
 import { Route, Routes, BrowserRouter } from 'react-router-dom';
 import { QueryClientProvider, QueryClient } from 'react-query';
-import { ReactQueryDevtools } from 'react-query/devtools'
+import { ReactQueryDevtools } from 'react-query/devtools';
 import Home from './pages/Home';
 import Layout from './components/common/Layout';
 import Register from './pages/register';
+import Login from './pages/login';
 
-const queryClient = new QueryClient()
+const queryClient = new QueryClient();
 
 const NotFound = () => {
   return (
@@ -18,7 +19,7 @@ const NotFound = () => {
   );
 };
 
-const App:FC = () => {
+const App: FC = () => {
   return (
     <BrowserRouter>
       <QueryClientProvider client={queryClient}>
@@ -30,6 +31,7 @@ const App:FC = () => {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/register" element={<Register />} />
+              <Route path="/login" element={<Login />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Suspense>
