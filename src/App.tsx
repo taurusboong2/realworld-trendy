@@ -4,6 +4,7 @@ import './reset.scss';
 import { Route, Routes, BrowserRouter } from 'react-router-dom';
 import Home from './pages/Home';
 import Layout from './components/common/Layout';
+import Register from './pages/register';
 
 const NotFound = () => {
   return (
@@ -24,6 +25,7 @@ const App: React.FC = () => {
         <Suspense fallback={<></>}>
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/register" element={<Register />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>

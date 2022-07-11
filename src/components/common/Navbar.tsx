@@ -32,7 +32,7 @@ const NavBar: FC<Props> = () => {
               </MyLink>
             </li>
             <li className="nav-item">
-              <MyLink className="nav-link" href="">
+              <MyLink className="nav-link" href="register">
                 Sign in
               </MyLink>
             </li>
