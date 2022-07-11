@@ -8,7 +8,7 @@ const Login = () => {
   const emailInputRef = useRef<HTMLInputElement>(null);
   const passWordInputRef = useRef<HTMLInputElement>(null);
 
-  const { mutate: login, status } = useLogin();
+  const { mutateAsync: login, data, status, context } = useLogin();
 
   const loginSubmit = async () => {
     const loginData = {
@@ -17,8 +17,9 @@ const Login = () => {
         password: passWordInputRef.current?.value as string,
       },
     };
-    const response = await login(loginData);
-    console.log(response);
+    await login(loginData);
+    console.log(`context: `, context);
+    console.log(`data: `, data);
     navigate('/');
   };
 

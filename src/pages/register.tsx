@@ -9,23 +9,22 @@ const Register = () => {
   const emailInputRef = useRef<HTMLInputElement>(null);
   const passWordInputRef = useRef<HTMLInputElement>(null);
 
-  const { mutate: signUp, error, status,isLoading } = useCreateNewAccount();
+  const { mutate: signUp, error, status, isLoading, data } = useCreateNewAccount();
 
-  const submitSignup = async () => {
+  const submitSignup = () => {
     const newAccountData = {
       user: {
         username: userNameInputRef.current?.value as string,
         email: emailInputRef.current?.value as string,
-        password:passWordInputRef.current?.value as string,
-      }
-    }
-    await signUp(newAccountData);
+        password: passWordInputRef.current?.value as string,
+      },
+    };
+    signUp(newAccountData);
     navigate('/');
+  };
 
-  }
-
-  if(status === 'loading') return <LoadingSpinner />
-  if(status === 'error') return <>{error}</>
+  if (status === 'loading') return <LoadingSpinner />;
+  if (status === 'error') return <>{error}</>;
   return (
     <>
       <div className="auth-page">
@@ -66,7 +65,11 @@ const Register = () => {
                     />
                   </fieldset>
 
-                  <button className="btn btn-lg btn-primary pull-xs-right" type="submit" onClick={submitSignup} disabled={isLoading}>
+                  <button
+                    className="btn btn-lg btn-primary pull-xs-right"
+                    type="submit"
+                    onClick={submitSignup}
+                    disabled={isLoading}>
                     Sign up
                   </button>
                 </fieldset>

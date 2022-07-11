@@ -1,4 +1,3 @@
-import { Certificate } from 'crypto';
 import { api } from '../config/api';
 import { LoginData, NewAccountType } from '../types/auth';
 

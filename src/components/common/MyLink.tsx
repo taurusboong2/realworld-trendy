@@ -8,8 +8,8 @@ type Props = {
 };
 
 const MyLink = ({ className, href, children }: Props) => (
-  <Link to={href}>
-    <a className={className}>{children}</a>
+  <Link to={href} className={className}>
+    {children}
   </Link>
 );
 

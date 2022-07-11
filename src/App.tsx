@@ -21,24 +21,26 @@ const NotFound = () => {
 
 const App: FC = () => {
   return (
-    <BrowserRouter>
-      <QueryClientProvider client={queryClient}>
-        <Layout>
-          <head>
-            <link rel="stylesheet" href="//demo.productionready.io/main.css" />
-          </head>
-          <Suspense fallback={<></>}>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/register" element={<Register />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </Suspense>
-        </Layout>
-        <ReactQueryDevtools initialIsOpen={false} />
-      </QueryClientProvider>
-    </BrowserRouter>
+    <>
+      <head>
+        <link rel="stylesheet" href="//demo.productionready.io/main.css" />
+      </head>
+      <BrowserRouter>
+        <QueryClientProvider client={queryClient}>
+          <Layout>
+            <Suspense fallback={<></>}>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/register" element={<Register />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </Suspense>
+          </Layout>
+          <ReactQueryDevtools initialIsOpen={false} />
+        </QueryClientProvider>
+      </BrowserRouter>
+    </>
   );
 };
 
