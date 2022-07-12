@@ -9,6 +9,7 @@ import Layout from './components/common/Layout';
 import Register from './pages/register';
 import Login from './pages/login';
 import Settings from './pages/settings';
+import Profile from './pages/profile';
 
 const queryClient = new QueryClient();
 
@@ -35,6 +36,7 @@ const App: FC = () => {
                 <Route path="/register" element={<Register />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/settings" element={<Settings />} />
+                <Route path="/profile" element={<Profile />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </Suspense>

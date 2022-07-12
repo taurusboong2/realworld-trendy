@@ -1,13 +1,10 @@
 import React, { FC } from 'react';
-import { useFetchUserToken } from '../../hooks/auth.hook';
+import { useFetchCurrentUser, useFetchUserToken } from '../../hooks/auth.hook';
 import MyLink from './MyLink';
 
-type Props = {
-  name?: string | number | string[];
-};
-
-const NavBar: FC<Props> = () => {
+const NavBar: FC = () => {
   const { data: userToken } = useFetchUserToken();
+  const { data: user } = useFetchCurrentUser();
 
   return (
     <>
@@ -34,6 +31,11 @@ const NavBar: FC<Props> = () => {
                   <MyLink className="nav-link" href="/settings">
                     <i className="ion-gear-a" />
                     &nbsp;Settings
+                  </MyLink>
+                </li>
+                <li className="nav-item">
+                  <MyLink className="nav-link" href="/profile">
+                    {user?.username}
                   </MyLink>
                 </li>
               </>
