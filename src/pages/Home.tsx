@@ -5,7 +5,6 @@ import { useFetchCurrentUser } from '../hooks/auth.hook';
 
 const Home = () => {
   const { data } = useFetchCurrentUser();
-  console.log(data);
 
   return (
     <div className="home-page">

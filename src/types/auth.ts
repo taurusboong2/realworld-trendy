@@ -22,3 +22,11 @@ export type UserData = {
     image?: string;
   };
 };
+
+export type UserInfo = {
+  email: string;
+  token: string;
+  username: string;
+  bio?: string;
+  image?: string;
+};

@@ -9,7 +9,7 @@ const Register = () => {
   const emailInputRef = useRef<HTMLInputElement>(null);
   const passWordInputRef = useRef<HTMLInputElement>(null);
 
-  const { mutate: signUp, error, status, isLoading, data } = useCreateNewAccount();
+  const { mutate: signUp, error, status, isLoading } = useCreateNewAccount();
 
   const submitSignup = () => {
     const newAccountData = {
