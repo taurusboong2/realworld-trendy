@@ -1,11 +1,24 @@
-import React, { FC, useRef } from 'react';
+import React, { FC, useEffect, useRef } from 'react';
+import { useFetchCurrentUser } from '../../hooks/auth.hook';
 
 const SettingsForm: FC = () => {
   const imageInput = useRef<HTMLInputElement>(null);
-  const usernameInput = useRef<HTMLInputElement>(null);
+  const usernameInput = useRef<HTMLInputElement | null>(null);
   const bioInput = useRef<HTMLTextAreaElement>(null);
   const emailInput = useRef<HTMLInputElement>(null);
   const passwordInput = useRef<HTMLInputElement>(null);
+
+  const { data: currentUser } = useFetchCurrentUser();
+
+  useEffect(() => {
+    if (currentUser) {
+      if (typeof window !== 'undefined') {
+        imageInput.current!.value = currentUser!.image as string;
+        usernameInput.current!.value = currentUser!.username as string;
+        emailInput.current!.value = currentUser!.email as string;
+      }
+    }
+  }, [usernameInput.current]);
 
   return (
     <>

@@ -2,7 +2,7 @@ import React, { FC, Suspense } from 'react';
 import { hot } from 'react-hot-loader/root';
 import './reset.scss';
 import { Route, Routes, BrowserRouter } from 'react-router-dom';
-import { QueryClientProvider, QueryClient } from 'react-query';
+import { QueryClientProvider, QueryClient, QueryCache, MutationCache } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import Home from './pages/Home';
 import Layout from './components/common/Layout';
@@ -12,7 +12,12 @@ import Settings from './pages/settings';
 import Profile from './pages/profile';
 import Edit from './pages/edit';
 
-const queryClient = new QueryClient();
+const mutationCache = new MutationCache();
+const queryCache = new QueryCache();
+const queryClient = new QueryClient({
+  queryCache,
+  mutationCache,
+});
 
 const NotFound = () => {
   return (

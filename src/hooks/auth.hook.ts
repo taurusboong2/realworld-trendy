@@ -31,16 +31,18 @@ export const useLogin = () => {
 
 export const useFetchCurrentUser = () => {
   return useQuery('current-user', fetchCurentUser, {
-    cacheTime: 30000,
+    cacheTime: Infinity,
+    staleTime: Infinity,
     select: data => {
       const userData: UserInfo = data.data.user;
       return userData;
     },
+    retry: false,
   });
 };
 
 export const useFetchUserToken = () => {
   return useQuery('current-token', getTokenFromStorage, {
-    cacheTime: 30000,
+    cacheTime: Infinity,
   });
 };

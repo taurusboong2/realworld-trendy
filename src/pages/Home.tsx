@@ -1,10 +1,11 @@
 import React from 'react';
+import { useQueryClient } from 'react-query';
 import Banner from '../components/Home/Banner';
 import Container from '../components/Home/Container';
-import { useFetchCurrentUser } from '../hooks/auth.hook';
 
 const Home = () => {
-  const { data } = useFetchCurrentUser();
+  const queryClient = useQueryClient();
+  console.log(queryClient);
 
   return (
     <div className="home-page">
