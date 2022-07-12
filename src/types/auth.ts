@@ -11,4 +11,14 @@ export type LoginData = {
     email: string;
     password: string;
   };
-}
+};
+
+export type UserData = {
+  user: {
+    email: string;
+    token: string;
+    username: string;
+    bio?: string;
+    image?: string;
+  };
+};

@@ -5,7 +5,6 @@ import { useLogin } from '../hooks/auth.hook';
 import LoadingSpinner from '../components/common/LoadingSpinner';
 
 const Login = () => {
-  const navigate = useNavigate();
   const emailInputRef = useRef<HTMLInputElement>(null);
   const passWordInputRef = useRef<HTMLInputElement>(null);
 
@@ -19,7 +18,6 @@ const Login = () => {
       },
     };
     await login(loginData);
-    navigate('/');
   };
 
   if (status === 'loading') return <LoadingSpinner />;

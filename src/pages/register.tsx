@@ -20,7 +20,10 @@ const Register = () => {
       },
     };
     signUp(newAccountData);
-    navigate('/');
+    if (status === 'success') {
+      alert('회원가입이 성공적으로 진행되었습니다.');
+      navigate('/');
+    }
   };
 
   if (status === 'loading') return <LoadingSpinner />;
