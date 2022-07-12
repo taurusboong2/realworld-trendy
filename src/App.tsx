@@ -17,6 +17,11 @@ const queryCache = new QueryCache();
 const queryClient = new QueryClient({
   queryCache,
   mutationCache,
+  defaultOptions: {
+    queries: {
+      staleTime: Infinity,
+    },
+  },
 });
 
 const NotFound = () => {

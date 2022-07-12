@@ -1,10 +1,14 @@
 import React, { FC } from 'react';
-import { useFetchCurrentUser, useFetchUserToken } from '../../hooks/auth.hook';
+import { useQuery, useQueryClient } from 'react-query';
+import { useFetchUserToken, useGetCurrentUserData } from '../../hooks/auth.hook';
 import MyLink from './MyLink';
 
 const NavBar: FC = () => {
+  const queryClient = useQueryClient();
   const { data: userToken } = useFetchUserToken();
-  const { data: user } = useFetchCurrentUser();
+  const userData = queryClient.getQueryData('login-user');
+
+  console.log(userData);
 
   return (
     <>
@@ -35,7 +39,7 @@ const NavBar: FC = () => {
                 </li>
                 <li className="nav-item">
                   <MyLink className="nav-link" href="/profile">
-                    {user?.username}
+                    {userData!.username}
                   </MyLink>
                 </li>
               </>

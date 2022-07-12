@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from 'react-query';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { createNewAccount, fetchCurentUser, login, updateCurrentUserData } from '../networks/auth';
 import { useNavigate } from 'react-router';
 import { UserData, UserInfo } from '../types/auth';
@@ -18,11 +18,13 @@ export const useCreateNewAccount = () => {
 
 export const useLogin = () => {
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
 
   return useMutation(login, {
     onSuccess: data => {
       const userData: UserData = data.data;
       setTokenFromStorage(userData.user.token);
+      queryClient.setQueryData('login-user', userData);
       alert(`환영합니다 ${userData.user.username}님!`);
       navigate('/');
     },
