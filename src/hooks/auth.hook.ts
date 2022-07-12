@@ -2,14 +2,15 @@ import { useQuery, useMutation } from 'react-query';
 import { createNewAccount, login } from '../networks/auth';
 import { useNavigate } from 'react-router';
 import { UserData } from '../types/auth';
+import { setTokenFromStorage } from '../commons/tokenStorage';
 
 export const useCreateNewAccount = () => {
   const navigate = useNavigate();
 
   return useMutation(createNewAccount, {
     onSuccess: data => {
-      console.log(data);
-      alert('회원가입이 성공적으로 진행되었습니다.');
+      const userName = data.data.user.username;
+      alert(`${userName}님의 회원가입이 성공적으로 진행되었습니다.`);
       navigate('/');
     },
   });
@@ -21,7 +22,7 @@ export const useLogin = () => {
   return useMutation(login, {
     onSuccess: data => {
       const userData: UserData = data.data;
-      console.log(userData);
+      setTokenFromStorage(userData.user.token);
       alert(`환영합니다 ${userData.user.username}님!`);
       navigate('/');
     },

@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+import { getTokenFromStorage } from '../../commons/tokenStorage';
 import MyLink from './MyLink';
 
 type Props = {
@@ -6,6 +7,9 @@ type Props = {
 };
 
 const NavBar: FC<Props> = () => {
+  const userToken = getTokenFromStorage();
+  console.log(`토큰:`, userToken);
+
   return (
     <>
       <nav className="navbar navbar-light">
@@ -19,28 +23,35 @@ const NavBar: FC<Props> = () => {
                 Home
               </MyLink>
             </li>
-            <li className="nav-item">
-              <MyLink className="nav-link" href="">
-                <i className="ion-compose" />
-                &nbsp;New Article
-              </MyLink>
-            </li>
-            <li className="nav-item">
-              <MyLink className="nav-link" href="">
-                <i className="ion-gear-a" />
-                &nbsp;Settings
-              </MyLink>
-            </li>
-            <li className="nav-item">
-              <MyLink className="nav-link" href="/login">
-                Sign in
-              </MyLink>
-            </li>
-            <li className="nav-item">
-              <MyLink className="nav-link" href="/register">
-                Sign up
-              </MyLink>
-            </li>
+            {userToken ? (
+              <>
+                <li className="nav-item">
+                  <MyLink className="nav-link" href="">
+                    <i className="ion-compose" />
+                    &nbsp;New Article
+                  </MyLink>
+                </li>
+                <li className="nav-item">
+                  <MyLink className="nav-link" href="/settings">
+                    <i className="ion-gear-a" />
+                    &nbsp;Settings
+                  </MyLink>
+                </li>
+              </>
+            ) : (
+              <>
+                <li className="nav-item">
+                  <MyLink className="nav-link" href="/login">
+                    Sign in
+                  </MyLink>
+                </li>
+                <li className="nav-item">
+                  <MyLink className="nav-link" href="/register">
+                    Sign up
+                  </MyLink>
+                </li>
+              </>
+            )}
           </ul>
         </div>
       </nav>
