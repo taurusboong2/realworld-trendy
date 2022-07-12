@@ -2,13 +2,14 @@ import React, { useRef } from 'react';
 import MyLink from '../components/common/MyLink';
 import { useNavigate } from 'react-router';
 import { useLogin } from '../hooks/auth.hook';
+import LoadingSpinner from '../components/common/LoadingSpinner';
 
 const Login = () => {
   const navigate = useNavigate();
   const emailInputRef = useRef<HTMLInputElement>(null);
   const passWordInputRef = useRef<HTMLInputElement>(null);
 
-  const { mutateAsync: login, data, status, context } = useLogin();
+  const { mutateAsync: login, status, error } = useLogin();
 
   const loginSubmit = async () => {
     const loginData = {
@@ -18,11 +19,11 @@ const Login = () => {
       },
     };
     await login(loginData);
-    console.log(`context: `, context);
-    console.log(`data: `, data);
     navigate('/');
   };
 
+  if (status === 'loading') return <LoadingSpinner />;
+  if (status === 'error') return <>{error}</>;
   return (
     <>
       <div className="auth-page">
