@@ -1,5 +1,5 @@
 import { useMutation, useQuery } from 'react-query';
-import { createNewAccount, fetchCurentUser, login } from '../networks/auth';
+import { createNewAccount, fetchCurentUser, login, updateCurrentUserData } from '../networks/auth';
 import { useNavigate } from 'react-router';
 import { UserData, UserInfo } from '../types/auth';
 import { getTokenFromStorage, setTokenFromStorage } from '../commons/tokenStorage';
@@ -44,5 +44,17 @@ export const useFetchCurrentUser = () => {
 export const useFetchUserToken = () => {
   return useQuery('current-token', getTokenFromStorage, {
     cacheTime: Infinity,
+  });
+};
+
+export const useUpdateCurrentUserData = () => {
+  const navigate = useNavigate();
+
+  return useMutation(updateCurrentUserData, {
+    onSuccess: data => {
+      console.log(data);
+      alert('회원정보가 성공적으로 수정되었습니다.');
+      navigate('/');
+    },
   });
 };

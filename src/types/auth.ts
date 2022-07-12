@@ -30,3 +30,13 @@ export type UserInfo = {
   bio?: string;
   image?: string;
 };
+
+export type UpdateUserData = {
+  user: {
+    username: string;
+    password: string;
+    email: string;
+    bio?: string;
+    image?: string;
+  };
+};

@@ -1,5 +1,5 @@
 import { api, apiWithAuth } from '../config/api';
-import { LoginData, NewAccountType } from '../types/auth';
+import { LoginData, NewAccountType, UpdateUserData } from '../types/auth';
 
 export const createNewAccount = (newAccountData: NewAccountType) => {
   const response = api.post(`/users`, newAccountData);
@@ -13,5 +13,10 @@ export const login = (loginData: LoginData) => {
 
 export const fetchCurentUser = () => {
   const response = apiWithAuth.get(`/user`);
+  return response;
+};
+
+export const updateCurrentUserData = (updataUserData: UpdateUserData) => {
+  const response = apiWithAuth.put(`/user`, updataUserData);
   return response;
 };

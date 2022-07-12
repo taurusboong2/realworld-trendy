@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useRef } from 'react';
-import { useFetchCurrentUser } from '../../hooks/auth.hook';
+import { useFetchCurrentUser, useUpdateCurrentUserData } from '../../hooks/auth.hook';
 
 const SettingsForm: FC = () => {
   const imageInput = useRef<HTMLInputElement>(null);
@@ -9,6 +9,7 @@ const SettingsForm: FC = () => {
   const passwordInput = useRef<HTMLInputElement>(null);
 
   const { data: currentUser } = useFetchCurrentUser();
+  const { mutate: updateUserData, isLoading } = useUpdateCurrentUserData();
 
   useEffect(() => {
     if (currentUser) {
@@ -20,9 +21,22 @@ const SettingsForm: FC = () => {
     }
   }, [usernameInput.current]);
 
+  const submitUpdateUser = () => {
+    const newData = {
+      user: {
+        username: usernameInput.current?.value as string,
+        email: emailInput.current?.value as string,
+        bio: bioInput.current?.value as string,
+        image: imageInput.current?.value as string,
+        password: passwordInput.current?.value as string,
+      },
+    };
+    updateUserData(newData);
+  };
+
   return (
     <>
-      <form>
+      <form onSubmit={submitUpdateUser}>
         <fieldset>
           <fieldset className="form-group">
             <input className="form-control" type="text" placeholder="URL of profile picture" ref={imageInput} />
@@ -50,7 +64,9 @@ const SettingsForm: FC = () => {
               ref={passwordInput}
             />
           </fieldset>
-          <button className="btn btn-lg btn-primary pull-xs-right">Update Settings</button>
+          <button className="btn btn-lg btn-primary pull-xs-right" onClick={submitUpdateUser} disabled={isLoading}>
+            Update Settings
+          </button>
         </fieldset>
       </form>
     </>
