@@ -1,9 +1,14 @@
 import React from 'react';
 import { useFetchCurrentUser } from '../hooks/auth.hook';
 import UserInfo from '../components/Profile/UserInfo';
+import { useFetchArticleList } from '../hooks/article.hook';
+import Feed from '../components/common/Feed';
+import { ArticleType } from '../types/article';
 
 const Profile = () => {
   const { data: user } = useFetchCurrentUser();
+  const { data: articles } = useFetchArticleList();
+  console.log(articles);
 
   return (
     <>
@@ -27,6 +32,20 @@ const Profile = () => {
                   </li>
                 </ul>
               </div>
+              {articles?.map((article: ArticleType) => {
+                return (
+                  <Feed
+                    key={article.slug}
+                    author={article.author.username}
+                    date={article.createdAt}
+                    heart={article.favoritesCount}
+                    title={article.title}
+                    description={article.description}
+                    slug={article.slug}
+                    image={article.author.image}
+                  />
+                );
+              })}
             </div>
           </div>
         </div>

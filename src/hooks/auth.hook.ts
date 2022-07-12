@@ -1,4 +1,4 @@
-import { useMutation, QueryCache, useQuery } from 'react-query';
+import { useMutation, useQuery } from 'react-query';
 import { createNewAccount, fetchCurentUser, login } from '../networks/auth';
 import { useNavigate } from 'react-router';
 import { UserData, UserInfo } from '../types/auth';
