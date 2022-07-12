@@ -18,9 +18,30 @@ const EditFrom: FC<Props> = ({ isCreatePage }) => {
             <div className="col-md-10 offset-md-1 col-xs-12">
               <form>
                 <fieldset>
-                  <ArticleInput input={true} placeholder="타이틀을 입력하세요. *필수" ref={titleRef} />
-                  <ArticleInput input={false} placeholder="내용을 입력하세요. *필수" ref={descriptionRef} />
-                  <ArticleInput input={true} placeholder="바디를 입력하세요. *필수" ref={bodyRef} />
+                  <fieldset className="form-group">
+                    <input
+                      type="text"
+                      className="form-control form-control-lg"
+                      placeholder="제목을 입력해주세요."
+                      ref={titleRef}
+                    />
+                  </fieldset>
+                  <fieldset className="form-group">
+                    <textarea
+                      className="form-control"
+                      rows={8}
+                      placeholder="내용을 입력해주세요."
+                      ref={descriptionRef}
+                    />
+                  </fieldset>
+                  <fieldset className="form-group">
+                    <input
+                      type="text"
+                      className="form-control form-control-lg"
+                      placeholder="바디를 입력해주세요."
+                      ref={bodyRef}
+                    />
+                  </fieldset>
                   <button className="btn btn-lg pull-xs-right btn-primary" type="button">
                     {isCreatePage ? 'Publish' : 'Update'} Article
                   </button>
