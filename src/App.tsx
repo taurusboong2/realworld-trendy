@@ -10,6 +10,7 @@ import Register from './pages/register';
 import Login from './pages/login';
 import Settings from './pages/settings';
 import Profile from './pages/profile';
+import Edit from './pages/edit';
 
 const queryClient = new QueryClient();
 
@@ -37,6 +38,7 @@ const App: FC = () => {
                 <Route path="/login" element={<Login />} />
                 <Route path="/settings" element={<Settings />} />
                 <Route path="/profile" element={<Profile />} />
+                <Route path="/edit" element={<Edit />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </Suspense>

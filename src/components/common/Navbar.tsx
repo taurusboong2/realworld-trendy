@@ -22,7 +22,7 @@ const NavBar: FC = () => {
             {userToken ? (
               <>
                 <li className="nav-item">
-                  <MyLink className="nav-link" href="">
+                  <MyLink className="nav-link" href="/edit">
                     <i className="ion-compose" />
                     &nbsp;New Article
                   </MyLink>

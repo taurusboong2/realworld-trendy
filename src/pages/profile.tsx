@@ -8,7 +8,6 @@ import { ArticleType } from '../types/article';
 const Profile = () => {
   const { data: user } = useFetchCurrentUser();
   const { data: articles } = useFetchArticleList();
-  console.log(articles);
 
   return (
     <>
