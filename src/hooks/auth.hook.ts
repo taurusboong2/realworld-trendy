@@ -2,7 +2,7 @@ import { useMutation, QueryCache, useQuery } from 'react-query';
 import { createNewAccount, fetchCurentUser, login } from '../networks/auth';
 import { useNavigate } from 'react-router';
 import { UserData } from '../types/auth';
-import { setTokenFromStorage } from '../commons/tokenStorage';
+import { getTokenFromStorage, setTokenFromStorage } from '../commons/tokenStorage';
 
 export const useCreateNewAccount = () => {
   const navigate = useNavigate();
@@ -29,10 +29,12 @@ export const useLogin = () => {
   });
 };
 
-export const useFetchCurrentUser = (onSuccess, onError) => {
+export const useFetchCurrentUser = () => {
   return useQuery('current-user', fetchCurentUser, {
-    onSuccess,
-    onError,
     cacheTime: 30000,
   });
+};
+
+export const useFetchUserToken = () => {
+  return useQuery('current-token', getTokenFromStorage);
 };

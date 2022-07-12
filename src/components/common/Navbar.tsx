@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { getTokenFromStorage } from '../../commons/tokenStorage';
+import { useFetchUserToken } from '../../hooks/auth.hook';
 import MyLink from './MyLink';
 
 type Props = {
@@ -7,8 +7,7 @@ type Props = {
 };
 
 const NavBar: FC<Props> = () => {
-  const userToken = getTokenFromStorage();
-  console.log(`토큰:`, userToken);
+  const { data: userToken } = useFetchUserToken();
 
   return (
     <>
