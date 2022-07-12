@@ -11,3 +11,12 @@ export type ArticleType = {
   favorited: boolean;
   tagList: string[] | string;
 };
+
+export type NewArticleData = {
+  article: {
+    title: string;
+    description: string;
+    body: string;
+    tagList?: string[];
+  };
+};

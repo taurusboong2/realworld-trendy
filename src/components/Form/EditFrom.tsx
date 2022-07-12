@@ -1,5 +1,5 @@
 import React, { FC, useRef } from 'react';
-import ArticleInput from '../common/ArticleInput';
+import { useCreateNewArticle } from '../../hooks/article.hook';
 
 type Props = {
   isCreatePage: boolean;
@@ -9,6 +9,24 @@ const EditFrom: FC<Props> = ({ isCreatePage }) => {
   const titleRef = useRef<HTMLInputElement>(null);
   const descriptionRef = useRef<HTMLTextAreaElement>(null);
   const bodyRef = useRef<HTMLInputElement>(null);
+
+  const { mutate: createNewArticle, isLoading: isCreating } = useCreateNewArticle();
+
+  const handleSubmitCreate = async () => {
+    const newArticleData = {
+      article: {
+        title: titleRef.current?.value as string,
+        description: descriptionRef.current?.value as string,
+        body: bodyRef.current?.value as string,
+        tagList: [],
+      },
+    };
+    await createNewArticle(newArticleData);
+  };
+
+  const handleSubmitUpdate = () => {
+    console.log('업데이트');
+  };
 
   return (
     <>
@@ -42,7 +60,11 @@ const EditFrom: FC<Props> = ({ isCreatePage }) => {
                       ref={bodyRef}
                     />
                   </fieldset>
-                  <button className="btn btn-lg pull-xs-right btn-primary" type="button">
+                  <button
+                    className="btn btn-lg pull-xs-right btn-primary"
+                    type="button"
+                    onClick={isCreatePage ? handleSubmitCreate : handleSubmitUpdate}
+                    disabled={isCreating}>
                     {isCreatePage ? 'Publish' : 'Update'} Article
                   </button>
                 </fieldset>
