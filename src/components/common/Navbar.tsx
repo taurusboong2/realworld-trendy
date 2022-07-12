@@ -14,12 +14,12 @@ const NavBar: FC<Props> = () => {
     <>
       <nav className="navbar navbar-light">
         <div className="container">
-          <MyLink className="navbar-brand" href="index.html">
+          <MyLink className="navbar-brand" href="/">
             conduit
           </MyLink>
           <ul className="nav navbar-nav pull-xs-right">
             <li className="nav-item">
-              <MyLink className="nav-link active" href="">
+              <MyLink className="nav-link active" href="/">
                 Home
               </MyLink>
             </li>

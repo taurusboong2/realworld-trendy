@@ -1,6 +1,5 @@
 import React, { useRef } from 'react';
 import MyLink from '../components/common/MyLink';
-import { useNavigate } from 'react-router';
 import { useLogin } from '../hooks/auth.hook';
 import LoadingSpinner from '../components/common/LoadingSpinner';
 

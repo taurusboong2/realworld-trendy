@@ -1,5 +1,5 @@
-import { useQuery, useMutation } from 'react-query';
-import { createNewAccount, login } from '../networks/auth';
+import { useMutation, QueryCache, useQuery } from 'react-query';
+import { createNewAccount, fetchCurentUser, login } from '../networks/auth';
 import { useNavigate } from 'react-router';
 import { UserData } from '../types/auth';
 import { setTokenFromStorage } from '../commons/tokenStorage';
@@ -26,5 +26,13 @@ export const useLogin = () => {
       alert(`환영합니다 ${userData.user.username}님!`);
       navigate('/');
     },
+  });
+};
+
+export const useFetchCurrentUser = (onSuccess, onError) => {
+  return useQuery('current-user', fetchCurentUser, {
+    onSuccess,
+    onError,
+    cacheTime: 30000,
   });
 };
