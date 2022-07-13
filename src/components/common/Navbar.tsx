@@ -1,14 +1,12 @@
 import React, { FC } from 'react';
-import { useQuery, useQueryClient } from 'react-query';
-import { useFetchUserToken, useGetCurrentUserData } from '../../hooks/auth.hook';
+import { useFetchUserToken, useGetLoginUserData } from '../../hooks/auth.hook';
 import MyLink from './MyLink';
 
 const NavBar: FC = () => {
-  const queryClient = useQueryClient();
   const { data: userToken } = useFetchUserToken();
-  const userData = queryClient.getQueryData('login-user');
+  const { data: loginUser } = useGetLoginUserData();
 
-  console.log(userData);
+  console.log(`로그인 유저 정보:`, loginUser);
 
   return (
     <>
@@ -39,7 +37,7 @@ const NavBar: FC = () => {
                 </li>
                 <li className="nav-item">
                   <MyLink className="nav-link" href="/profile">
-                    {userData!.username}
+                    {loginUser?.username}
                   </MyLink>
                 </li>
               </>

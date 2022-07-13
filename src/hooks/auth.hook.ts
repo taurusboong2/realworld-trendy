@@ -60,3 +60,14 @@ export const useUpdateCurrentUserData = () => {
     },
   });
 };
+
+export const useGetLoginUserData = () => {
+  return useQuery('login-user', fetchCurentUser, {
+    cacheTime: Infinity,
+    staleTime: Infinity,
+    select: data => {
+      const userInfo: UserInfo = data.data.user;
+      return userInfo;
+    },
+  });
+};
