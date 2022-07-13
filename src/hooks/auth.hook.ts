@@ -24,7 +24,8 @@ export const useLogin = () => {
     onSuccess: data => {
       const userData: UserData = data.data;
       setTokenFromStorage(userData.user.token);
-      queryClient.setQueryData('login-user', userData);
+      queryClient.setQueryData('login-user-data', userData);
+      queryClient.setQueryData('login-token', userData.user.token);
       alert(`환영합니다 ${userData.user.username}님!`);
       navigate('/');
     },

@@ -2,8 +2,10 @@ import React, { useRef } from 'react';
 import MyLink from '../components/common/MyLink';
 import { useLogin } from '../hooks/auth.hook';
 import LoadingSpinner from '../components/common/LoadingSpinner';
+import { useQueryClient } from 'react-query';
 
 const Login = () => {
+  const queryClient = useQueryClient();
   const emailInputRef = useRef<HTMLInputElement>(null);
   const passWordInputRef = useRef<HTMLInputElement>(null);
 
@@ -16,7 +18,12 @@ const Login = () => {
         password: passWordInputRef.current?.value as string,
       },
     };
-    await login(loginData);
+    // await login(loginData);
+    await login(loginData).then(res => {
+      queryClient.setQueryData('current-user-data', res.data);
+    });
+    const mutateData = queryClient.getMutationCache();
+    console.log(mutateData);
   };
 
   if (status === 'loading') return <LoadingSpinner />;

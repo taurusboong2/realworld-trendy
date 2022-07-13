@@ -6,8 +6,6 @@ const NavBar: FC = () => {
   const { data: userToken } = useFetchUserToken();
   const { data: loginUser } = useGetLoginUserData();
 
-  console.log(`로그인 유저 정보:`, loginUser);
-
   return (
     <>
       <nav className="navbar navbar-light">
