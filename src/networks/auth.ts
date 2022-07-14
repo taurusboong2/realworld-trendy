@@ -1,22 +1,22 @@
 import { api, apiWithAuth } from '../config/api';
-import { LoginData, NewAccountType, UpdateUserData, UserData, UserInfo } from '../types/auth';
+import { LoginData, NewAccountType, UpdateUserData, UserData } from '../types/auth';
 
-export const createNewAccount = (newAccountData: NewAccountType) => {
-  const response = api.post<UserData>(`/users`, newAccountData);
+export const createNewAccount = async (newAccountData: NewAccountType) => {
+  const response = await api.post<UserData>(`/users`, newAccountData);
   return response;
 };
 
-export const login = (loginData: LoginData) => {
-  const response = api.post<UserData>(`/users/login`, loginData);
+export const login = async (loginData: LoginData) => {
+  const response = await api.post<UserData>(`/users/login`, loginData);
   return response;
 };
 
-export const fetchCurentUser = () => {
-  const response = apiWithAuth.get<UserInfo>(`/user`);
+export const fetchCurentUser = async () => {
+  const response = await apiWithAuth.get<UserData>(`/user`);
   return response;
 };
 
-export const updateCurrentUserData = (updataUserData: UpdateUserData) => {
-  const response = apiWithAuth.put<UserData>(`/user`, updataUserData);
+export const updateCurrentUserData = async (updataUserData: UpdateUserData) => {
+  const response = await apiWithAuth.put<UserData>(`/user`, updataUserData);
   return response;
 };

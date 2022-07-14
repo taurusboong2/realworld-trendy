@@ -1,19 +1,16 @@
 import axios from 'axios';
 import { getTokenFromStorage } from '../commons/tokenStorage';
 
-const currentUserToken = getTokenFromStorage();
+const USER_TOKEN = getTokenFromStorage();
 
 export const api = axios.create({
   baseURL: 'https://boong-realworld-api.herokuapp.com/api',
-  headers: {
-    'Content-Type': ' application/json; charset=utf-8',
-  },
+  headers: {},
 });
 
 export const apiWithAuth = axios.create({
   baseURL: 'https://boong-realworld-api.herokuapp.com/api',
   headers: {
-    'Content-Type': ' application/json; charset=utf-8',
-    Authorization: `Token ${currentUserToken}`,
+    Authorization: `Token ${USER_TOKEN}`,
   },
 });

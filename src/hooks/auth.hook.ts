@@ -1,8 +1,9 @@
-import { useMutation, useQuery, useQueryClient } from 'react-query';
+import { useMutation, useQuery } from 'react-query';
 import { createNewAccount, fetchCurentUser, login, updateCurrentUserData } from '../networks/auth';
 import { useNavigate } from 'react-router';
-import { UserData, UserInfo } from '../types/auth';
 import { getTokenFromStorage, setTokenFromStorage } from '../commons/tokenStorage';
+import { UserInfo } from '../types/auth';
+import { apiWithAuth } from '../config/api';
 
 export const useCreateNewAccount = () => {
   const navigate = useNavigate();
@@ -18,14 +19,12 @@ export const useCreateNewAccount = () => {
 
 export const useLogin = () => {
   const navigate = useNavigate();
-  const queryClient = useQueryClient();
 
   return useMutation(login, {
     onSuccess: data => {
-      const userData: UserData = data.data;
+      const userData = data.data;
+      apiWithAuth.defaults.headers['Authorization'] = `Token ${userData.user.token}`;
       setTokenFromStorage(userData.user.token);
-      queryClient.setQueryData('login-user-data', userData);
-      queryClient.setQueryData('login-token', userData.user.token);
       alert(`환영합니다 ${userData.user.username}님!`);
       navigate('/');
     },
@@ -37,8 +36,8 @@ export const useFetchCurrentUser = () => {
     cacheTime: Infinity,
     staleTime: Infinity,
     select: data => {
-      const userData: UserInfo = data.data.user;
-      return userData;
+      const userInfo: UserInfo = data.data.user;
+      return userInfo;
     },
     retry: false,
   });
