@@ -73,9 +73,13 @@ export const useUpdateCurrentUserData = () => {
   const queryClient = useQueryClient();
 
   return useMutation(updateCurrentUserData, {
-    onSuccess: async () => {
+    onSuccess: async data => {
+      console.log(data);
       alert('회원정보가 성공적으로 수정되었습니다.');
       navigate('/');
+      removeTokenFromStorage();
+      queryClient.setQueryData('current-user', data);
+      setTokenFromStorage(`${data.data.user.token}`);
       await queryClient.invalidateQueries('current-user');
     },
   });

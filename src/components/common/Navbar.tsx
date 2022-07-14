@@ -4,7 +4,6 @@ import MyLink from './MyLink';
 
 const NavBar: FC = () => {
   const { data: loginUser } = useFetchCurrentUser();
-  console.log(`loginUser:`, loginUser);
 
   return (
     <>
