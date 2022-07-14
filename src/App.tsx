@@ -2,7 +2,7 @@ import React, { FC, Suspense } from 'react';
 import { hot } from 'react-hot-loader/root';
 import './reset.scss';
 import { Route, Routes, BrowserRouter } from 'react-router-dom';
-import { QueryClientProvider, QueryClient, QueryCache, MutationCache } from 'react-query';
+import { QueryClientProvider, QueryClient } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import Home from './pages/Home';
 import Layout from './components/common/Layout';

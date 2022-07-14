@@ -1,8 +1,10 @@
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { createNewAccount, fetchCurentUser, login, updateCurrentUserData } from '../networks/auth';
 import { useNavigate } from 'react-router';
-import { getTokenFromStorage, setTokenFromStorage } from '../commons/tokenStorage';
+import { getTokenFromStorage, removeTokenFromStorage, setTokenFromStorage } from '../commons/tokenStorage';
 import { apiWithAuth } from '../config/api';
+
+const TOKEN = getTokenFromStorage();
 
 export const useCreateNewAccount = () => {
   const navigate = useNavigate();
@@ -32,16 +34,31 @@ export const useLogin = () => {
   });
 };
 
+export const useLogout = () => {
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
+
+  const currentUserLogout = async () => {
+    removeTokenFromStorage();
+    alert('로그아웃이 성공적으로 진행되었습니다.');
+    navigate('/');
+    await queryClient.setQueryData('current-user', undefined);
+  };
+
+  return { currentUserLogout };
+};
+
 export const useFetchCurrentUser = () => {
   return useQuery('current-user', fetchCurentUser, {
     cacheTime: Infinity,
     staleTime: Infinity,
+    retry: false,
+    refetchOnWindowFocus: false,
+    notifyOnChangeProps: ['data', 'refetch', 'remove', 'error'],
     select: data => {
       const userInfo = data.data.user;
       return userInfo;
     },
-    retry: false,
-    refetchOnWindowFocus: false,
   });
 };
 
@@ -53,12 +70,13 @@ export const useFetchUserToken = () => {
 
 export const useUpdateCurrentUserData = () => {
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
 
   return useMutation(updateCurrentUserData, {
-    onSuccess: data => {
-      console.log(data);
+    onSuccess: async () => {
       alert('회원정보가 성공적으로 수정되었습니다.');
       navigate('/');
+      await queryClient.invalidateQueries('current-user');
     },
   });
 };

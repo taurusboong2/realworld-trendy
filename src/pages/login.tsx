@@ -20,7 +20,6 @@ const Login = () => {
   };
 
   if (status === 'loading') return <LoadingSpinner />;
-  if (status === 'error') return <>{error}</>;
   return (
     <>
       <div className="auth-page">

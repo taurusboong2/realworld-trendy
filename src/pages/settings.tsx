@@ -1,7 +1,14 @@
 import React from 'react';
 import SettingsForm from '../components/Form/SettingsForm';
+import { useLogout } from '../hooks/auth.hook';
 
 const Settings = () => {
+  const { currentUserLogout } = useLogout();
+
+  const handleLogout = async () => {
+    await currentUserLogout();
+  };
+
   return (
     <>
       <div className="settings-page">
@@ -14,7 +21,9 @@ const Settings = () => {
 
               <SettingsForm />
               <hr />
-              <button className="btn btn-outline-danger">Or click here to logout.</button>
+              <button className="btn btn-outline-danger" onClick={handleLogout}>
+                Or click here to logout.
+              </button>
             </div>
           </div>
         </div>
