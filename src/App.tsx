@@ -12,11 +12,7 @@ import Settings from './pages/settings';
 import Profile from './pages/profile';
 import Edit from './pages/edit';
 
-const mutationCache = new MutationCache();
-const queryCache = new QueryCache();
 const queryClient = new QueryClient({
-  queryCache,
-  mutationCache,
   defaultOptions: {
     queries: {
       staleTime: Infinity,

@@ -13,22 +13,16 @@ export type LoginData = {
   };
 };
 
-export type UserData = {
-  user: {
-    email: string;
-    token: string;
-    username: string;
-    bio?: string;
-    image?: string;
-  };
-};
-
 export type UserInfo = {
   email: string;
   token: string;
   username: string;
   bio?: string;
   image?: string;
+};
+
+export type UserData = {
+  user: UserInfo;
 };
 
 export type UpdateUserData = {
