@@ -11,6 +11,7 @@ import Login from './pages/login';
 import Settings from './pages/settings';
 import Profile from './pages/profile';
 import Edit from './pages/edit';
+import ArticleDetail from './pages/articleDetail';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -46,6 +47,7 @@ const App: FC = () => {
                 <Route path="/settings" element={<Settings />} />
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/edit" element={<Edit />} />
+                <Route path="/article-detail/:slug" element={<ArticleDetail />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </Suspense>

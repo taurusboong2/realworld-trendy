@@ -30,7 +30,7 @@ const Feed: FC<Props> = ({ slug, author, date, heart, title, description, image,
             <i className="ion-heart" /> {heart}
           </button>
         </div>
-        <MyLink href={`/article/${slug}`} className="preview-link">
+        <MyLink href={`/article-detail/${slug}`} className="preview-link">
           <h1>{title}</h1>
           <p>{description}</p>
           <span>Read more...</span>
