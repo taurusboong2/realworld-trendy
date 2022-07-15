@@ -17,6 +17,6 @@ export const createNewArticle = async (newArticleData: NewArticleData) => {
 };
 
 export const fetchArticle = async (slug: string) => {
-  const response = await api.get<ArticleDataType>(`/articls/${slug}`);
+  const response = await api.get<ArticleDataType>(`/articles/${slug}`);
   return response;
 };

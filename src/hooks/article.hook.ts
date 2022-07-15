@@ -32,5 +32,6 @@ export const useFetchArticle = (slug: string) => {
     onSuccess: data => {
       console.log(data);
     },
+    retry: false,
   });
 };
