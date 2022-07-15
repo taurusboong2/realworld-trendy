@@ -1,17 +1,22 @@
 import { getTokenFromStorage } from '../commons/tokenStorage';
-import { apiWithAuth } from '../config/api';
-import { NewArticleData } from '../types/article';
+import { apiWithAuth, api } from '../config/api';
+import { ArticleListType, NewArticleData, ArticleDataType } from '../types/article';
 
-export const fetchArticleList = () => {
+export const fetchArticleList = async () => {
   if (!getTokenFromStorage()) return;
   if (getTokenFromStorage()) {
-    const response = apiWithAuth.get(`/articles`);
+    const response = await apiWithAuth.get<ArticleListType>(`/articles`);
     return response;
   }
   return null;
 };
 
-export const createNewArticle = (newArticleData: NewArticleData) => {
-  const response = apiWithAuth.post(`/articles`, newArticleData);
+export const createNewArticle = async (newArticleData: NewArticleData) => {
+  const response = await apiWithAuth.post<NewArticleData>(`/articles`, newArticleData);
+  return response;
+};
+
+export const fetchArticle = async (slug: string) => {
+  const response = await api.get<ArticleDataType>(`/articls/${slug}`);
   return response;
 };

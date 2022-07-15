@@ -12,6 +12,14 @@ export type ArticleType = {
   tagList: string[] | string;
 };
 
+export type ArticleListType = {
+  articles: ArticleType[];
+};
+
+export type ArticleDataType = {
+  article: ArticleType;
+};
+
 export type NewArticleData = {
   article: {
     title: string;

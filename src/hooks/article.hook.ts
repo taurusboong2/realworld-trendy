@@ -1,12 +1,11 @@
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { useNavigate } from 'react-router';
-import { createNewArticle, fetchArticleList } from '../networks/articles';
-import { ArticleType } from '../types/article';
+import { createNewArticle, fetchArticle, fetchArticleList } from '../networks/articles';
 
 export const useFetchArticleList = () => {
   return useQuery('article-list', fetchArticleList, {
     select: data => {
-      const articles: ArticleType[] = data?.data.articles;
+      const articles = data?.data.articles;
       return articles;
     },
   });
@@ -24,6 +23,14 @@ export const useCreateNewArticle = () => {
     },
     onError: error => {
       console.log(error);
+    },
+  });
+};
+
+export const useFetchArticle = (slug: string) => {
+  return useQuery(['article', slug], () => fetchArticle(slug), {
+    onSuccess: data => {
+      console.log(data);
     },
   });
 };
