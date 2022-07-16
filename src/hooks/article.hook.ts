@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { useNavigate } from 'react-router';
-import { createNewArticle, fetchArticle, fetchArticleList } from '../networks/articles';
+import { createNewArticle, deleteArticle, fetchArticle, fetchArticleList } from '../networks/articles';
 
 export const useFetchArticleList = () => {
   return useQuery('article-list', fetchArticleList, {
@@ -33,5 +33,18 @@ export const useFetchArticle = (slug: string) => {
       console.log(data);
     },
     retry: false,
+  });
+};
+
+export const useDeleteArticle = () => {
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
+
+  return useMutation(deleteArticle, {
+    onSuccess: data => {
+      console.log(data);
+      queryClient.invalidateQueries('article-list');
+      navigate('/profile');
+    },
   });
 };

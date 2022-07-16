@@ -20,3 +20,8 @@ export const fetchArticle = async (slug: string) => {
   const response = await api.get<ArticleDataType>(`/articles/${slug}`);
   return response;
 };
+
+export const deleteArticle = async (slug: string) => {
+  const response = await apiWithAuth.delete(`/articles/${slug}`);
+  return response;
+};
