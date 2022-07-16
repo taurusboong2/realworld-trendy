@@ -7,7 +7,6 @@ type Props = {
 };
 
 const Banner: FC<Props> = ({ articleData }) => {
-  console.log(articleData);
   return (
     <>
       <div className="banner">

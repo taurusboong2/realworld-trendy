@@ -3,6 +3,7 @@ import { useParams } from 'react-router';
 import LoadingSpinner from '../components/common/LoadingSpinner';
 import { useFetchArticle } from '../hooks/article.hook';
 import Banner from '../components/Article/Banner';
+import Container from '../components/Article/Container';
 import { ArticleType } from '../types/article';
 
 const ArticleDetail = () => {
@@ -18,9 +19,8 @@ const ArticleDetail = () => {
       <div className="article-page">
         <Banner articleData={articleData as ArticleType} />
 
-        <h2>본문자리</h2>
-        <h2>userbox자리</h2>
         <div className="container page">
+          <Container articleData={articleData as ArticleType} />
           <div className="row">
             <div className="col-xs-12 col-md-8 offset-md-2">커멘트리스트 자리</div>
           </div>
