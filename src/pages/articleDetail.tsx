@@ -10,7 +10,7 @@ import ProfileBox from '../components/Article/ProfileBox';
 const ArticleDetail = () => {
   const { slug } = useParams();
   const { data, isLoading } = useFetchArticle(slug as string);
-  const { mutate: deleteArticle } = useDeleteArticle();
+  const { mutate: deleteArticle } = useDeleteArticle(slug as string);
 
   const submitDeleteArticle = async () => {
     const result = confirm('정말로 게시글을 삭제하시겠습니까?');

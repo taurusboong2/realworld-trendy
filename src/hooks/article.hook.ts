@@ -29,21 +29,18 @@ export const useCreateNewArticle = () => {
 
 export const useFetchArticle = (slug: string) => {
   return useQuery(['article', slug], () => fetchArticle(slug), {
-    onSuccess: data => {
-      console.log(data);
-    },
     retry: false,
   });
 };
 
-export const useDeleteArticle = () => {
+export const useDeleteArticle = (slug: string) => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
 
   return useMutation(deleteArticle, {
-    onSuccess: data => {
-      console.log(data);
+    onSuccess: _data => {
       queryClient.invalidateQueries('article-list');
+      queryClient.removeQueries(['article', slug]);
       navigate('/profile');
     },
   });
