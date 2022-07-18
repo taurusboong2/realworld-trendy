@@ -36,23 +36,25 @@ export const useLogout = () => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
 
-  const currentUserLogout = async () => {
-    removeTokenFromStorage();
-    alert('로그아웃이 성공적으로 진행되었습니다.');
-    navigate('/');
-    await queryClient.setQueryData(['current-user'], undefined);
+  const currentUserLogout = () => {
+    const ask = confirm('정말로 로그아웃을 하시겠습니까?');
+    if (!ask) return;
+    if (ask) {
+      removeTokenFromStorage();
+      navigate('/');
+      queryClient.setQueryData('current-user', undefined);
+    }
   };
 
   return { currentUserLogout };
 };
 
 export const useFetchCurrentUser = () => {
-  return useQuery(['current-user'], fetchCurentUser, {
+  return useQuery('current-user', fetchCurentUser, {
     cacheTime: Infinity,
     staleTime: Infinity,
     retry: false,
     refetchOnWindowFocus: false,
-    notifyOnChangeProps: ['data', 'refetch', 'remove', 'error'],
     select: data => {
       const userInfo = data.data.user;
       return userInfo;
@@ -61,7 +63,7 @@ export const useFetchCurrentUser = () => {
 };
 
 export const useFetchUserToken = () => {
-  return useQuery(['current-token'], getTokenFromStorage, {
+  return useQuery('current-token', getTokenFromStorage, {
     cacheTime: Infinity,
   });
 };
@@ -75,7 +77,7 @@ export const useUpdateCurrentUserData = () => {
       alert('회원정보가 성공적으로 수정되었습니다.');
       navigate('/');
       removeTokenFromStorage();
-      queryClient.setQueryData(['current-user'], data);
+      queryClient.setQueryData('current-user', data);
       setTokenFromStorage(`${data.data.user.token}`);
     },
   });
