@@ -25,7 +25,7 @@ const ProfileBox: FC<Props> = ({ articleData, deleteHandler }) => {
           </div>
           {currentUser !== undefined ? (
             <>
-              <MyLink href="/editor/[pid]" className="btn btn-outline-secondary btn-sm">
+              <MyLink href={`/edit/${articleData.slug}`} className="btn btn-outline-secondary btn-sm">
                 <i className="ion-edit" /> Edit Article
               </MyLink>
               &nbsp;&nbsp;

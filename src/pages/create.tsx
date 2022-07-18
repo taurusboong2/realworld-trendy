@@ -1,12 +1,12 @@
 import React from 'react';
 import EditForm from '../components/Form/EditForm';
 
-const EditPage = () => {
+const CreatePage = () => {
   return (
     <>
-      <EditForm isCreatePage={false} />
+      <EditForm isCreatePage={true} />
     </>
   );
 };
 
-export default EditPage;
+export default CreatePage;

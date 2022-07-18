@@ -1,16 +1,21 @@
 import React, { FC, useRef } from 'react';
-import { useCreateNewArticle } from '../../hooks/article.hook';
+import { useParams } from 'react-router';
+import { useCreateNewArticle, useFetchArticle } from '../../hooks/article.hook';
 
 type Props = {
   isCreatePage: boolean;
 };
 
-const EditFrom: FC<Props> = ({ isCreatePage }) => {
+const EditForm: FC<Props> = ({ isCreatePage }) => {
+  const { slug } = useParams();
+
   const titleRef = useRef<HTMLInputElement>(null);
   const descriptionRef = useRef<HTMLTextAreaElement>(null);
   const bodyRef = useRef<HTMLInputElement>(null);
 
   const { mutate: createNewArticle, isLoading: isCreating } = useCreateNewArticle();
+  const { data: currentArticle } = useFetchArticle(slug as string);
+  console.log(`currentArticle :`, currentArticle);
 
   const handleSubmitCreate = async () => {
     const newArticleData = {
@@ -77,4 +82,4 @@ const EditFrom: FC<Props> = ({ isCreatePage }) => {
   );
 };
 
-export default EditFrom;
+export default EditForm;

@@ -4,10 +4,11 @@ import UserInfo from '../components/Profile/UserInfo';
 import { useFetchArticleList } from '../hooks/article.hook';
 import Feed from '../components/common/Feed';
 import { ArticleType } from '../types/article';
+import LoadingSpinner from '../components/common/LoadingSpinner';
 
 const Profile = () => {
   const { data: user } = useFetchCurrentUser();
-  const { data: articles } = useFetchArticleList();
+  const { data: articles, isLoading } = useFetchArticleList();
 
   return (
     <>
@@ -31,6 +32,8 @@ const Profile = () => {
                   </li>
                 </ul>
               </div>
+              {isLoading && <LoadingSpinner />}
+
               {articles?.map((article: ArticleType) => {
                 return (
                   <Feed

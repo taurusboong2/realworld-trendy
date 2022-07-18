@@ -10,8 +10,9 @@ import Register from './pages/register';
 import Login from './pages/login';
 import Settings from './pages/settings';
 import Profile from './pages/profile';
-import Edit from './pages/edit';
+import CreatePage from './pages/create';
 import ArticleDetail from './pages/articleDetail';
+import EditPage from './pages/edit';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -46,8 +47,9 @@ const App: FC = () => {
                 <Route path="/login" element={<Login />} />
                 <Route path="/settings" element={<Settings />} />
                 <Route path="/profile" element={<Profile />} />
-                <Route path="/edit" element={<Edit />} />
+                <Route path="/create" element={<CreatePage />} />
                 <Route path="/article-detail/:slug" element={<ArticleDetail />} />
+                <Route path="/edit/:slug" element={<EditPage />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </Suspense>

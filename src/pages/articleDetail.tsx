@@ -19,7 +19,6 @@ const ArticleDetail = () => {
   };
 
   const articleData = data?.data.article;
-  console.log(`data:`, articleData);
 
   if (isLoading) return <LoadingSpinner />;
   return (

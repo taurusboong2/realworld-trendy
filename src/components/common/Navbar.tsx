@@ -21,7 +21,7 @@ const NavBar: FC = () => {
             {loginUser !== undefined ? (
               <>
                 <li className="nav-item">
-                  <MyLink className="nav-link" href="/edit">
+                  <MyLink className="nav-link" href="/create">
                     <i className="ion-compose" />
                     &nbsp;New Article
                   </MyLink>
