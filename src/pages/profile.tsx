@@ -1,6 +1,7 @@
 import React from 'react';
 import { useFetchCurrentUser } from '../hooks/auth.hook';
 import UserInfo from '../components/Profile/UserInfo';
+import AuthCheck from '../components/common/AuthCheck';
 import { useFetchArticleList } from '../hooks/article.hook';
 import Feed from '../components/common/Feed';
 import { ArticleType } from '../types/article';
@@ -11,7 +12,7 @@ const Profile = () => {
   const { data: articles, isLoading } = useFetchArticleList();
 
   return (
-    <>
+    <AuthCheck>
       <div className="profile-page">
         <UserInfo userName={user?.username} userBio={user?.bio} userImage={user?.image || undefined} />
 
@@ -52,7 +53,7 @@ const Profile = () => {
           </div>
         </div>
       </div>
-    </>
+    </AuthCheck>
   );
 };
 
