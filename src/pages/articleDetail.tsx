@@ -1,11 +1,12 @@
 import React from 'react';
-import { useParams } from 'react-router';
+import CommentForm from '../components/Comment/Form';
 import LoadingSpinner from '../components/common/LoadingSpinner';
-import { useDeleteArticle, useFetchArticle } from '../hooks/article.hook';
 import Banner from '../components/Article/Banner';
 import Container from '../components/Article/Container';
-import { ArticleType } from '../types/article';
 import ProfileBox from '../components/Article/ProfileBox';
+import { useParams } from 'react-router';
+import { useDeleteArticle, useFetchArticle } from '../hooks/article.hook';
+import { ArticleType } from '../types/article';
 
 const ArticleDetail = () => {
   const { slug } = useParams();
@@ -34,7 +35,11 @@ const ArticleDetail = () => {
           <ProfileBox articleData={articleData as ArticleType} deleteHandler={submitDeleteArticle} />
 
           <div className="row">
-            <div className="col-xs-12 col-md-8 offset-md-2">커멘트리스트 자리</div>
+            <div className="col-xs-12 col-md-8 offset-md-2">
+              <div>
+                <CommentForm />
+              </div>
+            </div>
           </div>
         </div>
       </div>
