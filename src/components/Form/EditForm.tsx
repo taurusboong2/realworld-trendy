@@ -1,6 +1,6 @@
-import React, { FC, useRef } from 'react';
+import React, { FC, useEffect, useRef } from 'react';
 import { useParams } from 'react-router';
-import { useCreateNewArticle, useFetchArticle } from '../../hooks/article.hook';
+import { useCreateNewArticle, useFetchArticle, useUpdateArticle } from '../../hooks/article.hook';
 
 type Props = {
   isCreatePage: boolean;
@@ -14,8 +14,20 @@ const EditForm: FC<Props> = ({ isCreatePage }) => {
   const bodyRef = useRef<HTMLInputElement>(null);
 
   const { mutate: createNewArticle, isLoading: isCreating } = useCreateNewArticle();
-  const { data: currentArticle } = useFetchArticle(slug as string);
-  console.log(`currentArticle :`, currentArticle);
+  const { mutate: updateCurrentArticle } = useUpdateArticle();
+  const { data } = useFetchArticle(slug as string);
+
+  const articleData = data?.data.article;
+
+  useEffect(() => {
+    if (articleData) {
+      if (typeof window !== 'undefined') {
+        titleRef.current!.value = articleData!.title as string;
+        descriptionRef.current!.value = articleData!.description as string;
+        bodyRef.current!.value = articleData!.body as string;
+      }
+    }
+  }, []);
 
   const handleSubmitCreate = async () => {
     const newArticleData = {
@@ -29,8 +41,16 @@ const EditForm: FC<Props> = ({ isCreatePage }) => {
     await createNewArticle(newArticleData);
   };
 
-  const handleSubmitUpdate = () => {
-    console.log('업데이트');
+  const handleSubmitUpdate = async () => {
+    const changedData = {
+      article: {
+        title: titleRef.current?.value as string,
+        description: descriptionRef.current?.value as string,
+        body: bodyRef.current?.value as string,
+        tagList: [],
+      },
+    };
+    await updateCurrentArticle(slug as string, changedData);
   };
 
   return (

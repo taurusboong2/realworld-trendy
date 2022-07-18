@@ -1,6 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { useNavigate } from 'react-router';
-import { createNewArticle, deleteArticle, fetchArticle, fetchArticleList } from '../networks/articles';
+import { createNewArticle, deleteArticle, editArticle, fetchArticle, fetchArticleList } from '../networks/articles';
+import { ArticleDataType, NewArticleData } from '../types/article';
 
 export const useFetchArticleList = () => {
   return useQuery('article-list', fetchArticleList, {
@@ -42,6 +43,23 @@ export const useDeleteArticle = (slug: string) => {
       queryClient.invalidateQueries('article-list');
       queryClient.removeQueries(['article', slug]);
       navigate('/profile');
+    },
+  });
+};
+
+export const useUpdateArticle = () => {
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
+
+  return useMutation(editArticle, {
+    onSuccess: data => {
+      console.log(data);
+      alert('게시글이 성공적으로 수정되었습니다.');
+      queryClient.invalidateQueries('article-list');
+      navigate('/');
+    },
+    onError: error => {
+      console.log(error);
     },
   });
 };
