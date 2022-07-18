@@ -26,7 +26,7 @@ export const deleteArticle = async (slug: string) => {
   return response;
 };
 
-export const editArticle = async (slug: string, newData: any) => {
-  const response = await apiWithAuth.put(`/articles/${slug}`, newData);
+export const editArticle = async (props: { slug: string | undefined; newData: NewArticleData }) => {
+  const response = await apiWithAuth.put<ArticleType>(`/articles/${props.slug}`, props.newData);
   return response;
 };

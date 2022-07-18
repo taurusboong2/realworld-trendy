@@ -50,7 +50,7 @@ const EditForm: FC<Props> = ({ isCreatePage }) => {
         tagList: [],
       },
     };
-    await updateCurrentArticle(slug as string, changedData);
+    await updateCurrentArticle({ slug, changedData });
   };
 
   return (
