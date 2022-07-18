@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from 'react-query';
-import { addComment, fetchComments } from '../networks/comment';
+import { addComment, deleteComment, fetchComments } from '../networks/comment';
 
 export const useAddComment = () => {
   const queryClient = useQueryClient();
@@ -21,5 +21,16 @@ export const useFetchComments = (slug: string) => {
     retry: false,
     refetchOnMount: false,
     staleTime: Infinity,
+  });
+};
+
+export const useDeleteComment = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation(deleteComment, {
+    onSuccess: _data => {
+      alert('댓글이 삭제되었습니다.');
+      queryClient.invalidateQueries('comment-list');
+    },
   });
 };

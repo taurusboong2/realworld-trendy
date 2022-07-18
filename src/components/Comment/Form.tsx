@@ -13,7 +13,6 @@ const CommentForm: FC = () => {
   const { mutate: addComment, isLoading } = useAddComment();
 
   const submitAddComment = async () => {
-    console.log(`버튼누름`);
     const commentData = {
       comment: {
         body: commentRef.current?.value,

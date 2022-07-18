@@ -13,6 +13,13 @@ export type MutationAddCommentProps = {
   };
 };
 
+export type MutationDeleteCommentProps = {
+  props: {
+    slug: string;
+    id: number;
+  };
+};
+
 export type CommentDataType = {
   id: number;
   createdAt: string;
