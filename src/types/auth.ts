@@ -34,3 +34,12 @@ export type UpdateUserData = {
     image?: string;
   };
 };
+
+export type CommentUserType = {
+  author: {
+    username: string;
+    bio: string;
+    image: string;
+    following: boolean;
+  };
+};
