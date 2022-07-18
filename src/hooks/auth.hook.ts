@@ -27,7 +27,7 @@ export const useLogin = () => {
       setTokenFromStorage(userData.user.token);
       alert(`환영합니다 ${userData.user.username}님!`);
       navigate('/');
-      await queryClient.invalidateQueries('current-user');
+      await queryClient.invalidateQueries(['current-user']);
     },
   });
 };
@@ -40,14 +40,14 @@ export const useLogout = () => {
     removeTokenFromStorage();
     alert('로그아웃이 성공적으로 진행되었습니다.');
     navigate('/');
-    await queryClient.setQueryData('current-user', undefined);
+    await queryClient.setQueryData(['current-user'], undefined);
   };
 
   return { currentUserLogout };
 };
 
 export const useFetchCurrentUser = () => {
-  return useQuery('current-user', fetchCurentUser, {
+  return useQuery(['current-user'], fetchCurentUser, {
     cacheTime: Infinity,
     staleTime: Infinity,
     retry: false,
@@ -61,7 +61,7 @@ export const useFetchCurrentUser = () => {
 };
 
 export const useFetchUserToken = () => {
-  return useQuery('current-token', getTokenFromStorage, {
+  return useQuery(['current-token'], getTokenFromStorage, {
     cacheTime: Infinity,
   });
 };
@@ -75,7 +75,7 @@ export const useUpdateCurrentUserData = () => {
       alert('회원정보가 성공적으로 수정되었습니다.');
       navigate('/');
       removeTokenFromStorage();
-      queryClient.setQueryData('current-user', data);
+      queryClient.setQueryData(['current-user'], data);
       setTokenFromStorage(`${data.data.user.token}`);
     },
   });
