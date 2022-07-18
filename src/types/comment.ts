@@ -13,12 +13,18 @@ export type MutationAddCommentProps = {
   };
 };
 
+type CommentDataType = {
+  id: number;
+  createdAt: string;
+  updatedAt: string;
+  body: string;
+  author: CommentUserType;
+};
+
 export type CommentType = {
-  comment: {
-    id: number;
-    createdAt: string;
-    updatedAt: string;
-    body: string;
-    author: CommentUserType;
-  };
+  comment: CommentDataType;
+};
+
+export type MultipleCommentsType = {
+  comments: CommentDataType[];
 };
