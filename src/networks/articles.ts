@@ -1,6 +1,6 @@
 import { getTokenFromStorage } from '../commons/tokenStorage';
 import { apiWithAuth, api } from '../config/api';
-import { ArticleListType, NewArticleData, ArticleDataType, ArticleType } from '../types/article';
+import { ArticleListType, NewArticleData, ArticleDataType, ArticleType, updateMutation } from '../types/article';
 
 export const fetchArticleList = async () => {
   if (!getTokenFromStorage()) return;
@@ -26,7 +26,6 @@ export const deleteArticle = async (slug: string) => {
   return response;
 };
 
-export const editArticle = async (props: { slug: string | undefined; newData: NewArticleData }) => {
-  const response = await apiWithAuth.put<ArticleType>(`/articles/${props.slug}`, props.newData);
-  return response;
+export const editArticle = async ({ props: { slug, newData } }: updateMutation) => {
+  await apiWithAuth.put<ArticleType>(`/articles/${slug}`, newData);
 };

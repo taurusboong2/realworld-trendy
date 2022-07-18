@@ -28,3 +28,10 @@ export type NewArticleData = {
     tagList?: string[];
   };
 };
+
+export type updateMutation = {
+  props: {
+    slug: string;
+    newData: NewArticleData;
+  };
+};

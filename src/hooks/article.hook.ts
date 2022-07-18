@@ -1,7 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { useNavigate } from 'react-router';
 import { createNewArticle, deleteArticle, editArticle, fetchArticle, fetchArticleList } from '../networks/articles';
-import { ArticleDataType, NewArticleData } from '../types/article';
 
 export const useFetchArticleList = () => {
   return useQuery('article-list', fetchArticleList, {
@@ -56,7 +55,7 @@ export const useUpdateArticle = () => {
       console.log(data);
       alert('게시글이 성공적으로 수정되었습니다.');
       queryClient.invalidateQueries('article-list');
-      navigate('/');
+      navigate('/profile');
     },
     onError: error => {
       console.log(error);
