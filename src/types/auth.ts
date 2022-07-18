@@ -36,10 +36,8 @@ export type UpdateUserData = {
 };
 
 export type CommentUserType = {
-  author: {
-    username: string;
-    bio: string;
-    image: string;
-    following: boolean;
-  };
+  username: string;
+  bio: string;
+  image: string;
+  following: boolean;
 };

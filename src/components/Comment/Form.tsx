@@ -2,7 +2,7 @@ import React, { FC, useRef } from 'react';
 import MyLink from '../common/MyLink';
 import LoadingSpinner from '../common/LoadingSpinner';
 import { useFetchCurrentUser } from '../../hooks/auth.hook';
-import { useAddComment, useFetchComments } from '../../hooks/comment.hook';
+import { useAddComment } from '../../hooks/comment.hook';
 import { useParams } from 'react-router';
 import { AddCommentType } from '../../types/comment';
 
@@ -11,8 +11,6 @@ const CommentForm: FC = () => {
   const commentRef = useRef<HTMLTextAreaElement>(null);
   const { data: user } = useFetchCurrentUser();
   const { mutate: addComment, isLoading } = useAddComment();
-  const { data: comments } = useFetchComments(slug as string);
-  console.log(comments);
 
   const submitAddComment = async () => {
     console.log(`버튼누름`);

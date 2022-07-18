@@ -4,6 +4,7 @@ import LoadingSpinner from '../components/common/LoadingSpinner';
 import Banner from '../components/Article/Banner';
 import Container from '../components/Article/Container';
 import ProfileBox from '../components/Article/ProfileBox';
+import List from '../components/Comment/List';
 import { useParams } from 'react-router';
 import { useDeleteArticle, useFetchArticle } from '../hooks/article.hook';
 import { ArticleType } from '../types/article';
@@ -38,6 +39,7 @@ const ArticleDetail = () => {
             <div className="col-xs-12 col-md-8 offset-md-2">
               <div>
                 <CommentForm />
+                <List />
               </div>
             </div>
           </div>

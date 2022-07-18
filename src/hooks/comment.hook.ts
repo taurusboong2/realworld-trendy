@@ -2,11 +2,12 @@ import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { addComment, fetchComments } from '../networks/comment';
 
 export const useAddComment = () => {
-  // const queryClient = useQueryClient();
+  const queryClient = useQueryClient();
 
   return useMutation(addComment, {
-    onSuccess: data => {
-      console.log(data);
+    onSuccess: _data => {
+      alert('댓글이 성공적으로 작성되었습니다.');
+      queryClient.invalidateQueries('comment-list');
     },
   });
 };
@@ -18,9 +19,7 @@ export const useFetchComments = (slug: string) => {
       return comments;
     },
     retry: false,
-    notifyOnChangeProps: ['data', 'isFetching', 'refetch', 'isStale'],
-    onSuccess: data => {
-      console.log(data);
-    },
+    refetchOnMount: false,
+    staleTime: Infinity,
   });
 };

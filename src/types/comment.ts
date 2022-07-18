@@ -13,7 +13,7 @@ export type MutationAddCommentProps = {
   };
 };
 
-type CommentDataType = {
+export type CommentDataType = {
   id: number;
   createdAt: string;
   updatedAt: string;
