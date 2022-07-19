@@ -25,7 +25,7 @@ export type NewArticleData = {
     title: string;
     description: string;
     body: string;
-    tagList?: string[];
+    tagList?: string[] | [];
   };
 };
 

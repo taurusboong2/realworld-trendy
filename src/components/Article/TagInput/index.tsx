@@ -11,6 +11,7 @@ const EnterKeyCode = 13;
 
 const TagInput: FC<Props> = ({ tagList, pushTag, deleteTag }) => {
   const tagRef = useRef<HTMLInputElement>(null);
+  console.log(`tagList:`, tagList);
 
   const handleTagInputkeyDown = e => {
     switch (e.keyCode) {

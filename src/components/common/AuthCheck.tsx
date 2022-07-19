@@ -1,5 +1,5 @@
 import React, { FC, useEffect } from 'react';
-import { useFetchCurrentUser } from '../../hooks/auth.hook';
+import { useQueryClient } from 'react-query';
 import { useNavigate } from 'react-router';
 
 type Props = {
@@ -8,13 +8,16 @@ type Props = {
 
 const AuthCheck: FC<Props> = ({ children }) => {
   const navigate = useNavigate();
-  const { data: user } = useFetchCurrentUser();
+  const queryclient = useQueryClient();
 
   useEffect(() => {
-    if (!user) {
-      alert('로그인이 필요한 페이지입니다!');
-      navigate('/');
-    }
+    (async () => {
+      const user = await queryclient.getQueryData('current-user');
+      if (!user) {
+        alert('로그인이 필요한 페이지입니다!');
+        navigate('/');
+      }
+    })();
   }, []);
 
   return <>{children}</>;

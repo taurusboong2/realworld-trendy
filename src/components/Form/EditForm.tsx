@@ -10,6 +10,7 @@ type Props = {
 const EditForm: FC<Props> = ({ isCreatePage }) => {
   const { slug } = useParams();
 
+  const [tagList, setTagList] = useState<string[]>([]);
   const titleRef = useRef<HTMLInputElement>(null);
   const descriptionRef = useRef<HTMLTextAreaElement>(null);
   const bodyRef = useRef<HTMLInputElement>(null);
@@ -19,15 +20,15 @@ const EditForm: FC<Props> = ({ isCreatePage }) => {
   const { data } = useFetchArticle(slug as string);
 
   const articleData = data?.data.article;
-  const [tagList, setTagList] = useState<string[]>(articleData?.tagList as string[]);
 
   useEffect(() => {
-    if (!articleData) return;
+    if (isCreatePage) return;
     if (articleData && !isCreatePage) {
       if (typeof window !== 'undefined') {
         titleRef.current!.value = articleData!.title as string;
         descriptionRef.current!.value = articleData!.description as string;
         bodyRef.current!.value = articleData!.body as string;
+        setTagList(articleData.tagList);
       }
     }
   }, []);

@@ -6,7 +6,6 @@ import Sidebar from './SideBar';
 
 const Container: FC = () => {
   const { data: articles, isLoading } = useFetchArticleList();
-  console.log(`articles:`, articles);
 
   if (isLoading) return <LoadingSpinner />;
   return (
