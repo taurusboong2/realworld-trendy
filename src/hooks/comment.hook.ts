@@ -21,6 +21,7 @@ export const useFetchComments = (slug: string) => {
     retry: false,
     refetchOnMount: false,
     staleTime: Infinity,
+    cacheTime: Infinity,
   });
 };
 

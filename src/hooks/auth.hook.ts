@@ -1,7 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { createNewAccount, fetchCurentUser, login, updateCurrentUserData } from '../networks/auth';
 import { useNavigate } from 'react-router';
-import { getTokenFromStorage, removeTokenFromStorage, setTokenFromStorage } from '../commons/tokenStorage';
+import { removeTokenFromStorage, setTokenFromStorage } from '../commons/tokenStorage';
 import { apiWithAuth } from '../config/api';
 
 export const useCreateNewAccount = () => {
@@ -59,12 +59,6 @@ export const useFetchCurrentUser = () => {
       const userInfo = data.data.user;
       return userInfo;
     },
-  });
-};
-
-export const useFetchUserToken = () => {
-  return useQuery('current-token', getTokenFromStorage, {
-    cacheTime: Infinity,
   });
 };
 
