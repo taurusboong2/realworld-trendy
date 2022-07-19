@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC, Fragment, useEffect } from 'react';
 import { useFetchArticleList } from '../../hooks/article.hook';
 import Feed from '../common/Feed';
 import LoadingSpinner from '../common/LoadingSpinner';
@@ -73,10 +73,9 @@ const Container: FC = () => {
                       {
                         page.articles.map((article: ArticleType) => {
                           return (
-                            <>
+                            <Fragment key={article.slug}>
                               <Feed
                                 slug={article.slug}
-                                key={article.slug}
                                 author={article.author.username}
                                 date={article.createdAt}
                                 heart={article.favoritesCount}
@@ -84,7 +83,7 @@ const Container: FC = () => {
                                 description={article.description}
                               />
                               <hr ref={ref} />
-                            </>
+                            </Fragment>
                           )
                         })
                       }
