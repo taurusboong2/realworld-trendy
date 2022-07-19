@@ -9,7 +9,7 @@ export type ArticleType = {
   createdAt: string;
   favoritesCount: number;
   favorited: boolean;
-  tagList: string[] | string;
+  tagList: string[];
 };
 
 export type ArticleListType = {

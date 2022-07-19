@@ -12,7 +12,13 @@ const Container: FC<Props> = ({ articleData }) => {
         <div className="col-md-12">
           <p>{articleData.description}</p>
           <p>body: {articleData.body}</p>
-          <ul className="tag-list">태그리스트 자리.</ul>
+          <ul className="tag-list">
+            {articleData.tagList.map(tag => (
+              <li key={tag} className="tag-default tag-pill tag-outline">
+                {tag}
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </>

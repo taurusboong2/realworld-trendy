@@ -1,4 +1,5 @@
-import React, { FC, useEffect, useRef } from 'react';
+import React, { FC, useEffect, useRef, useState } from 'react';
+import TagInput from '../Article/TagInput';
 import { useParams } from 'react-router';
 import { useCreateNewArticle, useFetchArticle, useUpdateArticle } from '../../hooks/article.hook';
 
@@ -18,9 +19,11 @@ const EditForm: FC<Props> = ({ isCreatePage }) => {
   const { data } = useFetchArticle(slug as string);
 
   const articleData = data?.data.article;
+  const [tagList, setTagList] = useState<string[]>(articleData?.tagList as string[]);
 
   useEffect(() => {
-    if (articleData) {
+    if (!articleData) return;
+    if (articleData && !isCreatePage) {
       if (typeof window !== 'undefined') {
         titleRef.current!.value = articleData!.title as string;
         descriptionRef.current!.value = articleData!.description as string;
@@ -35,7 +38,7 @@ const EditForm: FC<Props> = ({ isCreatePage }) => {
         title: titleRef.current?.value as string,
         description: descriptionRef.current?.value as string,
         body: bodyRef.current?.value as string,
-        tagList: [],
+        tagList: tagList,
       },
     };
     await createNewArticle(newArticleData);
@@ -47,7 +50,7 @@ const EditForm: FC<Props> = ({ isCreatePage }) => {
         title: titleRef.current?.value as string,
         description: descriptionRef.current?.value as string,
         body: bodyRef.current?.value as string,
-        tagList: [],
+        tagList: tagList,
       },
     };
     await updateCurrentArticle({
@@ -56,6 +59,16 @@ const EditForm: FC<Props> = ({ isCreatePage }) => {
         newData: changedData,
       },
     });
+  };
+
+  const pushTag = (newTag: string): void => {
+    setTagList([...tagList, newTag]);
+  };
+
+  const deleteTag = (index: number): void => {
+    const filtered = tagList.filter((tag, tagIndex) => tagIndex !== index);
+
+    setTagList(filtered);
   };
 
   return (
@@ -90,6 +103,7 @@ const EditForm: FC<Props> = ({ isCreatePage }) => {
                       ref={bodyRef}
                     />
                   </fieldset>
+                  <TagInput tagList={tagList} pushTag={pushTag} deleteTag={deleteTag} />
                   <button
                     className="btn btn-lg pull-xs-right btn-primary"
                     type="button"
