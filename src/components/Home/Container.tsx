@@ -9,18 +9,17 @@ import { useInfiniteQuery } from 'react-query';
 import { apiWithAuth } from '../../config/api';
 import axios from 'axios';
 import {  ArticleType } from '../../types/article';
-import { fetchArticleList } from '../../networks/articles';
 
 type Props = {
-  pageParams: number;
+  pageParam: number;
 }
 
 const Container: FC = () => {
   const { ref,inView } = useInView();
   // const { data: articles, isLoading } = useFetchArticleList();
 
-  const getArticles = async ({ pageParams = 0 }:Props ) => {
-    const res = await apiWithAuth.get(`/articles?limit=5&offset=${pageParams}`)
+  const getArticles = async ({ pageParam=0 }:Props ) => {
+    const res = await apiWithAuth.get(`/articles?limit=10&offset=${pageParam}`)
     const data = res.data;
     console.log(`아티클 찍어봄:`,data)
     return data;
@@ -32,10 +31,11 @@ const Container: FC = () => {
     fetchNextPage,
     isFetching,
     isFetchingNextPage
-  } = useInfiniteQuery('articles',() => getArticles({pageParams:0}), {
-    getNextPageParam: ( page ) => {
-      return page > page.articlesCount ? undefined : page + 5;
-      }
+  } = useInfiniteQuery('articles',({pageParam}) => getArticles({pageParam}), {
+    getNextPageParam: (lastPage, page:any) => {
+      const nextPage = page.length * 5;
+      return nextPage;
+    },
   })
 
   const handleOnClick = async() => {
@@ -60,7 +60,7 @@ const Container: FC = () => {
                 page.articles.map((article: ArticleType) => {
                   return (
                     <div key={article.slug} ref={ref }>
-                      <h2>{ article.title}</h2>
+                      <h2>{article.title}</h2>
                     </div>
                   )
                 })
