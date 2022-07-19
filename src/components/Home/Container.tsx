@@ -5,9 +5,10 @@ import LoadingSpinner from '../common/LoadingSpinner';
 import Sidebar from './SideBar';
 import { useInView } from 'react-intersection-observer';
 import { useInfiniteQuery } from 'react-query';
+// sdsd
 import { apiWithAuth } from '../../config/api';
 import axios from 'axios';
-import { ArticleListType } from '../../types/article';
+import {  ArticleType } from '../../types/article';
 
 type Props = {
   pageParams: number;
@@ -21,13 +22,8 @@ const Container: FC = () => {
     const res = await apiWithAuth.get(`/articles?limit=5&offset=${pageParams}`)
     const data = res.data;
     console.log(`아티클 찍어봄:`,data)
-    return {
-      data,
-      nextPage : pageParams + 5,
-    };
+    return data;
   }
-
-  getArticles({ pageParams: 0 });
 
   const {
     isLoading,
@@ -37,7 +33,7 @@ const Container: FC = () => {
     isFetchingNextPage
   } = useInfiniteQuery('articles',() => getArticles({pageParams:0}), {
     getNextPageParam: ( page ) => {
-      return page.nextPage > page.data.articlesCount ? undefined : page.nextPage;
+      return page.nextPage > page.data.articlesCount ? undefined : page.nextPage + 5;
       }
   })
 
@@ -45,15 +41,22 @@ const Container: FC = () => {
     await fetchNextPage()
   }
 
+  useEffect(() => {
+    if (inView) {
+      fetchNextPage();
+    }
+  },[inView])
+
   if (isLoading) return <h2>Loading...</h2>
   return (
     <>
       <>
       <h2>Infinite Scroll View</h2>
             <div className="card">
-                {data?.pages.map(page =>
-                  page.data.map(article => { <li key={article.slug}>{article.title}</li>})
-                )}
+          {data?.pages.map(page => {
+            console.log(page)
+            })
+          }
             </div>
             <div className='btn-container'>
                 <button onClick={handleOnClick}>Load More</button>
