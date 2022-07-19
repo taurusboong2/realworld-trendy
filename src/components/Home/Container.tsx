@@ -1,16 +1,66 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import { useFetchArticleList } from '../../hooks/article.hook';
 import Feed from '../common/Feed';
 import LoadingSpinner from '../common/LoadingSpinner';
 import Sidebar from './SideBar';
+import { useInView } from 'react-intersection-observer';
+import { useInfiniteQuery } from 'react-query';
+import { apiWithAuth } from '../../config/api';
+import axios from 'axios';
+import { ArticleListType } from '../../types/article';
+
+type Props = {
+  pageParams: number;
+}
 
 const Container: FC = () => {
-  const { data: articles, isLoading } = useFetchArticleList();
+  const { ref,inView } = useInView();
+  // const { data: articles, isLoading } = useFetchArticleList();
 
-  if (isLoading) return <LoadingSpinner />;
+  const getArticles = async ({ pageParams = 0 }:Props ) => {
+    const res = await apiWithAuth.get(`/articles?limit=5&offset=${pageParams}`)
+    const data = res.data;
+    console.log(`아티클 찍어봄:`,data)
+    return {
+      data,
+      nextPage : pageParams + 5,
+    };
+  }
+
+  getArticles({ pageParams: 0 });
+
+  const {
+    isLoading,
+    data,
+    fetchNextPage,
+    isFetching,
+    isFetchingNextPage
+  } = useInfiniteQuery('articles',() => getArticles({pageParams:0}), {
+    getNextPageParam: ( page ) => {
+      return page.nextPage > page.data.articlesCount ? undefined : page.nextPage;
+      }
+  })
+
+  const handleOnClick = async() => {
+    await fetchNextPage()
+  }
+
+  if (isLoading) return <h2>Loading...</h2>
   return (
     <>
-      <div className="container page">
+      <>
+      <h2>Infinite Scroll View</h2>
+            <div className="card">
+                {data?.pages.map(page =>
+                  page.data.map(article => { <li key={article.slug}>{article.title}</li>})
+                )}
+            </div>
+            <div className='btn-container'>
+                <button onClick={handleOnClick}>Load More</button>
+            </div>
+            <div>{isFetching && !isFetchingNextPage ? 'Fetching...' : null}</div>
+      </>
+      {/* <div className="container page">
         <div className="row">
           <div className="col-md-9">
             <div className="feed-toggle">
@@ -45,7 +95,7 @@ const Container: FC = () => {
           </div>
           <Sidebar />
         </div>
-      </div>
+      </div> */}
     </>
   );
 };

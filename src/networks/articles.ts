@@ -5,7 +5,7 @@ import { ArticleListType, NewArticleData, ArticleDataType, ArticleType, updateMu
 export const fetchArticleList = async () => {
   if (!getTokenFromStorage()) return;
   if (getTokenFromStorage()) {
-    const response = await apiWithAuth.get<ArticleListType>(`/articles`);
+    const response = await apiWithAuth.get<ArticleListType>(`/articles?limit=5`);
     return response;
   }
   return null;
