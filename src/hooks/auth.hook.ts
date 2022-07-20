@@ -43,6 +43,7 @@ export const useLogout = () => {
       removeTokenFromStorage();
       navigate('/');
       queryClient.setQueryData('current-user', undefined);
+      queryClient.removeQueries('articles');
     }
   };
 

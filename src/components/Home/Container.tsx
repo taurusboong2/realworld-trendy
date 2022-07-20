@@ -3,40 +3,44 @@ import Feed from '../common/Feed';
 import LoadingSpinner from '../common/LoadingSpinner';
 import Sidebar from './SideBar';
 import { useInView } from 'react-intersection-observer';
-import { useInfiniteQuery, useQueryClient } from 'react-query';
+import { useInfiniteQuery } from 'react-query';
 import { apiWithAuth } from '../../config/api';
 import { ArticleType } from '../../types/article';
 import { useFetchArticleListByOffset } from '../../hooks/article.hook';
+import { useFetchCurrentUser } from '../../hooks/auth.hook';
+
+type Props = {
+  pageParam: number;
+};
 
 const Container: FC = () => {
   const { ref, inView } = useInView({
     threshold: 0.7,
   });
+  const { data: user } = useFetchCurrentUser();
+  const isUserLoggedIn = user ? true : false;
 
-  const queryClient = useQueryClient();
-  const user = queryClient.getQueryData('current-user');
-  console.log(user);
+  // const { isLoading, data, fetchNextPage, isFetching, isFetchingNextPage } = useFetchArticleListByOffset();
 
-  const { isLoading, data, fetchNextPage, isFetching, isFetchingNextPage } = useFetchArticleListByOffset();
+  const getArticles = async ({ pageParam = 0 }: Props) => {
+    const res = await apiWithAuth.get(`/articles?limit=10&offset=${pageParam}`);
+    const data = res.data;
+    return data;
+  };
 
-  // const getArticles = async ({ pageParam = 0 }: Props) => {
-  //   const res = await apiWithAuth.get(`/articles?limit=10&offset=${pageParam}`);
-  //   const data = res.data;
-  //   return data;
-  // };
-
-  // const { isLoading, data, fetchNextPage, isFetching, isFetchingNextPage } = useInfiniteQuery(
-  //   'articles',
-  //   ({ pageParam }) => getArticles({ pageParam }),
-  //   {
-  //     getNextPageParam: (lastPage, page: any) => {
-  //       const nextPage = page.length * 5;
-  //       return nextPage;
-  //     },
-  //     retry: false,
-  //     refetchOnMount: false,
-  //   }
-  // );
+  const { isLoading, data, fetchNextPage, isFetching, isFetchingNextPage } = useInfiniteQuery(
+    'articles',
+    ({ pageParam }) => getArticles({ pageParam }),
+    {
+      enabled: isUserLoggedIn,
+      getNextPageParam: (lastPage, page: any) => {
+        const nextPage = page.length * 5;
+        return nextPage;
+      },
+      retry: false,
+      refetchOnMount: false,
+    }
+  );
 
   useEffect(() => {
     if (inView) {
