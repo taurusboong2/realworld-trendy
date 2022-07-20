@@ -1,6 +1,13 @@
 import { getTokenFromStorage } from '../commons/tokenStorage';
 import { apiWithAuth, api } from '../config/api';
-import { ArticleListType, NewArticleData, ArticleDataType, ArticleType, updateMutation } from '../types/article';
+import {
+  ArticleListType,
+  NewArticleData,
+  ArticleDataType,
+  ArticleType,
+  updateMutation,
+  offsetProps,
+} from '../types/article';
 
 export const fetchArticleList = async () => {
   if (!getTokenFromStorage()) return;
@@ -28,4 +35,10 @@ export const deleteArticle = async (slug: string) => {
 
 export const editArticle = async ({ props: { slug, newData } }: updateMutation) => {
   await apiWithAuth.put<ArticleType>(`/articles/${slug}`, newData);
+};
+
+export const fetchArticlebyOffset = async ({ pageParam = 0 }: offsetProps) => {
+  const res = await apiWithAuth.get(`/articles?limit=10&offset=${pageParam}`);
+  const data = res.data;
+  return data;
 };

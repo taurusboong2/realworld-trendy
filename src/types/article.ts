@@ -35,3 +35,7 @@ export type updateMutation = {
     newData: NewArticleData;
   };
 };
+
+export type offsetProps = {
+  pageParam: number;
+};

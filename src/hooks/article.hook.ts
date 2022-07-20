@@ -1,6 +1,13 @@
-import { useMutation, useQuery, useQueryClient } from 'react-query';
+import { useInfiniteQuery, useMutation, useQuery, useQueryClient } from 'react-query';
 import { useNavigate } from 'react-router';
-import { createNewArticle, deleteArticle, editArticle, fetchArticle, fetchArticleList } from '../networks/articles';
+import {
+  createNewArticle,
+  deleteArticle,
+  editArticle,
+  fetchArticle,
+  fetchArticlebyOffset,
+  fetchArticleList,
+} from '../networks/articles';
 
 export const useFetchArticleList = () => {
   return useQuery('article-list', fetchArticleList, {
@@ -61,4 +68,26 @@ export const useUpdateArticle = () => {
       console.log(error);
     },
   });
+};
+
+export const useFetchArticleListByOffset = () => {
+  const queryClient = useQueryClient();
+  const user = queryClient.getQueryData('current-user');
+  const userIsLoggedIn = user !== undefined ? true : false;
+
+  const { isLoading, data, fetchNextPage, isFetching, isFetchingNextPage } = useInfiniteQuery(
+    'articles',
+    ({ pageParam }) => fetchArticlebyOffset(pageParam),
+    {
+      enabled: userIsLoggedIn,
+      getNextPageParam: (lastPage, page: any) => {
+        const nextPage = page.length * 5;
+        return nextPage;
+      },
+      retry: false,
+      refetchOnMount: false,
+    }
+  );
+
+  return { isLoading, data, fetchNextPage, isFetching, isFetchingNextPage };
 };
