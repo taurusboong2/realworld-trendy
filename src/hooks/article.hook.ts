@@ -8,7 +8,7 @@ import {
   fetchArticlebyOffset,
   fetchArticleList,
 } from '../networks/articles';
-import { fetchCurentUser } from '../networks/auth';
+import { useFetchCurrentUser } from '../hooks/auth.hook';
 
 export const useFetchArticleList = () => {
   return useQuery('article-list', fetchArticleList, {
@@ -72,8 +72,7 @@ export const useUpdateArticle = () => {
 };
 
 export const useFetchArticleListByOffset = () => {
-  const queryClient = useQueryClient();
-  const user = queryClient.getQueryData('current-user');
+  const { data: user } = useFetchCurrentUser();
   const userIsLoggedIn = user ? true : false;
 
   const { isLoading, data, fetchNextPage, isFetching, isFetchingNextPage } = useInfiniteQuery(
