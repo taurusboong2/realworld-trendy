@@ -52,7 +52,7 @@ export const useLogout = () => {
 
 export const useFetchCurrentUser = () => {
   return useQuery('current-user', fetchCurentUser, {
-    cacheTime: Infinity,
+    cacheTime: 60000,
     staleTime: Infinity,
     retry: false,
     refetchOnWindowFocus: false,
