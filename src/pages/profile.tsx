@@ -1,5 +1,4 @@
 import React from 'react';
-import { useFetchCurrentUser } from '../hooks/auth.hook';
 import UserInfo from '../components/Profile/UserInfo';
 import AuthCheck from '../components/common/AuthCheck';
 import { useFetchArticleList } from '../hooks/article.hook';
@@ -8,13 +7,12 @@ import { ArticleType } from '../types/article';
 import LoadingSpinner from '../components/common/LoadingSpinner';
 
 const Profile = () => {
-  const { data: user } = useFetchCurrentUser();
   const { data: articles, isLoading } = useFetchArticleList();
 
   return (
     <AuthCheck>
       <div className="profile-page">
-        <UserInfo userName={user?.username} userBio={user?.bio} userImage={user?.image || undefined} />
+        <UserInfo />
 
         <div className="container">
           <div className="row">
