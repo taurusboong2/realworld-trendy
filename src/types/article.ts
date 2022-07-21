@@ -36,6 +36,6 @@ export type updateMutation = {
   };
 };
 
-export type offsetProps = {
+export type OffsetProps = {
   pageParam: number;
 };

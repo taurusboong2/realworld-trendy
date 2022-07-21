@@ -6,7 +6,7 @@ import {
   ArticleDataType,
   ArticleType,
   updateMutation,
-  offsetProps,
+  OffsetProps,
 } from '../types/article';
 
 export const fetchArticleList = async () => {
@@ -37,7 +37,7 @@ export const editArticle = async ({ props: { slug, newData } }: updateMutation) 
   await apiWithAuth.put<ArticleType>(`/articles/${slug}`, newData);
 };
 
-export const fetchArticlebyOffset = async ({ pageParam = 0 }: offsetProps) => {
+export const fetchArticlebyOffset = async ({ pageParam = 0 }: OffsetProps) => {
   const res = await apiWithAuth.get<ArticleListType>(`/articles?limit=10&offset=${pageParam}`);
   const data = res.data;
   return data;
