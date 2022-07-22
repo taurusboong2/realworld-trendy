@@ -17,6 +17,8 @@ const Login = () => {
     formState: { errors },
   } = useForm<LoginData>();
 
+  const errorUser = errors.user;
+
   const { mutateAsync: login, status } = useLogin();
 
   const loginSubmit = async (register: LoginData) => {
@@ -39,25 +41,33 @@ const Login = () => {
                 <fieldset>
                   <fieldset className="form-group">
                     <input
-                      {...register('user.email', { required: '*필수 항목입니다.' })}
+                      {...register('user.email', {
+                        required: '*필수 항목입니다.',
+                        pattern: {
+                          value: /\S+@\S+/,
+                          message: '*이메일 형식이 아닙니다.',
+                        },
+                      })}
                       className="form-control form-control-lg"
                       type="email"
                       placeholder="Email"
-                      style={errors.user?.email && ERROR_BORDER}
+                      style={errorUser?.email && ERROR_BORDER}
                     />
-                    {errors.user?.email && <ErrorMessage>{errors.user.email.message}</ErrorMessage>}
+                    {errorUser?.email && <ErrorMessage>{errorUser.email.message}</ErrorMessage>}
                   </fieldset>
 
                   <fieldset className="form-group">
                     <input
-                      {...register('user.password', { required: '*필수 항목입니다.' })}
+                      {...register('user.password', {
+                        required: '*필수 항목입니다.',
+                      })}
                       className="form-control form-control-lg"
                       type="password"
                       autoComplete="on"
                       placeholder="Password"
-                      style={errors.user?.password && ERROR_BORDER}
+                      style={errorUser?.password && ERROR_BORDER}
                     />
-                    {errors.user?.password && <ErrorMessage>{errors.user.password.message}</ErrorMessage>}
+                    {errorUser?.password && <ErrorMessage>{errorUser.password.message}</ErrorMessage>}
                   </fieldset>
 
                   <button
