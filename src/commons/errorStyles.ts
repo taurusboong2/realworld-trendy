@@ -11,7 +11,9 @@ export const ERROR_BUTTON = {
   borderColor: '#F15E5E',
 };
 
-export const ErrorMessage = styled.span`
+export const ErrorMessage = styled.small.attrs({
+  role: 'alert',
+})`
   color: #f15e5e;
   font-weight: bold;
 `;
