@@ -4,16 +4,7 @@ import { useLogin } from '../hooks/auth.hook';
 import LoadingSpinner from '../components/common/LoadingSpinner';
 import { useForm } from 'react-hook-form';
 import { LoginData } from '../types/auth';
-import styled from 'styled-components';
-
-const ERROR_BORDER = {
-  borderColor: '#F15E5E',
-};
-
-const ERROR_BUTTON = {
-  backgroundColor: '#F15E5E',
-  borderColor: '#F15E5E',
-};
+import { ErrorMessage, REQUIRED_Msg, ERROR_BORDER, ERROR_BUTTON } from '../commons/errorStyles';
 
 const Login = () => {
   const {
@@ -47,7 +38,7 @@ const Login = () => {
                   <fieldset className="form-group">
                     <input
                       {...register('user.email', {
-                        required: '*필수 항목입니다.',
+                        required: REQUIRED_Msg,
                         pattern: {
                           value: /\S+@\S+/,
                           message: '*이메일 형식이 아닙니다.',
@@ -64,7 +55,7 @@ const Login = () => {
                   <fieldset className="form-group">
                     <input
                       {...register('user.password', {
-                        required: '*필수 항목입니다.',
+                        required: REQUIRED_Msg,
                       })}
                       className="form-control form-control-lg"
                       type="password"
@@ -94,8 +85,3 @@ const Login = () => {
 };
 
 export default Login;
-
-const ErrorMessage = styled.span`
-  color: #f15e5e;
-  font-weight: bold;
-`;
