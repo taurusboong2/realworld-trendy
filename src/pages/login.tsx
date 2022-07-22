@@ -10,6 +10,11 @@ const ERROR_BORDER = {
   borderColor: '#F15E5E',
 };
 
+const ERROR_BUTTON = {
+  backgroundColor: '#F15E5E',
+  borderColor: '#F15E5E',
+};
+
 const Login = () => {
   const {
     register,
@@ -19,7 +24,7 @@ const Login = () => {
 
   const errorUser = errors.user;
 
-  const { mutateAsync: login, status } = useLogin();
+  const { mutateAsync: login, status, isLoading } = useLogin();
 
   const loginSubmit = async (register: LoginData) => {
     await login(register);
@@ -73,7 +78,9 @@ const Login = () => {
                   <button
                     className="btn btn-lg btn-primary pull-xs-right"
                     type="button"
-                    onClick={handleSubmit(loginSubmit)}>
+                    onClick={handleSubmit(loginSubmit)}
+                    style={errorUser && ERROR_BUTTON}
+                    disabled={errorUser || isLoading ? true : false}>
                     Sign in
                   </button>
                 </fieldset>
