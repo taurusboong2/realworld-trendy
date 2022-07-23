@@ -1,5 +1,5 @@
 import React from 'react';
-import Comment from './Comment';
+import Comment from '.';
 import { useParams } from 'react-router';
 import { useFetchComments } from '../../hooks/comment.hook';
 import LoadingSpinner from '../common/LoadingSpinner';

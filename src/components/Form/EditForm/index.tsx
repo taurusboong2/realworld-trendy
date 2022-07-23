@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useRef, useState } from 'react';
-import TagInput from '../Article/TagInput';
+import TagInput from '../../Article/TagInput';
 import { useParams } from 'react-router';
-import { useCreateNewArticle, useFetchArticle, useUpdateArticle } from '../../hooks/article.hook';
+import { useCreateNewArticle, useFetchArticle, useUpdateArticle } from '../../../hooks/article.hook';
 
 type Props = {
   isCreatePage: boolean;

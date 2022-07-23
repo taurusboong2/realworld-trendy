@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useRef } from 'react';
-import { useFetchCurrentUser, useUpdateCurrentUserData } from '../../hooks/auth.hook';
+import { useFetchCurrentUser, useUpdateCurrentUserData } from '../../../hooks/auth.hook';
 
 const SettingsForm: FC = () => {
   const imageInput = useRef<HTMLInputElement>(null);
