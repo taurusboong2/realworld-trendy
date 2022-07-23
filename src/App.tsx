@@ -34,9 +34,6 @@ const NotFound = () => {
 const App: FC = () => {
   return (
     <>
-      <head>
-        <link rel="stylesheet" href="//demo.productionready.io/main.css" />
-      </head>
       <BrowserRouter>
         <QueryClientProvider client={queryClient}>
           <Layout>

@@ -54,9 +54,18 @@ const config = {
       templateContent: ({ htmlWebpackPlugin }) =>
         '<!DOCTYPE html><html><head><meta charset="utf-8"><title>' +
         htmlWebpackPlugin.options.title +
-        '</title></head><body><div id="app"></div></body></html>',
+        '</title>' +
+        '<link rel="stylesheet" href="//demo.productionready.io/main.css" />' +
+        '</head><body><div id="app"></div></body></html>',
       filename: 'index.html',
+      options: {
+        title: 'TauBoong | Realworld',
+      },
     }),
+    // new HtmlWebpackPlugin({
+    //   template: './public/index.html',
+    //   filename: 'index.html',
+    // }),
   ],
   resolve: {
     extensions: ['.tsx', '.ts', '.js'],
