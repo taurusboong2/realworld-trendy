@@ -2,6 +2,9 @@ import React, { FC, useEffect, useRef, useState } from 'react';
 import TagInput from '../../Article/TagInput';
 import { useParams } from 'react-router';
 import { useCreateNewArticle, useFetchArticle, useUpdateArticle } from '../../../hooks/article.hook';
+import { useForm } from 'react-hook-form';
+import { NewArticleData } from '../../../types/article';
+import { ErrorMessage, ERROR_BORDER, REQUIRED_Msg } from '../../../commons/errorStyles';
 
 type Props = {
   isCreatePage: boolean;
@@ -11,6 +14,13 @@ const EditForm: FC<Props> = ({ isCreatePage }) => {
   const { slug } = useParams();
 
   const [tagList, setTagList] = useState<string[]>([]);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<NewArticleData>();
+  const articleError = errors.article;
+
   const titleRef = useRef<HTMLInputElement>(null);
   const descriptionRef = useRef<HTMLTextAreaElement>(null);
   const bodyRef = useRef<HTMLInputElement>(null);
@@ -33,16 +43,20 @@ const EditForm: FC<Props> = ({ isCreatePage }) => {
     }
   }, []);
 
-  const handleSubmitCreate = async () => {
-    const newArticleData = {
-      article: {
-        title: titleRef.current?.value as string,
-        description: descriptionRef.current?.value as string,
-        body: bodyRef.current?.value as string,
-        tagList: tagList,
-      },
-    };
-    await createNewArticle(newArticleData);
+  // const handleSubmitCreate = async () => {
+  //   const newArticleData = {
+  //     article: {
+  //       title: titleRef.current?.value as string,
+  //       description: descriptionRef.current?.value as string,
+  //       body: bodyRef.current?.value as string,
+  //       tagList: tagList,
+  //     },
+  //   };
+  //   await createNewArticle(newArticleData);
+  // };
+
+  const onSubmit = async (register: NewArticleData) => {
+    console.log(register);
   };
 
   const handleSubmitUpdate = async () => {
@@ -82,33 +96,45 @@ const EditForm: FC<Props> = ({ isCreatePage }) => {
                 <fieldset>
                   <fieldset className="form-group">
                     <input
+                      {...register('article.title', {
+                        required: REQUIRED_Msg,
+                      })}
+                      style={articleError && ERROR_BORDER}
+                      placeholder={articleError?.title ? '' : 'title'}
                       type="text"
                       className="form-control form-control-lg"
-                      placeholder="제목을 입력해주세요."
-                      ref={titleRef}
                     />
+                    {articleError?.title && <ErrorMessage>{articleError?.title.message}</ErrorMessage>}
                   </fieldset>
                   <fieldset className="form-group">
                     <textarea
+                      {...register('article.description', {
+                        required: REQUIRED_Msg,
+                      })}
+                      style={articleError && ERROR_BORDER}
+                      placeholder={articleError?.description ? '' : 'description'}
                       className="form-control"
                       rows={8}
-                      placeholder="내용을 입력해주세요."
-                      ref={descriptionRef}
                     />
+                    {articleError?.description && <ErrorMessage>{articleError?.description.message}</ErrorMessage>}
                   </fieldset>
                   <fieldset className="form-group">
                     <input
+                      {...register('article.body', {
+                        required: REQUIRED_Msg,
+                      })}
+                      style={articleError && ERROR_BORDER}
+                      placeholder={articleError?.body ? '' : 'body'}
                       type="text"
                       className="form-control form-control-lg"
-                      placeholder="바디를 입력해주세요."
-                      ref={bodyRef}
                     />
+                    {articleError?.body && <ErrorMessage>{articleError?.body.message}</ErrorMessage>}
                   </fieldset>
                   <TagInput tagList={tagList} pushTag={pushTag} deleteTag={deleteTag} />
                   <button
                     className="btn btn-lg pull-xs-right btn-primary"
                     type="button"
-                    onClick={isCreatePage ? handleSubmitCreate : handleSubmitUpdate}
+                    onClick={isCreatePage ? handleSubmit(onSubmit) : handleSubmitUpdate}
                     disabled={isCreating}>
                     {isCreatePage ? 'Publish' : 'Update'} Article
                   </button>
