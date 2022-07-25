@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { KeyboardEvent } from 'react';
 import MyLink from '../components/common/MyLink';
 import { useLogin } from '../hooks/auth.hook';
 import LoadingSpinner from '../components/common/LoadingSpinner';
@@ -15,13 +15,19 @@ const Login = () => {
 
   const errorUser = errors.user;
 
-  const { mutateAsync: login, status, isLoading } = useLogin();
+  const { mutateAsync: login, isLoading } = useLogin();
 
   const loginSubmit = async (register: LoginData) => {
     await login(register);
   };
 
-  if (status === 'loading') return <LoadingSpinner />;
+  const onEnterKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      handleSubmit(loginSubmit)();
+    }
+  };
+
+  if (isLoading) return <LoadingSpinner />;
   return (
     <>
       <div className="auth-page">
@@ -33,7 +39,7 @@ const Login = () => {
                 <MyLink href="/signUp">Need an account?</MyLink>
               </p>
 
-              <form>
+              <form onSubmit={handleSubmit(loginSubmit)}>
                 <fieldset>
                   <fieldset className="form-group">
                     <input
@@ -62,6 +68,7 @@ const Login = () => {
                       autoComplete="on"
                       placeholder="Password"
                       style={errorUser?.password && ERROR_BORDER}
+                      onKeyDown={onEnterKeyDown}
                     />
                     {errorUser?.password && <ErrorMessage>{errorUser.password.message}</ErrorMessage>}
                   </fieldset>

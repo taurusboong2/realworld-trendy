@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { KeyboardEvent } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import LoadingSpinner from '../components/common/LoadingSpinner';
 import { useCreateNewAccount } from '../hooks/auth.hook';
@@ -22,6 +22,12 @@ const Register = () => {
     if (status === 'success') {
       alert('회원가입이 성공적으로 진행되었습니다.');
       navigate('/');
+    }
+  };
+
+  const onEnterKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      handleSubmit(submitSignup)();
     }
   };
 
@@ -86,6 +92,7 @@ const Register = () => {
                       style={errorUser?.password && ERROR_BORDER}
                       className="form-control form-control-lg"
                       type="password"
+                      onKeyDown={onEnterKeyDown}
                       placeholder={errorUser?.password ? '' : 'password'}
                     />
                     {errorUser?.password && <ErrorMessage>{errorUser?.password.message}</ErrorMessage>}

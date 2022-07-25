@@ -21,7 +21,6 @@ const EditForm: FC<Props> = ({ isCreatePage }) => {
     setValue,
   } = useForm<NewArticleData>();
   const articleError = errors.article;
-  console.log(register);
 
   const titleRef = useRef<HTMLInputElement>(null);
   const descriptionRef = useRef<HTMLTextAreaElement>(null);
