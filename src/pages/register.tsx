@@ -5,7 +5,8 @@ import LoadingSpinner from '../components/common/LoadingSpinner';
 import { useCreateNewAccount } from '../hooks/auth.hook';
 import { useForm } from 'react-hook-form';
 import { NewAccountType } from '../types/auth';
-import { ErrorMessage, REQUIRED_Msg, ERROR_BORDER, ERROR_BUTTON } from '../commons/errorStyles';
+import { ErrorMessage } from '../commons/errorStyledComponents';
+import * as errorMessage from '../constants/errorMessage';
 
 const Register = () => {
   const navigate = useNavigate();
@@ -50,15 +51,15 @@ const Register = () => {
                   <fieldset className="form-group">
                     <input
                       {...register('user.username', {
-                        required: REQUIRED_Msg,
+                        required: errorMessage.REQUIRED_message,
                         minLength: {
                           value: 2,
-                          message: '*최소 2글자 이상이어야 합니다.',
+                          message: errorMessage.MIN_length_2,
                         },
                       })}
                       className={classnames('form-control form-control-lg', { is_error: errorUser?.username })}
                       type="text"
-                      placeholder={errorUser?.username ? '' : 'username'}
+                      placeholder="username"
                     />
                     {errorUser?.username && <ErrorMessage>{errorUser?.username.message}</ErrorMessage>}
                   </fieldset>
@@ -66,16 +67,15 @@ const Register = () => {
                   <fieldset className="form-group">
                     <input
                       {...register('user.email', {
-                        required: REQUIRED_Msg,
+                        required: errorMessage.REQUIRED_message,
                         pattern: {
                           value: /\S+\@\S+\.\S/,
-                          message: '*이메일 형식에 맞지 않습니다.',
+                          message: errorMessage.WRONG_email,
                         },
                       })}
-                      style={errorUser?.email && ERROR_BORDER}
                       className={classnames('form-control form-control-lg', { is_error: errorUser?.email })}
                       type="email"
-                      placeholder={errorUser?.email ? '' : 'email'}
+                      placeholder="email"
                     />
                     {errorUser?.email && <ErrorMessage>{errorUser?.email.message}</ErrorMessage>}
                   </fieldset>
@@ -83,17 +83,16 @@ const Register = () => {
                   <fieldset className="form-group">
                     <input
                       {...register('user.password', {
-                        required: REQUIRED_Msg,
+                        required: errorMessage.REQUIRED_message,
                         minLength: {
                           value: 4,
-                          message: '*최소 4자 이상이어야 합니다.',
+                          message: errorMessage.MIN_length_4,
                         },
                       })}
-                      style={errorUser?.password && ERROR_BORDER}
                       className={classnames('form-control form-control-lg', { is_error: errorUser?.password })}
                       type="password"
                       onKeyDown={onEnterKeyDown}
-                      placeholder={errorUser?.password ? '' : 'password'}
+                      placeholder="password"
                     />
                     {errorUser?.password && <ErrorMessage>{errorUser?.password.message}</ErrorMessage>}
                   </fieldset>
@@ -101,7 +100,6 @@ const Register = () => {
                   <button
                     className={classnames('btn btn-lg btn-primary pull-xs-right', { is_error: errorUser })}
                     type="button"
-                    style={errorUser && ERROR_BUTTON}
                     onClick={handleSubmit(submitSignup)}
                     disabled={errorUser || isLoading ? true : false}>
                     Sign up

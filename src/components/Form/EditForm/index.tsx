@@ -4,7 +4,9 @@ import { useParams } from 'react-router';
 import { useCreateNewArticle, useFetchArticle, useUpdateArticle } from '../../../hooks/article.hook';
 import { useForm } from 'react-hook-form';
 import { NewArticleData } from '../../../types/article';
-import { ErrorMessage, ERROR_BORDER, REQUIRED_Msg } from '../../../commons/errorStyles';
+import { ErrorMessage } from '../../../commons/errorStyledComponents';
+import * as errorMessage from '../../../constants/errorMessage';
+import classnames from 'classnames';
 
 type Props = {
   isCreatePage: boolean;
@@ -87,23 +89,21 @@ const EditForm: FC<Props> = ({ isCreatePage }) => {
                   <fieldset className="form-group">
                     <input
                       {...register('article.title', {
-                        required: REQUIRED_Msg,
+                        required: errorMessage.REQUIRED_message,
                       })}
-                      style={articleError && ERROR_BORDER}
                       placeholder={articleError?.title ? '' : 'title'}
                       type="text"
-                      className="form-control form-control-lg"
+                      className={classnames('form-control form-control-lg', { is_error: articleError?.title })}
                     />
                     {articleError?.title && <ErrorMessage>{articleError?.title.message}</ErrorMessage>}
                   </fieldset>
                   <fieldset className="form-group">
                     <textarea
                       {...register('article.description', {
-                        required: REQUIRED_Msg,
+                        required: errorMessage.REQUIRED_message,
                       })}
-                      style={articleError && ERROR_BORDER}
                       placeholder={articleError?.description ? '' : 'description'}
-                      className="form-control"
+                      className={classnames('form-control form-control-lg', { is_error: articleError?.description })}
                       rows={8}
                     />
                     {articleError?.description && <ErrorMessage>{articleError?.description.message}</ErrorMessage>}
@@ -111,12 +111,11 @@ const EditForm: FC<Props> = ({ isCreatePage }) => {
                   <fieldset className="form-group">
                     <input
                       {...register('article.body', {
-                        required: REQUIRED_Msg,
+                        required: errorMessage.REQUIRED_message,
                       })}
-                      style={articleError && ERROR_BORDER}
                       placeholder={articleError?.body ? '' : 'body'}
                       type="text"
-                      className="form-control form-control-lg"
+                      className={classnames('form-control form-control-lg', { is_error: articleError?.body })}
                     />
                     {articleError?.body && <ErrorMessage>{articleError?.body.message}</ErrorMessage>}
                   </fieldset>

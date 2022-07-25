@@ -5,7 +5,8 @@ import { useLogin } from '../hooks/auth.hook';
 import LoadingSpinner from '../components/common/LoadingSpinner';
 import { useForm } from 'react-hook-form';
 import { LoginData } from '../types/auth';
-import { ErrorMessage, REQUIRED_Msg, ERROR_BORDER, ERROR_BUTTON } from '../commons/errorStyles';
+import { ErrorMessage } from '../commons/errorStyledComponents';
+import * as errorMessage from '../constants/errorMessage';
 
 const Login = () => {
   const {
@@ -13,7 +14,6 @@ const Login = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<LoginData>();
-
   const errorUser = errors.user;
 
   const { mutateAsync: login, isLoading } = useLogin();
@@ -45,10 +45,10 @@ const Login = () => {
                   <fieldset className="form-group">
                     <input
                       {...register('user.email', {
-                        required: REQUIRED_Msg,
+                        required: errorMessage.REQUIRED_message,
                         pattern: {
                           value: /\S+@\S+/,
-                          message: '*이메일 형식이 아닙니다.',
+                          message: errorMessage.WRONG_email,
                         },
                       })}
                       className={classnames('form-control form-control-lg', { is_error: errorUser?.email })}
@@ -61,7 +61,7 @@ const Login = () => {
                   <fieldset className="form-group">
                     <input
                       {...register('user.password', {
-                        required: REQUIRED_Msg,
+                        required: errorMessage.REQUIRED_message,
                       })}
                       className={classnames('form-control form-control-lg', { is_error: errorUser?.password })}
                       type="password"
