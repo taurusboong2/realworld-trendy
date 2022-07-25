@@ -13,8 +13,7 @@ import CreatePage from './pages/create';
 import ArticleDetail from './pages/articleDetail';
 import EditPage from './pages/edit';
 
-import './main.scss';
-import './custom.scss';
+import './styles/_base.scss';
 
 const queryClient = new QueryClient({
   defaultOptions: {
