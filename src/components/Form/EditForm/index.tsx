@@ -18,13 +18,8 @@ const EditForm: FC<Props> = ({ isCreatePage }) => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<NewArticleData>({
-    defaultValues: {
-      article: {
-        tagList: [...tagList],
-      },
-    },
-  });
+    setValue,
+  } = useForm<NewArticleData>();
   const articleError = errors.article;
   console.log(register);
 
@@ -73,6 +68,7 @@ const EditForm: FC<Props> = ({ isCreatePage }) => {
 
   const pushTag = (newTag: string): void => {
     setTagList([...tagList, newTag]);
+    setValue('article.tagList', [...tagList, newTag]);
   };
 
   const deleteTag = (index: number): void => {
