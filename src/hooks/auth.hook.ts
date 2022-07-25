@@ -81,15 +81,14 @@ export const useUpdateCurrentUserData = () => {
 
 export const useCheckAuth = () => {
   const navigate = useNavigate();
-  const queryclient = useQueryClient();
+  const { isFetched, data: user } = useFetchCurrentUser();
 
   useEffect(() => {
-    (async () => {
-      const user = await queryclient.getQueryData('current-user');
-      if (!user) {
-        alert('로그인이 필요한 페이지입니다!');
-        navigate('/');
-      }
-    })();
-  }, []);
+    if (!isFetched) return;
+
+    if (!user) {
+      alert('로그인이 필요한 페이지입니다!');
+      navigate('/');
+    }
+  }, [isFetched, user]);
 };
