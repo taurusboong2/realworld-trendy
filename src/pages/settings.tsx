@@ -1,17 +1,18 @@
 import React from 'react';
 import SettingsForm from '../components/Form/SettingsForm';
-import AuthCheck from '../components/common/AuthCheck';
+import { useCheckAuth } from '../hooks/auth.hook';
 import { useLogout } from '../hooks/auth.hook';
 
 const Settings = () => {
   const { currentUserLogout } = useLogout();
+  useCheckAuth();
 
   const handleLogout = async () => {
     await currentUserLogout();
   };
 
   return (
-    <AuthCheck>
+    <>
       <div className="settings-page">
         <div className="container page">
           <div className="row">
@@ -29,7 +30,7 @@ const Settings = () => {
           </div>
         </div>
       </div>
-    </AuthCheck>
+    </>
   );
 };
 

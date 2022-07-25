@@ -66,6 +66,7 @@ const Register = () => {
                           message: '*이메일 형식에 맞지 않습니다.',
                         },
                       })}
+                      style={errorUser?.email && ERROR_BORDER}
                       className="form-control form-control-lg"
                       type="email"
                       placeholder={errorUser?.email ? '' : 'email'}
@@ -82,6 +83,7 @@ const Register = () => {
                           message: '*최소 4자 이상이어야 합니다.',
                         },
                       })}
+                      style={errorUser?.password && ERROR_BORDER}
                       className="form-control form-control-lg"
                       type="password"
                       placeholder={errorUser?.password ? '' : 'password'}

@@ -1,16 +1,17 @@
 import React from 'react';
 import UserInfo from '../components/Profile/UserInfo';
-import AuthCheck from '../components/common/AuthCheck';
 import { useFetchArticleList } from '../hooks/article.hook';
+import { useCheckAuth } from '../hooks/auth.hook';
 import Feed from '../components/common/Feed';
 import { ArticleType } from '../types/article';
 import LoadingSpinner from '../components/common/LoadingSpinner';
 
 const Profile = () => {
   const { data: articles, isLoading } = useFetchArticleList();
+  useCheckAuth();
 
   return (
-    <AuthCheck>
+    <>
       <div className="profile-page">
         <UserInfo />
 
@@ -51,7 +52,7 @@ const Profile = () => {
           </div>
         </div>
       </div>
-    </AuthCheck>
+    </>
   );
 };
 

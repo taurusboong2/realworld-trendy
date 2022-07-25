@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { createNewAccount, fetchCurentUser, login, updateCurrentUserData } from '../networks/auth';
 import { useNavigate } from 'react-router';
@@ -76,4 +77,17 @@ export const useUpdateCurrentUserData = () => {
       setTokenFromStorage(`${data.data.user.token}`);
     },
   });
+};
+
+export const useCheckAuth = () => {
+  const navigate = useNavigate();
+  const { isFetched, data: user } = useFetchCurrentUser();
+
+  useEffect(() => {
+    if (!isFetched) return;
+    if (!user) {
+      alert('로그인이 필요한 페이지입니다!');
+      navigate('/');
+    }
+  }, [isFetched, user]);
 };

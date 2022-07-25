@@ -1,12 +1,14 @@
 import React from 'react';
 import EditForm from '../components/Form/EditForm';
-import AuthCheck from '../components/common/AuthCheck';
+import { useCheckAuth } from '../hooks/auth.hook';
 
 const CreatePage = () => {
+  useCheckAuth();
+
   return (
-    <AuthCheck>
+    <>
       <EditForm isCreatePage={true} />
-    </AuthCheck>
+    </>
   );
 };
 
