@@ -6,6 +6,7 @@ import LoadingSpinner from '../components/common/LoadingSpinner';
 import { useForm } from 'react-hook-form';
 import { LoginData } from '../types/auth';
 import { ErrorMessage, REQUIRED_Msg, ERROR_BORDER, ERROR_BUTTON } from '../commons/errorStyles';
+import * as errorMessage from '../constants/errorMessage';
 
 const Login = () => {
   const {
@@ -42,7 +43,7 @@ const Login = () => {
                         required: REQUIRED_Msg,
                         pattern: {
                           value: /\S+@\S+/,
-                          message: '*이메일 형식이 아닙니다.',
+                          message: errorMessage.WRONG_email,
                         },
                       })}
                       className="form-control form-control-lg"
