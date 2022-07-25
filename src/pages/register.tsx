@@ -5,6 +5,7 @@ import { useCreateNewAccount } from '../hooks/auth.hook';
 import { useForm } from 'react-hook-form';
 import { NewAccountType } from '../types/auth';
 import { ErrorMessage, REQUIRED_Msg, ERROR_BORDER, ERROR_BUTTON } from '../commons/errorStyles';
+import * as regexes from '../constants/regexes';
 
 const Register = () => {
   const navigate = useNavigate();
@@ -62,7 +63,7 @@ const Register = () => {
                       {...register('user.email', {
                         required: REQUIRED_Msg,
                         pattern: {
-                          value: /\S+\@\S+\.\S/,
+                          value: regexes.emailFormat,
                           message: '*이메일 형식에 맞지 않습니다.',
                         },
                       })}
