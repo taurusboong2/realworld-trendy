@@ -22,7 +22,7 @@ const config = {
         exclude: /node_modules/,
       },
       {
-        test: /\.scss$/,
+        test: /\.s?css$/,
         use: [
           'style-loader',
           {
@@ -30,12 +30,17 @@ const config = {
             options: {
               importLoaders: 1,
               modules: {
-                localIdentName: '[local]--[hash:base64:5]',
+                localIdentName: '[local]',
               },
               sourceMap: true,
             },
           },
-          'sass-loader',
+          {
+            loader: 'sass-loader',
+            options: {
+              additionalData: `@import "src/styles/_variables.scss";`,
+            },
+          },
         ],
       },
     ],
@@ -51,21 +56,9 @@ const config = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      templateContent: ({ htmlWebpackPlugin }) =>
-        '<!DOCTYPE html><html><head><meta charset="utf-8"><title>' +
-        htmlWebpackPlugin.options.title +
-        '</title>' +
-        '<link rel="stylesheet" href="//demo.productionready.io/main.css" />' +
-        '</head><body><div id="app"></div></body></html>',
+      template: './src/index.html',
       filename: 'index.html',
-      options: {
-        title: 'TauBoong | Realworld',
-      },
     }),
-    // new HtmlWebpackPlugin({
-    //   template: './public/index.html',
-    //   filename: 'index.html',
-    // }),
   ],
   resolve: {
     extensions: ['.tsx', '.ts', '.js'],
