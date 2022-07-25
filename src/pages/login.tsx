@@ -1,4 +1,5 @@
 import React from 'react';
+import classnames from 'classnames';
 import MyLink from '../components/common/MyLink';
 import { useLogin } from '../hooks/auth.hook';
 import LoadingSpinner from '../components/common/LoadingSpinner';
@@ -57,11 +58,10 @@ const Login = () => {
                       {...register('user.password', {
                         required: REQUIRED_Msg,
                       })}
-                      className="form-control form-control-lg"
+                      className={classnames('form-control form-control-lg', { is_error: errorUser?.password })}
                       type="password"
                       autoComplete="on"
                       placeholder="Password"
-                      style={errorUser?.password && ERROR_BORDER}
                     />
                     {errorUser?.password && <ErrorMessage>{errorUser.password.message}</ErrorMessage>}
                   </fieldset>

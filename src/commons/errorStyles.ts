@@ -7,6 +7,7 @@ export const ERROR_BORDER = {
 };
 
 export const ERROR_BUTTON = {
+  // css 로 동작하도록 고치기
   backgroundColor: '#F15E5E',
   borderColor: '#F15E5E',
 };

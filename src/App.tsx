@@ -14,6 +14,7 @@ import ArticleDetail from './pages/articleDetail';
 import EditPage from './pages/edit';
 
 import './main.scss';
+import './custom.scss';
 
 const queryClient = new QueryClient({
   defaultOptions: {
