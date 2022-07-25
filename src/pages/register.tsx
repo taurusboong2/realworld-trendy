@@ -1,5 +1,6 @@
 import React, { KeyboardEvent } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import classnames from 'classnames';
 import LoadingSpinner from '../components/common/LoadingSpinner';
 import { useCreateNewAccount } from '../hooks/auth.hook';
 import { useForm } from 'react-hook-form';
@@ -55,8 +56,7 @@ const Register = () => {
                           message: '*최소 2글자 이상이어야 합니다.',
                         },
                       })}
-                      style={errorUser && ERROR_BORDER}
-                      className="form-control form-control-lg"
+                      className={classnames('form-control form-control-lg', { is_error: errorUser?.username })}
                       type="text"
                       placeholder={errorUser?.username ? '' : 'username'}
                     />
@@ -73,7 +73,7 @@ const Register = () => {
                         },
                       })}
                       style={errorUser?.email && ERROR_BORDER}
-                      className="form-control form-control-lg"
+                      className={classnames('form-control form-control-lg', { is_error: errorUser?.email })}
                       type="email"
                       placeholder={errorUser?.email ? '' : 'email'}
                     />
@@ -90,7 +90,7 @@ const Register = () => {
                         },
                       })}
                       style={errorUser?.password && ERROR_BORDER}
-                      className="form-control form-control-lg"
+                      className={classnames('form-control form-control-lg', { is_error: errorUser?.password })}
                       type="password"
                       onKeyDown={onEnterKeyDown}
                       placeholder={errorUser?.password ? '' : 'password'}
@@ -99,7 +99,7 @@ const Register = () => {
                   </fieldset>
 
                   <button
-                    className="btn btn-lg btn-primary pull-xs-right"
+                    className={classnames('btn btn-lg btn-primary pull-xs-right', { is_error: errorUser })}
                     type="button"
                     style={errorUser && ERROR_BUTTON}
                     onClick={handleSubmit(submitSignup)}

@@ -1,5 +1,6 @@
 import React, { KeyboardEvent } from 'react';
 import MyLink from '../components/common/MyLink';
+import classnames from 'classnames';
 import { useLogin } from '../hooks/auth.hook';
 import LoadingSpinner from '../components/common/LoadingSpinner';
 import { useForm } from 'react-hook-form';
@@ -50,10 +51,9 @@ const Login = () => {
                           message: '*이메일 형식이 아닙니다.',
                         },
                       })}
-                      className="form-control form-control-lg"
+                      className={classnames('form-control form-control-lg', { is_error: errorUser?.email })}
                       type="email"
                       placeholder="Email"
-                      style={errorUser?.email && ERROR_BORDER}
                     />
                     {errorUser?.email && <ErrorMessage>{errorUser.email.message}</ErrorMessage>}
                   </fieldset>
@@ -63,21 +63,19 @@ const Login = () => {
                       {...register('user.password', {
                         required: REQUIRED_Msg,
                       })}
-                      className="form-control form-control-lg"
+                      className={classnames('form-control form-control-lg', { is_error: errorUser?.password })}
                       type="password"
                       autoComplete="on"
                       placeholder="Password"
-                      style={errorUser?.password && ERROR_BORDER}
                       onKeyDown={onEnterKeyDown}
                     />
                     {errorUser?.password && <ErrorMessage>{errorUser.password.message}</ErrorMessage>}
                   </fieldset>
 
                   <button
-                    className="btn btn-lg btn-primary pull-xs-right"
+                    className={classnames('btn btn-lg btn-primary pull-xs-right', { is_error: errorUser })}
                     type="button"
                     onClick={handleSubmit(loginSubmit)}
-                    style={errorUser && ERROR_BUTTON}
                     disabled={errorUser || isLoading ? true : false}>
                     Sign in
                   </button>
