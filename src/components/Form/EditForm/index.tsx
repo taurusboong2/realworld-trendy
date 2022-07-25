@@ -20,6 +20,7 @@ const EditForm: FC<Props> = ({ isCreatePage }) => {
     formState: { errors },
   } = useForm<NewArticleData>();
   const articleError = errors.article;
+  console.log(register);
 
   const titleRef = useRef<HTMLInputElement>(null);
   const descriptionRef = useRef<HTMLTextAreaElement>(null);
@@ -43,20 +44,8 @@ const EditForm: FC<Props> = ({ isCreatePage }) => {
     }
   }, []);
 
-  // const handleSubmitCreate = async () => {
-  //   const newArticleData = {
-  //     article: {
-  //       title: titleRef.current?.value as string,
-  //       description: descriptionRef.current?.value as string,
-  //       body: bodyRef.current?.value as string,
-  //       tagList: tagList,
-  //     },
-  //   };
-  //   await createNewArticle(newArticleData);
-  // };
-
-  const onSubmit = async (register: NewArticleData) => {
-    console.log(register);
+  const handleSubmitCreate = async (register: NewArticleData) => {
+    await createNewArticle(register);
   };
 
   const handleSubmitUpdate = async () => {
@@ -130,11 +119,11 @@ const EditForm: FC<Props> = ({ isCreatePage }) => {
                     />
                     {articleError?.body && <ErrorMessage>{articleError?.body.message}</ErrorMessage>}
                   </fieldset>
-                  <TagInput tagList={tagList} pushTag={pushTag} deleteTag={deleteTag} />
+                  <TagInput tagList={tagList} pushTag={pushTag} deleteTag={deleteTag} tagInput={register} />
                   <button
                     className="btn btn-lg pull-xs-right btn-primary"
                     type="button"
-                    onClick={isCreatePage ? handleSubmit(onSubmit) : handleSubmitUpdate}
+                    onClick={isCreatePage ? handleSubmit(handleSubmitCreate) : handleSubmitUpdate}
                     disabled={isCreating}>
                     {isCreatePage ? 'Publish' : 'Update'} Article
                   </button>
