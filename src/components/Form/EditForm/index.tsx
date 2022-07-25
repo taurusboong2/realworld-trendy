@@ -28,7 +28,7 @@ const EditForm: FC<Props> = ({ isCreatePage }) => {
 
   const { mutate: createNewArticle, isLoading: isCreating } = useCreateNewArticle();
   const { mutate: updateCurrentArticle } = useUpdateArticle();
-  const { data } = useFetchArticle(slug as string);
+  const { data } = useFetchArticle(slug as string, !!slug);
 
   const articleData = data?.data.article;
 

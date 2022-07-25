@@ -8,7 +8,6 @@ import {
   fetchArticlebyOffset,
   fetchArticleList,
 } from '../networks/articles';
-import { OffsetProps } from '../types/article';
 import { useFetchCurrentUser } from './auth.hook';
 
 export const useFetchArticleList = () => {
@@ -37,9 +36,10 @@ export const useCreateNewArticle = () => {
   });
 };
 
-export const useFetchArticle = (slug: string) => {
+export const useFetchArticle = (slug: string, shouldFetch?: boolean) => {
   return useQuery(['article', slug], () => fetchArticle(slug), {
     retry: false,
+    enabled: shouldFetch,
   });
 };
 
