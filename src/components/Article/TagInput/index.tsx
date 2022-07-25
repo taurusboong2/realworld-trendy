@@ -5,21 +5,21 @@ import { NewArticleData } from '../../../types/article';
 
 type Props = {
   tagList: string[];
-  tagInput: UseFormRegister<NewArticleData>;
+  register: UseFormRegister<NewArticleData>;
   pushTag: (newTag: string) => void;
   deleteTag: (index: number) => void;
 };
 
 const EnterKeyCode = 13;
 
-const TagInput: FC<Props> = ({ tagList, pushTag, deleteTag, tagInput }) => {
-  const tagRef = useRef<HTMLInputElement>(null);
+const TagInput: FC<Props> = ({ tagList, pushTag, deleteTag }) => {
+  const tagInput = useRef<HTMLInputElement>(null);
 
   const handleTagInputkeyDown = e => {
     switch (e.keyCode) {
       case EnterKeyCode:
-        pushTag(tagInput as any);
-        tagInput = '';
+        pushTag(tagInput.current?.value as string);
+        tagInput.current!.value = '';
     }
   };
 
@@ -31,7 +31,7 @@ const TagInput: FC<Props> = ({ tagList, pushTag, deleteTag, tagInput }) => {
     <>
       <fieldset className="form-group">
         <input
-          {...tagInput('article.tagList')}
+          ref={tagInput}
           className="form-control"
           type="text"
           placeholder="Enter tags"

@@ -18,7 +18,13 @@ const EditForm: FC<Props> = ({ isCreatePage }) => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<NewArticleData>();
+  } = useForm<NewArticleData>({
+    defaultValues: {
+      article: {
+        tagList: [...tagList],
+      },
+    },
+  });
   const articleError = errors.article;
   console.log(register);
 
@@ -119,7 +125,7 @@ const EditForm: FC<Props> = ({ isCreatePage }) => {
                     />
                     {articleError?.body && <ErrorMessage>{articleError?.body.message}</ErrorMessage>}
                   </fieldset>
-                  <TagInput tagList={tagList} pushTag={pushTag} deleteTag={deleteTag} tagInput={register} />
+                  <TagInput tagList={tagList} pushTag={pushTag} deleteTag={deleteTag} register={register} />
                   <button
                     className="btn btn-lg pull-xs-right btn-primary"
                     type="button"
