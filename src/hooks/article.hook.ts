@@ -27,8 +27,8 @@ export const useCreateNewArticle = () => {
   return useMutation(createNewArticle, {
     onSuccess: _data => {
       alert('게시글이 성공적으로 생성되었습니다.');
-      queryClient.invalidateQueries('article-list');
       navigate('/');
+      queryClient.invalidateQueries('articles');
     },
     onError: error => {
       console.log(error);
