@@ -1,4 +1,4 @@
-import { useInfiniteQuery, useMutation, useQuery, useQueryClient } from 'react-query';
+import { useInfiniteQuery, useMutation, useQuery, useQueryClient, UseQueryOptions } from 'react-query';
 import { useNavigate } from 'react-router';
 import {
   createNewArticle,
@@ -37,9 +37,10 @@ export const useCreateNewArticle = () => {
   });
 };
 
-export const useFetchArticle = (slug: string) => {
+export const useFetchArticle = (slug: string, shouldFetch?: boolean) => {
   return useQuery(['article', slug], () => fetchArticle(slug), {
     retry: false,
+    enabled: shouldFetch,
   });
 };
 
