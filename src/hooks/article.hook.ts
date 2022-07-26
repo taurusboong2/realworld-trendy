@@ -72,8 +72,10 @@ export const useUpdateArticle = () => {
   return useMutation(editArticle, {
     onSuccess: _data => {
       alert('게시글이 성공적으로 수정되었습니다.');
+      navigate('/');
       queryClient.invalidateQueries(['article-list']);
-      navigate('/profile');
+      queryClient.invalidateQueries(['articles']);
+      queryClient.invalidateQueries(['article']);
     },
     onError: error => {
       console.log(error);

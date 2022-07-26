@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useRef, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import TagInput from '../../Article/TagInput';
 import { useParams } from 'react-router';
 import { useCreateNewArticle, useFetchArticle, useUpdateArticle } from '../../../hooks/article.hook';
@@ -21,6 +21,7 @@ const EditForm: FC<Props> = ({ isCreatePage }) => {
     handleSubmit,
     formState: { errors },
     setValue,
+    reset,
   } = useForm<NewArticleData>({
     defaultValues: {
       article: {
@@ -29,10 +30,6 @@ const EditForm: FC<Props> = ({ isCreatePage }) => {
     },
   });
   const articleError = errors.article;
-
-  const titleRef = useRef<HTMLInputElement>(null);
-  const descriptionRef = useRef<HTMLTextAreaElement>(null);
-  const bodyRef = useRef<HTMLInputElement>(null);
 
   const { mutate: createNewArticle, isLoading: isCreating } = useCreateNewArticle();
   const { mutate: updateCurrentArticle } = useUpdateArticle();
@@ -43,32 +40,26 @@ const EditForm: FC<Props> = ({ isCreatePage }) => {
   useEffect(() => {
     if (isCreatePage) return;
     if (articleData && !isCreatePage) {
-      if (typeof window !== 'undefined') {
-        titleRef.current!.value = articleData!.title as string;
-        descriptionRef.current!.value = articleData!.description as string;
-        bodyRef.current!.value = articleData!.body as string;
-        setTagList(articleData.tagList);
-      }
+      reset({
+        article: {
+          title: articleData.title,
+          description: articleData.description,
+          body: articleData.body,
+        },
+      });
+      setTagList(articleData.tagList);
     }
-  }, []);
+  }, [articleData]);
 
   const handleSubmitCreate = async (register: NewArticleData) => {
     await createNewArticle(register);
   };
 
-  const handleSubmitUpdate = async () => {
-    const changedData = {
-      article: {
-        title: titleRef.current?.value as string,
-        description: descriptionRef.current?.value as string,
-        body: bodyRef.current?.value as string,
-        tagList: tagList,
-      },
-    };
+  const handleSubmitUpdate = async (register: NewArticleData) => {
     await updateCurrentArticle({
       props: {
         slug: slug as string,
-        newData: changedData,
+        newData: register,
       },
     });
   };
@@ -129,7 +120,7 @@ const EditForm: FC<Props> = ({ isCreatePage }) => {
                   <button
                     className={classnames('btn btn-lg pull-xs-right btn-primary', { is_error: articleError })}
                     type="button"
-                    onClick={isCreatePage ? handleSubmit(handleSubmitCreate) : handleSubmitUpdate}
+                    onClick={isCreatePage ? handleSubmit(handleSubmitCreate) : handleSubmit(handleSubmitUpdate)}
                     disabled={isCreating || !!articleError}>
                     {isCreatePage ? 'Publish' : 'Update'} Article
                   </button>
