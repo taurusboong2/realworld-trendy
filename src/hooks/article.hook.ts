@@ -21,7 +21,7 @@ export const useFetchArticleList = () => {
 };
 
 export const useFetchArticleCount = () => {
-  return useQuery('article-count', fetchArticleList, {
+  return useQuery('articles-count', fetchArticleList, {
     select: data => {
       const counts = data?.data.articlesCount;
       return counts;

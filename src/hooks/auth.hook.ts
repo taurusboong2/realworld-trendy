@@ -53,8 +53,8 @@ export const useLogout = () => {
 
 export const useFetchCurrentUser = () => {
   return useQuery('current-user', fetchCurentUser, {
-    cacheTime: 60000,
     staleTime: Infinity,
+    cacheTime: 60000,
     retry: false,
     refetchOnWindowFocus: false,
     select: data => {
@@ -72,10 +72,11 @@ export const useUpdateCurrentUserData = () => {
     onSuccess: async data => {
       alert('회원정보가 성공적으로 수정되었습니다.');
       navigate('/');
-      // removeTokenFromStorage();
-      // setTokenFromStorage(`${data.data.user.token}`);
+      removeTokenFromStorage();
+      setTokenFromStorage(`${data.data.user.token}`);
+      apiWithAuth.defaults.headers['Authorization'] = `Token ${data.data.user.token}`;
       queryClient.setQueryData('current-user', data);
-      await queryClient.invalidateQueries(['current-user']);
+      queryClient.invalidateQueries(['articles']);
     },
   });
 };
