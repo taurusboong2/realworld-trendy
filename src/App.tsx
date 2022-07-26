@@ -3,7 +3,7 @@ import { hot } from 'react-hot-loader/root';
 import { Route, Routes, BrowserRouter } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
-import Home from './pages/Home';
+import Home from './pages/home';
 import Register from './pages/register';
 import Login from './pages/login';
 import Settings from './pages/settings';

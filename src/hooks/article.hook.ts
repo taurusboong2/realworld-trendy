@@ -85,6 +85,7 @@ export const useFetchArticleListByOffset = () => {
         return nextPage;
       },
       retry: false,
+      staleTime: Infinity,
     }
   );
 

@@ -21,7 +21,13 @@ const EditForm: FC<Props> = ({ isCreatePage }) => {
     handleSubmit,
     formState: { errors },
     setValue,
-  } = useForm<NewArticleData>();
+  } = useForm<NewArticleData>({
+    defaultValues: {
+      article: {
+        tagList: [''],
+      },
+    },
+  });
   const articleError = errors.article;
 
   const titleRef = useRef<HTMLInputElement>(null);
