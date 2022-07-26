@@ -16,7 +16,6 @@ export const useFetchArticleList = () => {
       const articles = data?.data.articles;
       return articles;
     },
-    notifyOnChangeProps: ['data'],
   });
 };
 

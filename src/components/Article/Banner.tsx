@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { ArticleType } from '../../types/article';
-import MyLink from '../common/MyLink';
+import MyLink from '../common/MyLink/MyLink';
 
 type Props = {
   articleData: ArticleType;

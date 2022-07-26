@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import MyLink from '../common/MyLink';
+import MyLink from '../common/MyLink/MyLink';
 import DeleteBtn from './DeleteBtn';
 import { useParams } from 'react-router';
 import { CommentDataType } from '../../types/comment';

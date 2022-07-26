@@ -1,5 +1,5 @@
 import React, { FC, useRef } from 'react';
-import MyLink from '../common/MyLink';
+import MyLink from '../common/MyLink/MyLink';
 import LoadingSpinner from '../common/LoadingSpinner';
 import { useFetchCurrentUser } from '../../hooks/auth.hook';
 import { useAddComment } from '../../hooks/comment.hook';

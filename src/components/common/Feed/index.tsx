@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import MyLink from '../common/MyLink';
+import MyLink from '../MyLink/MyLink';
 
 type Props = {
   author: string;
