@@ -14,6 +14,7 @@ export type ArticleType = {
 
 export type ArticleListType = {
   articles: ArticleType[];
+  articlesCount: number;
 };
 
 export type ArticleDataType = {

@@ -20,6 +20,15 @@ export const useFetchArticleList = () => {
   });
 };
 
+export const useFetchArticleCount = () => {
+  return useQuery('article-count', fetchArticleList, {
+    select: data => {
+      const counts = data?.data.articlesCount;
+      return counts;
+    },
+  });
+};
+
 export const useCreateNewArticle = () => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
@@ -74,14 +83,17 @@ export const useUpdateArticle = () => {
 
 export const useFetchArticleListByOffset = () => {
   const { data: user } = useFetchCurrentUser();
+  const { data: counts } = useFetchArticleCount();
+  const count: number[] = [0];
 
-  const { isLoading, data, fetchNextPage, isFetching, isFetchingNextPage } = useInfiniteQuery(
+  const { isLoading, data, fetchNextPage, isFetching, isFetchingNextPage, hasNextPage } = useInfiniteQuery(
     'articles',
     ({ pageParam }) => fetchArticlebyOffset({ pageParam }),
     {
       enabled: !!user,
-      getNextPageParam: (lastPage, page: any) => {
-        const nextPage = page.length * 5;
+      getNextPageParam: (lastPage, page) => {
+        const nextPage = (counts as number) < count.at(-1)! ? undefined : page.length * 5;
+        count.push(nextPage as number);
         return nextPage;
       },
       retry: false,
@@ -89,5 +101,5 @@ export const useFetchArticleListByOffset = () => {
     }
   );
 
-  return { isLoading, data, fetchNextPage, isFetching, isFetchingNextPage };
+  return { isLoading, data, fetchNextPage, isFetching, isFetchingNextPage, hasNextPage };
 };

@@ -11,7 +11,7 @@ const Container: FC = () => {
     threshold: 0.7,
   });
 
-  const { data, fetchNextPage, isFetching, isFetchingNextPage } = useFetchArticleListByOffset();
+  const { data, fetchNextPage, isFetching, isFetchingNextPage, hasNextPage } = useFetchArticleListByOffset();
 
   useEffect(() => {
     if (inView) {
@@ -61,7 +61,7 @@ const Container: FC = () => {
                   </div>
                 );
               })}
-              {isFetchingNextPage ? <LoadingSpinner /> : null}
+              {hasNextPage && isFetchingNextPage ? <LoadingSpinner /> : null}
             </>
           </div>
           <Sidebar />
