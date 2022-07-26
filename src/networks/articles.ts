@@ -38,7 +38,7 @@ export const editArticle = async ({ props: { slug, newData } }: updateMutation) 
 };
 
 export const fetchArticlebyOffset = async ({ pageParam = 0 }: OffsetProps) => {
-  const res = await apiWithAuth.get<ArticleListType>(`/articles?limit=10&offset=${pageParam}`);
+  const res = await apiWithAuth.get<ArticleListType>(`/articles?limit=5&offset=${pageParam}`);
   const data = res.data;
   return data;
 };

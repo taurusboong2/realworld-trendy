@@ -1,70 +1,96 @@
-import React, { FC, useEffect, useRef } from 'react';
+import React, { FC, useEffect } from 'react';
 import { useFetchCurrentUser, useUpdateCurrentUserData } from '../../../hooks/auth.hook';
+import { useForm } from 'react-hook-form';
+import * as errorMessages from '../../../constants/errorMessages';
+import { ErrorMessage } from '../../../commons/errorStyledComponents';
+import { UpdateUserData } from '../../../types/auth';
+import classnames from 'classnames';
 
 const SettingsForm: FC = () => {
-  const imageInput = useRef<HTMLInputElement>(null);
-  const usernameInput = useRef<HTMLInputElement | null>(null);
-  const bioInput = useRef<HTMLTextAreaElement>(null);
-  const emailInput = useRef<HTMLInputElement>(null);
-  const passwordInput = useRef<HTMLInputElement>(null);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm<UpdateUserData>();
+  const formError = errors.user;
 
-  const { data: currentUser } = useFetchCurrentUser();
+  const { data: currentUser, isFetched } = useFetchCurrentUser();
   const { mutate: updateUserData, isLoading } = useUpdateCurrentUserData();
 
   useEffect(() => {
-    if (currentUser) {
-      if (typeof window !== 'undefined') {
-        imageInput.current!.value = currentUser!.image as string;
-        usernameInput.current!.value = currentUser!.username as string;
-        emailInput.current!.value = currentUser!.email as string;
-      }
+    if (currentUser && isFetched) {
+      reset({
+        user: {
+          username: currentUser.username,
+          image: currentUser.image,
+          bio: currentUser.bio,
+          email: currentUser.email,
+        },
+      });
     }
-  }, [usernameInput.current]);
+  }, [currentUser]);
 
-  const submitUpdateUser = () => {
-    const newData = {
-      user: {
-        username: usernameInput.current?.value as string,
-        email: emailInput.current?.value as string,
-        bio: bioInput.current?.value as string,
-        image: imageInput.current?.value as string,
-        password: passwordInput.current?.value as string,
-      },
-    };
-    updateUserData(newData);
+  const submitUpdateUser = (register: UpdateUserData) => {
+    updateUserData(register);
   };
 
   return (
     <>
-      <form onSubmit={submitUpdateUser}>
+      <form>
         <fieldset>
           <fieldset className="form-group">
-            <input className="form-control" type="text" placeholder="URL of profile picture" ref={imageInput} />
-          </fieldset>
-          <fieldset className="form-group">
-            <input className="form-control form-control-lg" type="text" placeholder="Your Name" ref={usernameInput} />
-          </fieldset>
-          <fieldset className="form-group">
-            <textarea
-              className="form-control form-control-lg"
-              rows={8}
-              placeholder="Short bio about you"
-              ref={bioInput}
+            <input
+              className="form-control"
+              type="text"
+              {...register('user.image')}
+              placeholder="URL of profile picture"
             />
-          </fieldset>
-          <fieldset className="form-group">
-            <input className="form-control form-control-lg" type="text" placeholder="Email" ref={emailInput} />
           </fieldset>
           <fieldset className="form-group">
             <input
               className="form-control form-control-lg"
+              {...register('user.username')}
+              type="text"
+              placeholder="Your Name"
+            />
+          </fieldset>
+          <fieldset className="form-group">
+            <textarea
+              className="form-control form-control-lg"
+              {...register('user.bio')}
+              rows={8}
+              placeholder="Short bio about you"
+            />
+          </fieldset>
+          <fieldset className="form-group">
+            <input
+              className="form-control form-control-lg"
+              {...register('user.email')}
+              type="text"
+              placeholder="Email"
+            />
+          </fieldset>
+          <fieldset className="form-group">
+            <input
+              className={classnames('form-control form-control-lg', { is_error: formError?.password })}
+              {...register('user.password', {
+                required: errorMessages.REQUIRED_message,
+                minLength: {
+                  value: 4,
+                  message: errorMessages.MIN_length_4,
+                },
+              })}
               type="password"
               placeholder="Password"
               autoComplete="false"
-              ref={passwordInput}
             />
+            {formError?.password && <ErrorMessage>{formError.password.message}</ErrorMessage>}
           </fieldset>
-          <button className="btn btn-lg btn-primary pull-xs-right" onClick={submitUpdateUser} disabled={isLoading}>
+          <button
+            className={classnames('btn btn-lg btn-primary pull-xs-right', { is_error: formError })}
+            onClick={handleSubmit(submitUpdateUser)}
+            disabled={isLoading || !!formError}>
             Update Settings
           </button>
         </fieldset>

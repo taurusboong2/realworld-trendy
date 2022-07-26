@@ -127,10 +127,10 @@ const EditForm: FC<Props> = ({ isCreatePage }) => {
                   </fieldset>
                   <TagInput tagList={tagList} pushTag={pushTag} deleteTag={deleteTag} />
                   <button
-                    className="btn btn-lg pull-xs-right btn-primary"
+                    className={classnames('btn btn-lg pull-xs-right btn-primary', { is_error: articleError })}
                     type="button"
                     onClick={isCreatePage ? handleSubmit(handleSubmitCreate) : handleSubmitUpdate}
-                    disabled={isCreating}>
+                    disabled={isCreating || !!articleError}>
                     {isCreatePage ? 'Publish' : 'Update'} Article
                   </button>
                 </fieldset>
