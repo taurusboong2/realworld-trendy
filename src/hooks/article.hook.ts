@@ -74,13 +74,12 @@ export const useUpdateArticle = () => {
 
 export const useFetchArticleListByOffset = () => {
   const { data: user } = useFetchCurrentUser();
-  const userIsLoggedIn = user ? true : false;
 
   const { isLoading, data, fetchNextPage, isFetching, isFetchingNextPage } = useInfiniteQuery(
     'articles',
     ({ pageParam }) => fetchArticlebyOffset({ pageParam }),
     {
-      enabled: userIsLoggedIn,
+      enabled: !!user,
       getNextPageParam: (lastPage, page: any) => {
         const nextPage = page.length * 5;
         return nextPage;
