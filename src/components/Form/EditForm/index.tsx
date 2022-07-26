@@ -5,7 +5,7 @@ import { useCreateNewArticle, useFetchArticle, useUpdateArticle } from '../../..
 import { useForm } from 'react-hook-form';
 import { NewArticleData } from '../../../types/article';
 import { ErrorMessage } from '../../../commons/errorStyledComponents';
-import * as errorMessage from '../../../constants/errorMessage';
+import * as errorMessages from '../../../constants/errorMessages';
 import classnames from 'classnames';
 
 type Props = {
@@ -89,7 +89,7 @@ const EditForm: FC<Props> = ({ isCreatePage }) => {
                   <fieldset className="form-group">
                     <input
                       {...register('article.title', {
-                        required: errorMessage.REQUIRED_message,
+                        required: errorMessages.REQUIRED_message,
                       })}
                       placeholder={articleError?.title ? '' : 'title'}
                       type="text"
@@ -100,7 +100,7 @@ const EditForm: FC<Props> = ({ isCreatePage }) => {
                   <fieldset className="form-group">
                     <textarea
                       {...register('article.description', {
-                        required: errorMessage.REQUIRED_message,
+                        required: errorMessages.REQUIRED_message,
                       })}
                       placeholder={articleError?.description ? '' : 'description'}
                       className={classnames('form-control form-control-lg', { is_error: articleError?.description })}
@@ -111,7 +111,7 @@ const EditForm: FC<Props> = ({ isCreatePage }) => {
                   <fieldset className="form-group">
                     <input
                       {...register('article.body', {
-                        required: errorMessage.REQUIRED_message,
+                        required: errorMessages.REQUIRED_message,
                       })}
                       placeholder={articleError?.body ? '' : 'body'}
                       type="text"
@@ -119,7 +119,7 @@ const EditForm: FC<Props> = ({ isCreatePage }) => {
                     />
                     {articleError?.body && <ErrorMessage>{articleError?.body.message}</ErrorMessage>}
                   </fieldset>
-                  <TagInput tagList={tagList} pushTag={pushTag} deleteTag={deleteTag} register={register} />
+                  <TagInput tagList={tagList} pushTag={pushTag} deleteTag={deleteTag} />
                   <button
                     className="btn btn-lg pull-xs-right btn-primary"
                     type="button"

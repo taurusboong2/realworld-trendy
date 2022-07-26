@@ -6,7 +6,8 @@ import { useCreateNewAccount } from '../hooks/auth.hook';
 import { useForm } from 'react-hook-form';
 import { NewAccountType } from '../types/auth';
 import { ErrorMessage } from '../commons/errorStyledComponents';
-import * as errorMessage from '../constants/errorMessage';
+import * as errorMessages from '../constants/errorMessages';
+import * as regexes from '../constants/regexes';
 
 const Register = () => {
   const navigate = useNavigate();
@@ -51,10 +52,10 @@ const Register = () => {
                   <fieldset className="form-group">
                     <input
                       {...register('user.username', {
-                        required: errorMessage.REQUIRED_message,
+                        required: errorMessages.REQUIRED_message,
                         minLength: {
                           value: 2,
-                          message: errorMessage.MIN_length_2,
+                          message: errorMessages.MIN_length_2,
                         },
                       })}
                       className={classnames('form-control form-control-lg', { is_error: errorUser?.username })}
@@ -67,10 +68,10 @@ const Register = () => {
                   <fieldset className="form-group">
                     <input
                       {...register('user.email', {
-                        required: errorMessage.REQUIRED_message,
+                        required: errorMessages.REQUIRED_message,
                         pattern: {
-                          value: /\S+\@\S+\.\S/,
-                          message: errorMessage.WRONG_email,
+                          value: regexes.emailFormat,
+                          message: errorMessages.WRONG_email,
                         },
                       })}
                       className={classnames('form-control form-control-lg', { is_error: errorUser?.email })}
@@ -83,10 +84,10 @@ const Register = () => {
                   <fieldset className="form-group">
                     <input
                       {...register('user.password', {
-                        required: errorMessage.REQUIRED_message,
+                        required: errorMessages.REQUIRED_message,
                         minLength: {
                           value: 4,
-                          message: errorMessage.MIN_length_4,
+                          message: errorMessages.MIN_length_4,
                         },
                       })}
                       className={classnames('form-control form-control-lg', { is_error: errorUser?.password })}
