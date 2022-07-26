@@ -5,7 +5,7 @@ import { useLogin } from '../hooks/auth.hook';
 import LoadingSpinner from '../components/common/LoadingSpinner';
 import { useForm } from 'react-hook-form';
 import { LoginData } from '../types/auth';
-import { ErrorMessage } from '../commons/errorStyledComponents';
+import { ErrorMessage } from '../commons/errorStyledComponents';
 import * as errorMessage from '../constants/errorMessage';
 
 const Login = () => {

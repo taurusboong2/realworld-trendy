@@ -4,7 +4,6 @@ import { Route, Routes, BrowserRouter } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import Home from './pages/Home';
-import Layout from './components/common/Layout';
 import Register from './pages/register';
 import Login from './pages/login';
 import Settings from './pages/settings';
@@ -12,6 +11,7 @@ import Profile from './pages/profile';
 import CreatePage from './pages/create';
 import ArticleDetail from './pages/articleDetail';
 import EditPage from './pages/edit';
+import Layout from './components/common/Layout';
 
 import './styles/_base.scss';
 

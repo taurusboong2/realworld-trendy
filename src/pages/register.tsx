@@ -5,7 +5,7 @@ import LoadingSpinner from '../components/common/LoadingSpinner';
 import { useCreateNewAccount } from '../hooks/auth.hook';
 import { useForm } from 'react-hook-form';
 import { NewAccountType } from '../types/auth';
-import { ErrorMessage } from '../commons/errorStyledComponents';
+import { ErrorMessage } from '../commons/errorStyledComponents';
 import * as errorMessage from '../constants/errorMessage';
 
 const Register = () => {

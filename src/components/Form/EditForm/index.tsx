@@ -4,7 +4,7 @@ import { useParams } from 'react-router';
 import { useCreateNewArticle, useFetchArticle, useUpdateArticle } from '../../../hooks/article.hook';
 import { useForm } from 'react-hook-form';
 import { NewArticleData } from '../../../types/article';
-import { ErrorMessage } from '../../../commons/errorStyledComponents';
+import { ErrorMessage } from '../../../commons/errorStyledComponents';
 import * as errorMessage from '../../../constants/errorMessage';
 import classnames from 'classnames';
 
