@@ -1,11 +1,8 @@
 import React, { FC, useRef } from 'react';
 import { FaTrash } from 'react-icons/fa';
-import { UseFormRegister } from 'react-hook-form';
-import { NewArticleData } from '../../../types/article';
 
 type Props = {
   tagList: string[];
-  register: UseFormRegister<NewArticleData>;
   pushTag: (newTag: string) => void;
   deleteTag: (index: number) => void;
 };
