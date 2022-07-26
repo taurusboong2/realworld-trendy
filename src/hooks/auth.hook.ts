@@ -72,9 +72,10 @@ export const useUpdateCurrentUserData = () => {
     onSuccess: async data => {
       alert('회원정보가 성공적으로 수정되었습니다.');
       navigate('/');
-      removeTokenFromStorage();
+      // removeTokenFromStorage();
+      // setTokenFromStorage(`${data.data.user.token}`);
       queryClient.setQueryData('current-user', data);
-      setTokenFromStorage(`${data.data.user.token}`);
+      await queryClient.invalidateQueries(['current-user']);
     },
   });
 };
