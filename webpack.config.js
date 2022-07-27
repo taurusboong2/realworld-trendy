@@ -64,6 +64,7 @@ const config = {
     extensions: ['.tsx', '.ts', '.js'],
     alias: {
       'react-dom': '@hot-loader/react-dom',
+      '@': path.resolve(__dirname, 'src'),
     },
   },
 };
