@@ -1,0 +1,33 @@
+$error: #DB3353;
+$primary: #5CB85C;
+$success: #6AC44E;
+$info:#235ADB;
+$warning:#DBB40C;
+
+.boong_ui-toastContainer {
+  position: absolute;
+  top: 15%;
+  left: 50%;
+  transform: translateX(-50%);
+  display: grid;
+  place-items: center;
+
+  .toastBox {
+    display: inline;
+    text-align: center;
+    background-color: #5CB85C;
+    color: #fff;
+    padding: 20px 15px;
+    border-radius: 10px;
+
+    &.error{background-color: $error;}
+    &.success {background-color: $success;}
+    &.warning {background-color: $warning;}
+    &.info {background-color: $info;}
+
+    .icon{
+      position: relative;
+      bottom: -1px;
+    }
+  }
+}

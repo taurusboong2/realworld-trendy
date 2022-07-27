@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Toast from './Toast';
 import { Props } from './types';
+import './index.scss';
 
 export const CONTAINER_CLASSNAME = 'boong_ui-toastContainer';
 

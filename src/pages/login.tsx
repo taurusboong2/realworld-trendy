@@ -8,6 +8,7 @@ import { LoginData } from '../types/auth';
 import { ErrorMessage } from '../commons/errorStyledComponents';
 import * as errorMessages from '../constants/errorMessages';
 import * as regexes from '../constants/regexes';
+import { createToast } from '@/components/common/Toast';
 
 const Login = () => {
   const {
@@ -40,6 +41,14 @@ const Login = () => {
               <p className="text-xs-center">
                 <MyLink href="/signUp">Need an account?</MyLink>
               </p>
+
+              <div>
+                <button
+                  type="button"
+                  onClick={() => createToast({ message: '로그인에 성공하셨습니다.', type: 'info' })}>
+                  토스트 생성
+                </button>
+              </div>
 
               <form onSubmit={handleSubmit(loginSubmit)}>
                 <fieldset>

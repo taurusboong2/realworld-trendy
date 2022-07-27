@@ -2,9 +2,11 @@ import React from 'react';
 import ToastPortal from './Portal';
 import { Props } from './types';
 import { CONTAINER_CLASSNAME } from '.';
+import { AiOutlineInfoCircle } from 'react-icons/ai';
+import classnames from 'classnames';
 
 const Toast: React.FC<Props> = props => {
-  const { message, type = 'default', duration = 3500 } = props;
+  const { message, type = 'default', duration = 10000 } = props;
   const ref = React.useRef<HTMLDivElement>(null);
   const [isDestroying, setIsDestroying] = React.useState<boolean>(false);
   const [isDestroyed, setIsDestroyed] = React.useState<boolean>(false);
@@ -35,9 +37,12 @@ const Toast: React.FC<Props> = props => {
 
   return (
     <ToastPortal>
-      <div ref={ref} onClick={remove}>
-        <span className="typeIcon">아이콘 아이콘</span>
-        <span>{message}</span>
+      <div className={classnames('toastBox', type)} ref={ref} onClick={remove}>
+        <span className="toast_message">
+          <AiOutlineInfoCircle className="icon" />
+          &nbsp;&nbsp;
+          {message}
+        </span>
       </div>
     </ToastPortal>
   );

@@ -4,6 +4,7 @@ import { createNewAccount, fetchCurentUser, login, updateCurrentUserData } from 
 import { useNavigate } from 'react-router';
 import { removeTokenFromStorage, setTokenFromStorage } from '../commons/tokenStorage';
 import { apiWithAuth } from '../config/api';
+import { createToast } from '@/components/common/Toast';
 
 export const useCreateNewAccount = () => {
   const navigate = useNavigate();
@@ -24,9 +25,13 @@ export const useLogin = () => {
   return useMutation(login, {
     onSuccess: async data => {
       const userData = data.data;
+      createToast({
+        message: `환영합니다 ${userData.user.username}님!`,
+        type: 'info',
+      });
       apiWithAuth.defaults.headers['Authorization'] = `Token ${userData.user.token}`;
       setTokenFromStorage(userData.user.token);
-      alert(`환영합니다 ${userData.user.username}님!`);
+      // alert(`환영합니다 ${userData.user.username}님!`);
       navigate('/');
       await queryClient.invalidateQueries(['current-user']);
     },
