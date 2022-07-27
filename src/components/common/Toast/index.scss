@@ -5,12 +5,12 @@ $info:#235ADB;
 $warning:#DBB40C;
 
 .boong_ui-toastContainer {
-  position: absolute;
+  position: fixed;
   top: 15%;
   left: 50%;
   transform: translateX(-50%);
-  display: grid;
-  place-items: center;
+  // display: grid;
+  // place-items: center;
 
   .toastBox {
     display: inline;

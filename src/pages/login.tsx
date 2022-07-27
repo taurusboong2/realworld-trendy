@@ -42,14 +42,6 @@ const Login = () => {
                 <MyLink href="/signUp">Need an account?</MyLink>
               </p>
 
-              <div>
-                <button
-                  type="button"
-                  onClick={() => createToast({ message: '로그인에 성공하셨습니다.', type: 'info' })}>
-                  토스트 생성
-                </button>
-              </div>
-
               <form onSubmit={handleSubmit(loginSubmit)}>
                 <fieldset>
                   <fieldset className="form-group">
@@ -89,6 +81,11 @@ const Login = () => {
                     disabled={errorUser || isLoading ? true : false}>
                     Sign in
                   </button>
+                  {errorUser &&
+                    createToast({
+                      message: '로그인 정보를 다시 확인해주세요',
+                      type: 'error',
+                    })}
                 </fieldset>
               </form>
             </div>
