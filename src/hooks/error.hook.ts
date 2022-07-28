@@ -1,20 +1,17 @@
 import { createToast } from '@/components/common/Toast';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { FieldErrorsImpl, DeepRequired } from 'react-hook-form';
 import { LoginData } from '@/types/auth';
+import { isEmptyObj } from '@/commons/utils';
 
 export const useErrorToast = (formError: FieldErrorsImpl<DeepRequired<LoginData>>, errorMessage: string) => {
-  const [error, setError] = useState<boolean>(false);
-
   useEffect(() => {
-    setError(true);
-    if (!error) return;
-    if (error) {
+    if (isEmptyObj(formError)) return;
+    if (!isEmptyObj(formError)) {
       createToast({
         message: errorMessage,
         type: 'error',
       });
     }
-    setError(false);
   }, [formError]);
 };
