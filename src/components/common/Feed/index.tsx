@@ -21,7 +21,7 @@ const Feed: FC<Props> = ({ slug, author, date, heart, title, description, image,
             <img src={image} />
           </MyLink>
           <div className="info">
-            <a href="propfile" className="author">
+            <a href="/profile" className="author">
               {author}
             </a>
             <span className="date">{date}</span>
