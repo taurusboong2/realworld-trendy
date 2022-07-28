@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import ToastPortal from './Portal';
 import { Props } from './types';
 import { CONTAINER_CLASSNAME } from '.';
@@ -7,16 +7,16 @@ import classnames from 'classnames';
 
 const Toast: React.FC<Props> = props => {
   const { message, type = 'default', duration = 3500 } = props;
-  const ref = React.useRef<HTMLDivElement>(null);
-  const [isDestroying, setIsDestroying] = React.useState<boolean>(false);
-  const [isDestroyed, setIsDestroyed] = React.useState<boolean>(false);
-  const [duraion, setDuraion] = React.useState<number>(duration);
+  const ref = useRef<HTMLDivElement>(null);
+  const [isDestroying, setIsDestroying] = useState<boolean>(false);
+  const [isDestroyed, setIsDestroyed] = useState<boolean>(false);
+  const [duraion, setDuraion] = useState<number>(duration);
 
   const remove = () => {
-    setDuraion(400);
+    setDuraion(100);
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     let t1: any;
     let t2: any;
     if (!isDestroyed) {

@@ -8,7 +8,7 @@ import { LoginData } from '../types/auth';
 import { ErrorMessage } from '../commons/errorStyledComponents';
 import * as errorMessages from '../constants/errorMessages';
 import * as regexes from '../constants/regexes';
-import { createToast } from '@/components/common/Toast';
+import { useErrorToast } from '@/hooks/error.hook';
 
 const Login = () => {
   const {
@@ -29,6 +29,8 @@ const Login = () => {
       handleSubmit(loginSubmit)();
     }
   };
+
+  useErrorToast(errors);
 
   if (isLoading) return <LoadingSpinner />;
   return (
@@ -64,6 +66,10 @@ const Login = () => {
                     <input
                       {...register('user.password', {
                         required: errorMessages.REQUIRED_message,
+                        minLength: {
+                          value: 4,
+                          message: errorMessages.MIN_length_4,
+                        },
                       })}
                       className={classnames('form-control form-control-lg', { is_error: errorUser?.password })}
                       type="password"
@@ -81,11 +87,6 @@ const Login = () => {
                     disabled={errorUser || isLoading ? true : false}>
                     Sign in
                   </button>
-                  {errorUser &&
-                    createToast({
-                      message: '로그인 정보를 다시 확인해주세요',
-                      type: 'error',
-                    })}
                 </fieldset>
               </form>
             </div>
