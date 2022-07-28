@@ -30,7 +30,7 @@ const Login = () => {
     }
   };
 
-  useErrorToast(errors);
+  useErrorToast(errors, '로그인 정보를 다시 확인해주세요.');
 
   if (isLoading) return <LoadingSpinner />;
   return (

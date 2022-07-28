@@ -1,7 +1,9 @@
 import { createToast } from '@/components/common/Toast';
 import { useEffect, useState } from 'react';
+import { FieldErrorsImpl, DeepRequired } from 'react-hook-form';
+import { LoginData } from '@/types/auth';
 
-export const useErrorToast = formError => {
+export const useErrorToast = (formError: FieldErrorsImpl<DeepRequired<LoginData>>, errorMessage: string) => {
   const [error, setError] = useState<boolean>(false);
 
   useEffect(() => {
@@ -9,7 +11,7 @@ export const useErrorToast = formError => {
     if (!error) return;
     if (error) {
       createToast({
-        message: '로그인 정보를 확인해주세요.',
+        message: errorMessage,
         type: 'error',
       });
     }
