@@ -6,6 +6,7 @@ import {
   editArticle,
   fetchArticle,
   fetchArticlebyOffset,
+  fetchArticleCounts,
   fetchArticleList,
 } from '../networks/articles';
 import { useFetchCurrentUser } from './auth.hook';
@@ -20,7 +21,7 @@ export const useFetchArticleList = () => {
 };
 
 export const useFetchArticleCount = () => {
-  return useQuery('articles-count', fetchArticleList, {
+  return useQuery('articles-count', fetchArticleCounts, {
     select: data => {
       const counts = data?.data.articlesCount;
       return counts;
@@ -93,7 +94,7 @@ export const useFetchArticleListByOffset = () => {
     {
       enabled: !!user,
       getNextPageParam: (lastPage, page) => {
-        const nextPage = (counts as number) < count.at(-1)! ? undefined : page.length * 5;
+        const nextPage = (counts as number) < (count.at(-1) as number) ? undefined : page.length * 5;
         count.push(nextPage as number);
         return nextPage;
       },

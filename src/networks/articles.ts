@@ -7,6 +7,7 @@ import {
   ArticleType,
   updateMutation,
   OffsetProps,
+  ArticlesCount,
 } from '../types/article';
 
 export const fetchArticleList = async () => {
@@ -16,6 +17,11 @@ export const fetchArticleList = async () => {
     return response;
   }
   return null;
+};
+
+export const fetchArticleCounts = async () => {
+  const response = await apiWithAuth.get<ArticlesCount>(`/articles`);
+  return response;
 };
 
 export const createNewArticle = async (newArticleData: NewArticleData) => {

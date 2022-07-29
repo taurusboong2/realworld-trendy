@@ -17,6 +17,8 @@ export type ArticleListType = {
   articlesCount: number;
 };
 
+export type ArticlesCount = Pick<ArticleListType, 'articlesCount'>;
+
 export type ArticleDataType = {
   article: ArticleType;
 };
