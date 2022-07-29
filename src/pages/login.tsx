@@ -1,5 +1,5 @@
 import React, { KeyboardEvent } from 'react';
-import MyLink from '../components/common/MyLink/MyLink';
+import MyLink from '../components/common/MyLink';
 import classnames from 'classnames';
 import { useLogin } from '../hooks/auth.hook';
 import LoadingSpinner from '../components/common/LoadingSpinner';

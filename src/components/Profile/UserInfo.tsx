@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { useFetchCurrentUser } from '../../hooks/auth.hook';
+import { useFetchCurrentUser } from '@/hooks/auth.hook';
 
 const UserInfo: FC = () => {
   const { data: user } = useFetchCurrentUser();

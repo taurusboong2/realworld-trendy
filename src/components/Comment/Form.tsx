@@ -1,10 +1,10 @@
 import React, { FC, useRef } from 'react';
-import MyLink from '../common/MyLink/MyLink';
+import MyLink from '../common/MyLink';
 import LoadingSpinner from '../common/LoadingSpinner';
-import { useFetchCurrentUser } from '../../hooks/auth.hook';
-import { useAddComment } from '../../hooks/comment.hook';
+import { useFetchCurrentUser } from '@/hooks/auth.hook';
+import { useAddComment } from '@/hooks/comment.hook';
 import { useParams } from 'react-router';
-import { AddCommentType } from '../../types/comment';
+import { AddCommentType } from '@/types/comment';
 
 const CommentForm: FC = () => {
   const { slug } = useParams();

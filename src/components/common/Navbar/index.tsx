@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
-import { useFetchCurrentUser } from '../../../hooks/auth.hook';
-import MyLink from '../MyLink/MyLink';
+import { useFetchCurrentUser } from '@/hooks/auth.hook';
+import MyLink from '../MyLink';
 
 const NavBar: FC = () => {
   const { data: loginUser } = useFetchCurrentUser();

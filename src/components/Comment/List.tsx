@@ -1,9 +1,9 @@
 import React from 'react';
 import Comment from '.';
 import { useParams } from 'react-router';
-import { useFetchComments } from '../../hooks/comment.hook';
+import { useFetchComments } from '@/hooks/comment.hook';
 import LoadingSpinner from '../common/LoadingSpinner';
-import { CommentDataType } from '../../types/comment';
+import { CommentDataType } from '@/types/comment';
 
 const List = () => {
   const { slug } = useParams();

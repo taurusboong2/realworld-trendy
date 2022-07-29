@@ -1,11 +1,11 @@
 import React, { FC, useEffect, useState } from 'react';
 import TagInput from '../../Article/TagInput';
 import { useParams } from 'react-router';
-import { useCreateNewArticle, useFetchArticle, useUpdateArticle } from '../../../hooks/article.hook';
+import { useCreateNewArticle, useFetchArticle, useUpdateArticle } from '@/hooks/article.hook';
 import { useForm } from 'react-hook-form';
-import { NewArticleData } from '../../../types/article';
-import { ErrorMessage } from '../../../commons/errorStyledComponents';
-import * as errorMessages from '../../../constants/errorMessages';
+import { NewArticleData } from '@/types/article';
+import { ErrorMessage } from '@/commons/errorStyledComponents';
+import * as errorMessages from '@/constants/errorMessages';
 import classnames from 'classnames';
 
 type Props = {
@@ -71,7 +71,6 @@ const EditForm: FC<Props> = ({ isCreatePage }) => {
 
   const deleteTag = (index: number): void => {
     const filtered = tagList.filter((tag, tagIndex) => tagIndex !== index);
-
     setTagList(filtered);
   };
 

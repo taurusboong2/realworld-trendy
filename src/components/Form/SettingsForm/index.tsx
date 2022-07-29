@@ -1,9 +1,9 @@
 import React, { FC, useEffect } from 'react';
-import { useFetchCurrentUser, useUpdateCurrentUserData } from '../../../hooks/auth.hook';
+import { useFetchCurrentUser, useUpdateCurrentUserData } from '@/hooks/auth.hook';
 import { useForm } from 'react-hook-form';
-import * as errorMessages from '../../../constants/errorMessages';
-import { ErrorMessage } from '../../../commons/errorStyledComponents';
-import { UpdateUserData } from '../../../types/auth';
+import * as errorMessages from '@/constants/errorMessages';
+import { ErrorMessage } from '@/commons/errorStyledComponents';
+import { UpdateUserData } from '@/types/auth';
 import classnames from 'classnames';
 
 const SettingsForm: FC = () => {

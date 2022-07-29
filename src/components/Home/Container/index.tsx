@@ -3,8 +3,8 @@ import Feed from '../../common/Feed';
 import LoadingSpinner from '../../common/LoadingSpinner';
 import Sidebar from '../Sidebar';
 import { useInView } from 'react-intersection-observer';
-import { ArticleType } from '../../../types/article';
-import { useFetchArticleListByOffset } from '../../../hooks/article.hook';
+import { ArticleType } from '@/types/article';
+import { useFetchArticleListByOffset } from '@/hooks/article.hook';
 
 const Container: FC = () => {
   const { ref, inView } = useInView({

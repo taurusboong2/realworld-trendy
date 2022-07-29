@@ -1,7 +1,7 @@
 import React, { FC, ReactEventHandler } from 'react';
 import { useFetchCurrentUser } from '../../hooks/auth.hook';
 import { ArticleType } from '../../types/article';
-import MyLink from '../common/MyLink/MyLink';
+import MyLink from '../common/MyLink';
 
 type Props = {
   articleData: ArticleType;
@@ -10,16 +10,18 @@ type Props = {
 
 const ProfileBox: FC<Props> = ({ articleData, deleteHandler }) => {
   const { data: currentUser } = useFetchCurrentUser();
+  const { author } = articleData;
+
   return (
     <>
       <div className="article-actions">
         <div className="article-meta">
           <a href="profile.html">
-            <img src={articleData!.author.image} />
+            <img src={author.image} />
           </a>
           <div className="info">
             <a href="" className="author">
-              {articleData!.author.username}
+              {author.username}
             </a>
             <span className="date"> {new Date(articleData.createdAt).toDateString()}</span>
           </div>
@@ -37,7 +39,7 @@ const ProfileBox: FC<Props> = ({ articleData, deleteHandler }) => {
             <>
               <button className="btn btn-sm btn-outline-secondary">
                 <i className="ion-plus-round" />
-                &nbsp; Follow {articleData.author.username}
+                &nbsp; Follow {author.username}
               </button>
               &nbsp;
               <button className="btn btn-sm btn-outline-primary">

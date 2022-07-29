@@ -31,7 +31,6 @@ export type ArticleDataType = {
 //     tagList?: string[] | [];
 //   };
 // };
-
 export type NewArticleData = Partial<ArticleDataType>;
 
 export type updateMutation = {
