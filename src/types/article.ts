@@ -9,7 +9,7 @@ export type ArticleType = {
   createdAt: string;
   favoritesCount: number;
   favorited: boolean;
-  tagList: string[];
+  tagList: string[] | [];
 };
 
 export type ArticleListType = {
@@ -21,14 +21,16 @@ export type ArticleDataType = {
   article: ArticleType;
 };
 
-export type NewArticleData = {
-  article: {
-    title: string;
-    description: string;
-    body: string;
-    tagList?: string[] | [];
-  };
-};
+// export type NewArticleData = {
+//   article: {
+//     title: string;
+//     description: string;
+//     body: string;
+//     tagList?: string[] | [];
+//   };
+// };
+
+export type NewArticleData = Partial<ArticleDataType>;
 
 export type updateMutation = {
   props: {
