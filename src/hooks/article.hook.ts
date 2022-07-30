@@ -1,3 +1,4 @@
+import { getTokenFromStorage } from '@/commons/tokenStorage';
 import { useInfiniteQuery, useMutation, useQuery, useQueryClient } from 'react-query';
 import { useNavigate } from 'react-router';
 import {
@@ -17,15 +18,19 @@ export const useFetchArticleList = () => {
       const articles = data?.data.articles;
       return articles;
     },
+    retry: false,
   });
 };
 
 export const useFetchArticleCount = () => {
+  const token = getTokenFromStorage();
   return useQuery('articles-count', fetchArticleCounts, {
+    enabled: !!token,
     select: data => {
       const counts = data?.data.articlesCount;
       return counts;
     },
+    retry: false,
   });
 };
 
