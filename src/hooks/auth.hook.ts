@@ -15,8 +15,14 @@ export const useCreateNewAccount = () => {
       alert(`${userName}님의 회원가입이 성공적으로 진행되었습니다.`);
       navigate('/');
     },
-    onError: error => {
-      console.log(error);
+    onError: (error: any) => {
+      const errorCode: number = error?.request.status;
+      if (errorCode === 422) {
+        createToast({
+          message: 'username과 email은 고유해야 합니다!',
+          type: 'error',
+        });
+      }
     },
   });
 };

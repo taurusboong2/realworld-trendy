@@ -1,5 +1,5 @@
 import React, { KeyboardEvent } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import classnames from 'classnames';
 import LoadingSpinner from '../components/common/LoadingSpinner';
 import { useCreateNewAccount } from '../hooks/auth.hook';
@@ -10,21 +10,25 @@ import * as errorMessages from '../constants/errorMessages';
 import * as regexes from '../constants/regexes';
 
 const Register = () => {
-  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm<NewAccountType>();
   const errorUser = errors.user;
 
-  const { mutate: signUp, error, status, isLoading } = useCreateNewAccount();
+  const { mutate: signUp, status, isLoading, error } = useCreateNewAccount();
 
   const submitSignup = async (register: NewAccountType) => {
     await signUp(register);
-    if (status === 'success') {
-      alert('회원가입이 성공적으로 진행되었습니다.');
-      navigate('/');
+    if (!!error) {
+      reset({
+        user: {
+          username: '',
+          email: '',
+        },
+      });
     }
   };
 
@@ -35,7 +39,6 @@ const Register = () => {
   };
 
   if (status === 'loading') return <LoadingSpinner />;
-  if (status === 'error') return <>{error}</>;
   return (
     <>
       <div className="auth-page">
