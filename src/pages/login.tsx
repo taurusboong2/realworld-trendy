@@ -8,7 +8,7 @@ import { LoginData } from '../types/auth';
 import { ErrorMessage } from '../commons/errorStyledComponents';
 import * as errorMessages from '../constants/errorMessages';
 import * as regexes from '../constants/regexes';
-import { useErrorToast } from '@/hooks/error.hook';
+import { useErrorToast } from '@/hooks/toast.hook';
 
 const Login = () => {
   const {

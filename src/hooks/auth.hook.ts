@@ -15,6 +15,9 @@ export const useCreateNewAccount = () => {
       alert(`${userName}님의 회원가입이 성공적으로 진행되었습니다.`);
       navigate('/');
     },
+    onError: error => {
+      console.log(error);
+    },
   });
 };
 
@@ -31,7 +34,6 @@ export const useLogin = () => {
       });
       apiWithAuth.defaults.headers['Authorization'] = `Token ${userData.user.token}`;
       setTokenFromStorage(userData.user.token);
-      // alert(`환영합니다 ${userData.user.username}님!`);
       navigate('/');
       await queryClient.invalidateQueries(['current-user']);
     },
@@ -48,6 +50,10 @@ export const useLogout = () => {
     if (ask) {
       removeTokenFromStorage();
       navigate('/');
+      createToast({
+        message: `로그아웃이 성공적으로 완료되었습니다.`,
+        type: 'warning',
+      });
       queryClient.setQueryData('current-user', undefined);
       queryClient.removeQueries('articles');
     }
@@ -75,7 +81,10 @@ export const useUpdateCurrentUserData = () => {
 
   return useMutation(updateCurrentUserData, {
     onSuccess: async data => {
-      alert('회원정보가 성공적으로 수정되었습니다.');
+      createToast({
+        message: `사용자 정보 변경이 성공적으로 완료되었습니다.`,
+        type: 'info',
+      });
       navigate('/');
       removeTokenFromStorage();
       setTokenFromStorage(`${data.data.user.token}`);
