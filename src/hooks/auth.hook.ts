@@ -7,6 +7,7 @@ import { removeTokenFromStorage, setTokenFromStorage } from '../commons/tokenSto
 import { apiWithAuth } from '../config/api';
 import { createToast } from '@/components/common/Toast';
 import { ErrorCode } from '@/constants/errorCodes';
+import * as Sentry from '@sentry/react';
 
 export const useCreateNewAccount = () => {
   const navigate = useNavigate();
@@ -82,6 +83,12 @@ export const useFetchCurrentUser = () => {
     select: data => {
       const userInfo = data.data.user;
       return userInfo;
+    },
+    onSuccess: data => {
+      Sentry.setUser({
+        email: data.email,
+        username: data.username,
+      });
     },
   });
 };
