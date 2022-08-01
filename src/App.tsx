@@ -1,4 +1,4 @@
-import React, { FC, Suspense } from 'react';
+import React, { FC, Suspense, useEffect } from 'react';
 import { hot } from 'react-hot-loader/root';
 import { Route, Routes, BrowserRouter } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
@@ -11,6 +11,7 @@ import Profile from './pages/profile';
 import CreatePage from './pages/create';
 import ArticleDetail from './pages/articleDetail';
 import EditPage from './pages/edit';
+import { useNotFoundRediect } from '@/hooks/common.hook';
 
 import './styles/_base.scss';
 
@@ -24,11 +25,9 @@ const queryClient = new QueryClient({
 });
 
 const NotFound = () => {
-  return (
-    <div>
-      <h1>Not Found</h1>
-    </div>
-  );
+  useNotFoundRediect();
+
+  return <></>;
 };
 
 const App: FC = () => {
