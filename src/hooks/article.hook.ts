@@ -11,6 +11,7 @@ import {
   fetchArticleList,
 } from '../networks/articles';
 import { useFetchCurrentUser } from './auth.hook';
+import { createToast } from '@/components/common/Toast';
 
 export const useFetchArticleList = () => {
   return useQuery('article-list', fetchArticleList, {
@@ -51,9 +52,18 @@ export const useCreateNewArticle = () => {
 };
 
 export const useFetchArticle = (slug: string, shouldFetch?: boolean) => {
+  const navigate = useNavigate();
   return useQuery(['article', slug], () => fetchArticle(slug), {
     retry: false,
     enabled: shouldFetch,
+    onSuccess: data => {
+      console.log('onSuccess');
+      console.log('data: ', data);
+      if (!data.data.article.slug) {
+        createToast({ type: 'error', message: 'Not Found Article' });
+        navigate('/');
+      }
+    },
   });
 };
 
