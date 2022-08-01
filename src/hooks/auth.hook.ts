@@ -1,10 +1,12 @@
 import { useEffect } from 'react';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
+import axios from 'axios';
 import { createNewAccount, fetchCurentUser, login, updateCurrentUserData } from '../networks/auth';
 import { useNavigate } from 'react-router';
 import { removeTokenFromStorage, setTokenFromStorage } from '../commons/tokenStorage';
 import { apiWithAuth } from '../config/api';
 import { createToast } from '@/components/common/Toast';
+import { ErrorCode } from '@/constants/errorCodes';
 
 export const useCreateNewAccount = () => {
   const navigate = useNavigate();
@@ -15,9 +17,12 @@ export const useCreateNewAccount = () => {
       alert(`${userName}님의 회원가입이 성공적으로 진행되었습니다.`);
       navigate('/');
     },
-    onError: (error: any) => {
+    onError: error => {
+      if (!axios.isAxiosError(error)) {
+        throw error;
+      }
       const errorCode: number = error?.request.status;
-      if (errorCode === 422) {
+      if (errorCode === ErrorCode.FailValidation) {
         createToast({
           message: 'username과 email은 고유해야 합니다!',
           type: 'error',
