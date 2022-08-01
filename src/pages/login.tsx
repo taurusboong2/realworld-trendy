@@ -9,6 +9,7 @@ import { ErrorMessage } from '../commons/errorStyledComponents';
 import * as errorMessages from '../constants/errorMessages';
 import * as regexes from '../constants/regexes';
 import { useErrorToast } from '@/hooks/toast.hook';
+import Layout from '@/components/common/Layout';
 
 const Login = () => {
   const {
@@ -34,7 +35,7 @@ const Login = () => {
 
   if (isLoading) return <LoadingSpinner />;
   return (
-    <>
+    <Layout>
       <div className="auth-page">
         <div className="container page">
           <div className="row">
@@ -93,7 +94,7 @@ const Login = () => {
           </div>
         </div>
       </div>
-    </>
+    </Layout>
   );
 };
 

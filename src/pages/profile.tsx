@@ -5,6 +5,7 @@ import { useCheckAuth } from '../hooks/auth.hook';
 import Feed from '../components/common/Feed';
 import { ArticleType } from '../types/article';
 import LoadingSpinner from '../components/common/LoadingSpinner';
+import Layout from '@/components/common/Layout';
 
 import ArticleListSkeleton from '@/components/skeletons/ArticleListSkeleton';
 
@@ -13,7 +14,7 @@ const Profile = () => {
   useCheckAuth();
 
   return (
-    <>
+    <Layout>
       <div className="profile-page">
         <UserInfo />
 
@@ -51,7 +52,7 @@ const Profile = () => {
           </div>
         </div>
       </div>
-    </>
+    </Layout>
   );
 };
 

@@ -8,6 +8,7 @@ import { NewAccountType } from '../types/auth';
 import { ErrorMessage } from '../commons/errorStyledComponents';
 import * as errorMessages from '../constants/errorMessages';
 import * as regexes from '../constants/regexes';
+import Layout from '@/components/common/Layout';
 
 const Register = () => {
   const {
@@ -40,7 +41,7 @@ const Register = () => {
 
   if (status === 'loading') return <LoadingSpinner />;
   return (
-    <>
+    <Layout>
       <div className="auth-page">
         <div className="container page">
           <div className="row">
@@ -114,7 +115,7 @@ const Register = () => {
           </div>
         </div>
       </div>
-    </>
+    </Layout>
   );
 };
 

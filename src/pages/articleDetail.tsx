@@ -8,6 +8,7 @@ import List from '../components/Comment/List';
 import { useParams } from 'react-router';
 import { useDeleteArticle, useFetchArticle } from '../hooks/article.hook';
 import { ArticleType } from '../types/article';
+import Layout from '@/components/common/Layout';
 
 const ArticleDetail = () => {
   const { slug } = useParams();
@@ -24,7 +25,7 @@ const ArticleDetail = () => {
 
   if (isLoading) return <LoadingSpinner />;
   return (
-    <>
+    <Layout>
       <div className="article-page">
         <Banner articleData={articleData as ArticleType} />
 
@@ -45,7 +46,7 @@ const ArticleDetail = () => {
           </div>
         </div>
       </div>
-    </>
+    </Layout>
   );
 };
 
