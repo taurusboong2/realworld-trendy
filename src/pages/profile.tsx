@@ -6,6 +6,8 @@ import Feed from '../components/common/Feed';
 import { ArticleType } from '../types/article';
 import LoadingSpinner from '../components/common/LoadingSpinner';
 
+import ArticleListSkeleton from '@/components/skeletons/ArticleListSkeleton';
+
 const Profile = () => {
   const { data: articles, isLoading } = useFetchArticleList();
   useCheckAuth();
@@ -25,7 +27,11 @@ const Profile = () => {
                   </li>
                 </ul>
               </div>
-              {isLoading && <LoadingSpinner />}
+              {isLoading && (
+                <>
+                  <ArticleListSkeleton />
+                </>
+              )}
 
               {articles?.map((article: ArticleType) => {
                 return (
