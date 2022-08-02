@@ -16,7 +16,10 @@ export const useCreateNewAccount = () => {
   return useMutation(createNewAccount, {
     onSuccess: data => {
       const userName = data.data.user.username;
-      alert(`${userName}님의 회원가입이 성공적으로 진행되었습니다.`);
+      createToast({
+        message: messages.AUTH_registerDone(userName),
+        type: 'info',
+      });
       navigate('/');
     },
     onError: error => {
@@ -68,6 +71,7 @@ export const useLogout = () => {
         type: 'warning',
       });
       queryClient.setQueryData('current-user', undefined);
+      Sentry.setUser(null);
       queryClient.removeQueries('articles');
     }
   };
@@ -86,10 +90,12 @@ export const useFetchCurrentUser = () => {
       return userInfo;
     },
     onSuccess: data => {
-      Sentry.setUser({
-        email: data.email,
-        username: data.username,
-      });
+      if (!Sentry.setUser) {
+        Sentry.setUser({
+          email: data.email as string,
+          username: data.username as string,
+        });
+      }
     },
   });
 };

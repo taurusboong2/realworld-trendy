@@ -49,9 +49,6 @@ export const useCreateNewArticle = () => {
       navigate('/');
       queryClient.invalidateQueries('articles');
     },
-    onError: error => {
-      console.log(error);
-    },
   });
 };
 
@@ -89,9 +86,6 @@ export const useUpdateArticle = () => {
       queryClient.invalidateQueries(['article-list']);
       queryClient.invalidateQueries(['articles']);
       queryClient.invalidateQueries(['article']);
-    },
-    onError: error => {
-      console.log(error);
     },
   });
 };
