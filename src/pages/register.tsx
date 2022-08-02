@@ -17,10 +17,14 @@ const Register = () => {
   } = useForm<NewAccountType>();
   const errorUser = errors.user;
 
-  const { mutate: signUp, status, isLoading, error } = useCreateNewAccount();
+  const { mutate: signUp, status, isLoading } = useCreateNewAccount();
 
   const submitSignup = async (register: NewAccountType) => {
     await signUp(register);
+  };
+
+  const pushError = () => {
+    throw new Error();
   };
 
   const onEnterKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
@@ -99,6 +103,7 @@ const Register = () => {
                     disabled={errorUser || isLoading ? true : false}>
                     Sign up
                   </button>
+                  <button onClick={pushError}>에러 푸시</button>
                 </fieldset>
               </form>
             </div>
