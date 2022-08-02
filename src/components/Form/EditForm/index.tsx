@@ -7,6 +7,9 @@ import { NewArticleData } from '@/types/article';
 import { ErrorMessage } from '@/commons/errorStyledComponents';
 import * as messages from '@/constants/messages';
 import classnames from 'classnames';
+import axios from 'axios';
+import { ErrorCode } from '@/constants/errorCodes';
+import { createToast } from '@/components/common/Toast';
 
 type Props = {
   isCreatePage: boolean;
@@ -22,6 +25,7 @@ const EditForm: FC<Props> = ({ isCreatePage }) => {
     formState: { errors },
     setValue,
     reset,
+    setError,
   } = useForm<NewArticleData>({
     defaultValues: {
       article: {
@@ -32,7 +36,9 @@ const EditForm: FC<Props> = ({ isCreatePage }) => {
   const articleError = errors.article;
 
   const { mutate: createNewArticle, isLoading: isCreating } = useCreateNewArticle();
+
   const { mutate: updateCurrentArticle } = useUpdateArticle();
+
   const { data } = useFetchArticle(slug as string, !!slug);
 
   const articleData = data?.data.article;
@@ -52,7 +58,21 @@ const EditForm: FC<Props> = ({ isCreatePage }) => {
   }, [articleData]);
 
   const handleSubmitCreate = async (register: NewArticleData) => {
-    await createNewArticle(register);
+    await createNewArticle(register, {
+      onError: error => {
+        if (!axios.isAxiosError(error)) {
+          throw error;
+        }
+        const errorCode: number = error?.response?.status as number;
+        if (errorCode === ErrorCode.FailValidation) {
+          setError('article.title', { message: messages.UNIQUE_title }, { shouldFocus: true });
+          createToast({
+            message: messages.ARTICLE_failValidate,
+            type: 'error',
+          });
+        }
+      },
+    });
   };
 
   const handleSubmitUpdate = async (register: NewArticleData) => {
