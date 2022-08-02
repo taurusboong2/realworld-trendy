@@ -1,7 +1,6 @@
 import React, { FC, Fragment, useEffect } from 'react';
 import Feed from '../../common/Feed';
 import LoadingSpinner from '../../common/LoadingSpinner';
-import Sidebar from '../Sidebar';
 import { useInView } from 'react-intersection-observer';
 import { ArticleType } from '@/types/article';
 import { useFetchArticleListByOffset } from '@/hooks/article.hook';
@@ -27,14 +26,7 @@ const Container: FC = () => {
             <div className="feed-toggle">
               <ul className="nav nav-pills outline-active">
                 <li className="nav-item">
-                  <a className="nav-link disabled" href="">
-                    Your Feed
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a className="nav-link active" href="">
-                    Global Feed
-                  </a>
+                  <span className="nav-link active">Global Feed</span>
                 </li>
               </ul>
             </div>
@@ -64,7 +56,6 @@ const Container: FC = () => {
               {hasNextPage && isFetchingNextPage ? <LoadingSpinner /> : null}
             </>
           </div>
-          <Sidebar />
         </div>
       </div>
     </>
