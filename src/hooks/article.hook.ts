@@ -1,4 +1,5 @@
 import { getTokenFromStorage } from '@/commons/tokenStorage';
+import { createToast } from '@/components/common/Toast';
 import { useInfiniteQuery, useMutation, useQuery, useQueryClient } from 'react-query';
 import { useNavigate } from 'react-router';
 import {
@@ -11,6 +12,7 @@ import {
   fetchArticleList,
 } from '../networks/articles';
 import { useFetchCurrentUser } from './auth.hook';
+import * as messages from '@/constants/messages';
 
 export const useFetchArticleList = () => {
   return useQuery('article-list', fetchArticleList, {
@@ -40,7 +42,10 @@ export const useCreateNewArticle = () => {
 
   return useMutation(createNewArticle, {
     onSuccess: _data => {
-      alert('게시글이 성공적으로 생성되었습니다.');
+      createToast({
+        message: messages.ARTICLE_createDone,
+        type: 'info',
+      });
       navigate('/');
       queryClient.invalidateQueries('articles');
     },
@@ -76,7 +81,10 @@ export const useUpdateArticle = () => {
 
   return useMutation(editArticle, {
     onSuccess: _data => {
-      alert('게시글이 성공적으로 수정되었습니다.');
+      createToast({
+        message: messages.ARTICLE_updateDone,
+        type: 'info',
+      });
       navigate('/');
       queryClient.invalidateQueries(['article-list']);
       queryClient.invalidateQueries(['articles']);

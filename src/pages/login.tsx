@@ -6,7 +6,7 @@ import LoadingSpinner from '../components/common/LoadingSpinner';
 import { useForm } from 'react-hook-form';
 import { LoginData } from '../types/auth';
 import { ErrorMessage } from '../commons/errorStyledComponents';
-import * as errorMessages from '../constants/errorMessages';
+import * as messages from '../constants/messages';
 import * as regexes from '../constants/regexes';
 import { useErrorToast } from '@/hooks/toast.hook';
 
@@ -49,10 +49,10 @@ const Login = () => {
                   <fieldset className="form-group">
                     <input
                       {...register('user.email', {
-                        required: errorMessages.REQUIRED_message,
+                        required: messages.REQUIRED_message,
                         pattern: {
                           value: regexes.loginEmailFormat,
-                          message: errorMessages.WRONG_email,
+                          message: messages.WRONG_email,
                         },
                       })}
                       className={classnames('form-control form-control-lg', { is_error: errorUser?.email })}
@@ -65,10 +65,10 @@ const Login = () => {
                   <fieldset className="form-group">
                     <input
                       {...register('user.password', {
-                        required: errorMessages.REQUIRED_message,
+                        required: messages.REQUIRED_message,
                         minLength: {
                           value: 4,
-                          message: errorMessages.MIN_length_4,
+                          message: messages.MIN_length_4,
                         },
                       })}
                       className={classnames('form-control form-control-lg', { is_error: errorUser?.password })}

@@ -7,7 +7,8 @@ import { removeTokenFromStorage, setTokenFromStorage } from '../commons/tokenSto
 import { apiWithAuth } from '../config/api';
 import { createToast } from '@/components/common/Toast';
 import { ErrorCode } from '@/constants/errorCodes';
-import * as ErrorMessages from '@/constants/errorMessages';
+import * as messages from '@/constants/messages';
+import * as Sentry from '@sentry/react';
 
 export const useCreateNewAccount = () => {
   const navigate = useNavigate();
@@ -25,7 +26,7 @@ export const useCreateNewAccount = () => {
       const errorCode: number = error?.request.status;
       if (errorCode === ErrorCode.FailValidation) {
         createToast({
-          message: ErrorMessages.UNIQUE_idEmail,
+          message: messages.UNIQUE_idEmail,
           type: 'error',
         });
       }
@@ -41,7 +42,7 @@ export const useLogin = () => {
     onSuccess: async data => {
       const userData = data.data;
       createToast({
-        message: `환영합니다 ${userData.user.username}님!`,
+        message: messages.AUTH_welcomeMessage(userData.user.username),
         type: 'info',
       });
       apiWithAuth.defaults.headers['Authorization'] = `Token ${userData.user.token}`;
@@ -63,7 +64,7 @@ export const useLogout = () => {
       removeTokenFromStorage();
       navigate('/');
       createToast({
-        message: `로그아웃이 성공적으로 완료되었습니다.`,
+        message: messages.AUTH_logoutDone,
         type: 'warning',
       });
       queryClient.setQueryData('current-user', undefined);
@@ -84,6 +85,12 @@ export const useFetchCurrentUser = () => {
       const userInfo = data.data.user;
       return userInfo;
     },
+    onSuccess: data => {
+      Sentry.setUser({
+        email: data.email,
+        username: data.username,
+      });
+    },
   });
 };
 
@@ -94,7 +101,7 @@ export const useUpdateCurrentUserData = () => {
   return useMutation(updateCurrentUserData, {
     onSuccess: async data => {
       createToast({
-        message: `사용자 정보 변경이 성공적으로 완료되었습니다.`,
+        message: messages.AUTH_changedInfo,
         type: 'info',
       });
       navigate('/');
@@ -114,7 +121,10 @@ export const useCheckAuth = () => {
   useEffect(() => {
     if (!isFetched) return;
     if (!user) {
-      alert('로그인이 필요한 페이지입니다!');
+      createToast({
+        message: messages.AUTH_required,
+        type: 'info',
+      });
       navigate('/');
     }
   }, [isFetched, user]);

@@ -1,7 +1,7 @@
 import React, { FC, useEffect } from 'react';
 import { useFetchCurrentUser, useUpdateCurrentUserData } from '@/hooks/auth.hook';
 import { useForm } from 'react-hook-form';
-import * as errorMessages from '@/constants/errorMessages';
+import * as messages from '@/constants/messages';
 import { ErrorMessage } from '@/commons/errorStyledComponents';
 import { UpdateUserData } from '@/types/auth';
 import classnames from 'classnames';
@@ -75,10 +75,10 @@ const SettingsForm: FC = () => {
             <input
               className={classnames('form-control form-control-lg', { is_error: formError?.password })}
               {...register('user.password', {
-                required: errorMessages.REQUIRED_message,
+                required: messages.REQUIRED_message,
                 minLength: {
                   value: 4,
-                  message: errorMessages.MIN_length_4,
+                  message: messages.MIN_length_4,
                 },
               })}
               type="password"

@@ -6,7 +6,7 @@ import { useCreateNewAccount } from '../hooks/auth.hook';
 import { useForm } from 'react-hook-form';
 import { NewAccountType } from '../types/auth';
 import { ErrorMessage } from '../commons/errorStyledComponents';
-import * as errorMessages from '../constants/errorMessages';
+import * as messages from '../constants/messages';
 import * as regexes from '../constants/regexes';
 
 const Register = () => {
@@ -21,10 +21,6 @@ const Register = () => {
 
   const submitSignup = async (register: NewAccountType) => {
     await signUp(register);
-  };
-
-  const pushError = () => {
-    throw new Error();
   };
 
   const onEnterKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
@@ -50,10 +46,10 @@ const Register = () => {
                   <fieldset className="form-group">
                     <input
                       {...register('user.username', {
-                        required: errorMessages.REQUIRED_message,
+                        required: messages.REQUIRED_message,
                         minLength: {
                           value: 2,
-                          message: errorMessages.MIN_length_2,
+                          message: messages.MIN_length_2,
                         },
                       })}
                       className={classnames('form-control form-control-lg', { is_error: errorUser?.username })}
@@ -66,10 +62,10 @@ const Register = () => {
                   <fieldset className="form-group">
                     <input
                       {...register('user.email', {
-                        required: errorMessages.REQUIRED_message,
+                        required: messages.REQUIRED_message,
                         pattern: {
                           value: regexes.emailFormat,
-                          message: errorMessages.WRONG_email,
+                          message: messages.WRONG_email,
                         },
                       })}
                       className={classnames('form-control form-control-lg', { is_error: errorUser?.email })}
@@ -82,10 +78,10 @@ const Register = () => {
                   <fieldset className="form-group">
                     <input
                       {...register('user.password', {
-                        required: errorMessages.REQUIRED_message,
+                        required: messages.REQUIRED_message,
                         minLength: {
                           value: 4,
-                          message: errorMessages.MIN_length_4,
+                          message: messages.MIN_length_4,
                         },
                       })}
                       className={classnames('form-control form-control-lg', { is_error: errorUser?.password })}
@@ -103,7 +99,6 @@ const Register = () => {
                     disabled={errorUser || isLoading ? true : false}>
                     Sign up
                   </button>
-                  <button onClick={pushError}>에러 푸시</button>
                 </fieldset>
               </form>
             </div>

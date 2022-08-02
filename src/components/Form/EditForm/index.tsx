@@ -5,7 +5,7 @@ import { useCreateNewArticle, useFetchArticle, useUpdateArticle } from '@/hooks/
 import { useForm } from 'react-hook-form';
 import { NewArticleData } from '@/types/article';
 import { ErrorMessage } from '@/commons/errorStyledComponents';
-import * as errorMessages from '@/constants/errorMessages';
+import * as messages from '@/constants/messages';
 import classnames from 'classnames';
 
 type Props = {
@@ -85,7 +85,7 @@ const EditForm: FC<Props> = ({ isCreatePage }) => {
                   <fieldset className="form-group">
                     <input
                       {...register('article.title', {
-                        required: errorMessages.REQUIRED_message,
+                        required: messages.REQUIRED_message,
                       })}
                       placeholder={articleError?.title ? '' : 'title'}
                       type="text"
@@ -96,7 +96,7 @@ const EditForm: FC<Props> = ({ isCreatePage }) => {
                   <fieldset className="form-group">
                     <textarea
                       {...register('article.description', {
-                        required: errorMessages.REQUIRED_message,
+                        required: messages.REQUIRED_message,
                       })}
                       placeholder={articleError?.description ? '' : 'description'}
                       className={classnames('form-control form-control-lg', { is_error: articleError?.description })}
@@ -107,7 +107,7 @@ const EditForm: FC<Props> = ({ isCreatePage }) => {
                   <fieldset className="form-group">
                     <input
                       {...register('article.body', {
-                        required: errorMessages.REQUIRED_message,
+                        required: messages.REQUIRED_message,
                       })}
                       placeholder={articleError?.body ? '' : 'body'}
                       type="text"
