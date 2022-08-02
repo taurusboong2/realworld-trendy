@@ -14,7 +14,6 @@ const Register = () => {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
   } = useForm<NewAccountType>();
   const errorUser = errors.user;
 
@@ -22,14 +21,6 @@ const Register = () => {
 
   const submitSignup = async (register: NewAccountType) => {
     await signUp(register);
-    if (!!error) {
-      reset({
-        user: {
-          username: '',
-          email: '',
-        },
-      });
-    }
   };
 
   const onEnterKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
