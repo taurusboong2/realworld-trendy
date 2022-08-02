@@ -4,10 +4,10 @@ import { useFetchArticleList } from '../hooks/article.hook';
 import { useCheckAuth } from '../hooks/auth.hook';
 import Feed from '../components/common/Feed';
 import { ArticleType } from '../types/article';
-import LoadingSpinner from '../components/common/LoadingSpinner';
 
 const Profile = () => {
-  const { data: articles, isLoading } = useFetchArticleList();
+  const { data: articles } = useFetchArticleList();
+
   useCheckAuth();
 
   return (
@@ -21,19 +21,10 @@ const Profile = () => {
               <div className="articles-toggle">
                 <ul className="nav nav-pills outline-active">
                   <li className="nav-item">
-                    <a className="nav-link active" href="">
-                      My Articles
-                    </a>
-                  </li>
-                  <li className="nav-item">
-                    <a className="nav-link" href="">
-                      Favorited Articles
-                    </a>
+                    <span className="nav-link active">My Articles</span>
                   </li>
                 </ul>
               </div>
-              {isLoading && <LoadingSpinner />}
-
               {articles?.map((article: ArticleType) => {
                 return (
                   <Feed
