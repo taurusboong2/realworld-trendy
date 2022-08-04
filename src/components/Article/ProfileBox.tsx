@@ -1,6 +1,6 @@
 import React, { FC, ReactEventHandler } from 'react';
-import { useFetchCurrentUser } from '../../hooks/auth.hook';
-import { ArticleType } from '../../types/article';
+import { useFetchCurrentUser } from '@/hooks/auth.hook';
+import { ArticleType } from '@/types/article';
 import MyLink from '../common/MyLink';
 
 type Props = {

@@ -1,6 +1,6 @@
 import React, { FC, Fragment, useEffect } from 'react';
-import Feed from '../../common/Feed';
-import LoadingSpinner from '../../common/LoadingSpinner';
+import Feed from '@/components/common/Feed';
+import LoadingSpinner from '@/components/common/LoadingSpinner';
 import { useInView } from 'react-intersection-observer';
 import { ArticleType } from '@/types/article';
 import { useFetchArticleListByOffset } from '@/hooks/article.hook';

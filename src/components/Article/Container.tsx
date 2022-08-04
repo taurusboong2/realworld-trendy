@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { ArticleType } from '../../types/article';
+import { ArticleType } from '@/types/article';
 
 type Props = {
   articleData: ArticleType;
