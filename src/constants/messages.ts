@@ -8,6 +8,8 @@ export const MIN_length_4 = '*최소 4글자 이상이어야 합니다.';
 
 export const UNIQUE_idEmail = 'username과 email은 고유해야 합니다!';
 
+export const UNIQUE_title = '*title은 고유해야 합니다.';
+
 export const AUTH_changedInfo = '사용자 정보 변경이 성공적으로 완료되었습니다.';
 
 export const AUTH_required = '로그인이 필요한 페이지입니다!';
@@ -26,10 +28,12 @@ export const ARTICLE_createDone = '게시글이 성공적으로 생성되었습�
 
 export const ARTICLE_updateDone = '게시글이 성공적으로 수정되었습니다.';
 
-export const UNIQUE_title = '*title은 고유해야 합니다.';
+export const ARTICLE_notFound = '*존재하지 않는 게시글입니다.';
 
 export const ARTICLE_failValidate = 'title은 고유해야 합니다.';
 
 export const COMMENT_createSuccess = '댓글이 성공적으로 생성되었습니다.';
 
 export const COMMENT_deleteSuccess = '댓글이 성공적으로 삭제되었습니다.';
+
+export const REDIRECT_pageNotFound = 'Page Not Found';

@@ -53,9 +53,21 @@ export const useCreateNewArticle = () => {
 };
 
 export const useFetchArticle = (slug: string, shouldFetch?: boolean) => {
+  const navigate = useNavigate();
+
   return useQuery(['article', slug], () => fetchArticle(slug), {
     retry: false,
     enabled: shouldFetch,
+    onSuccess: data => {
+      const slug = data.data.article.slug;
+      if (!slug) {
+        createToast({
+          message: messages.ARTICLE_notFound,
+          type: 'error',
+        });
+        navigate('/');
+      }
+    },
   });
 };
 
