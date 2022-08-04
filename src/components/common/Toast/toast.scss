@@ -1,25 +1,28 @@
-.boong_ui-toastContainer {
-  position: fixed;
-  top: 15%;
-  left: 50%;
-  transform: translateX(-50%);
+:global {
+  .boong_ui-toastContainer {
+    position: absolute;
 
-  .toastBox {
-    display: inline;
-    text-align: center;
-    background-color: #5CB85C;
-    color: #fff;
-    padding: 20px 15px;
-    border-radius: 10px;
+    .toastBox {
+      position: fixed;
+      top: 15%;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      text-align: center;
+      background-color: #5CB85C;
+      color: #fff;
+      padding: 20px 15px;
+      border-radius: 10px;
 
-    &.error{background-color: $error;}
-    &.success {background-color: $success;}
-    &.warning {background-color: $warning;}
-    &.info {background-color: $info;}
+      &.error{background-color: $error;}
+      &.success {background-color: $success;}
+      &.warning {background-color: $warning;}
+      &.info {background-color: $info;}
 
-    .icon{
-      position: relative;
-      bottom: -1px;
+      .icon{
+        position: relative;
+        bottom: -1px;
+      }
     }
   }
 }

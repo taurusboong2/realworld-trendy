@@ -30,7 +30,7 @@ const config = {
             options: {
               importLoaders: 1,
               modules: {
-                localIdentName: '[local]',
+                localIdentName: '[path][name]__[local]--[hash:base64:5]',
               },
               sourceMap: true,
             },
