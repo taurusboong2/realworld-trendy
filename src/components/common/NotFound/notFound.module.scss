@@ -1,0 +1,19 @@
+#notFound-wrap {
+  width: 100%;
+  height: calc(100vh - 220px);
+  margin-top: 220px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .background{
+    width: 60%;
+    height: 30%;
+    background: url('@/assets/not-found-image.png') no-repeat center center / contain;
+  }
+
+  span {
+    margin-top: 30px;
+  }
+
+}

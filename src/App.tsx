@@ -11,6 +11,7 @@ import Profile from './pages/profile';
 import CreatePage from './pages/create';
 import ArticleDetail from './pages/articleDetail';
 import EditPage from './pages/edit';
+import NotFound from './components/common/NotFound';
 
 import './styles/_base.scss';
 
@@ -22,14 +23,6 @@ const queryClient = new QueryClient({
     },
   },
 });
-
-const NotFound = () => {
-  return (
-    <div>
-      <h1>Not Found</h1>
-    </div>
-  );
-};
 
 const App: FC = () => {
   return (
