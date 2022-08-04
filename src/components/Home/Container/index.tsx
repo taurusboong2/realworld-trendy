@@ -4,6 +4,7 @@ import LoadingSpinner from '../../common/LoadingSpinner';
 import { useInView } from 'react-intersection-observer';
 import { ArticleType } from '@/types/article';
 import { useFetchArticleListByOffset } from '@/hooks/article.hook';
+import ArticleListSkeleton from '@/components/Skeletons/ArticleListSkeleton';
 
 const Container: FC = () => {
   const { ref, inView } = useInView({
@@ -30,7 +31,7 @@ const Container: FC = () => {
                 </li>
               </ul>
             </div>
-            {isFetching && <LoadingSpinner />}
+            {isFetching && <ArticleListSkeleton />}
             <>
               {data?.pages.map((page, index) => {
                 return (

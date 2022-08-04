@@ -4,9 +4,10 @@ import { useFetchArticleList } from '../hooks/article.hook';
 import { useCheckAuth } from '../hooks/auth.hook';
 import Feed from '../components/common/Feed';
 import { ArticleType } from '../types/article';
+import ArticleListSkeleton from '@/components/Skeletons/ArticleListSkeleton';
 
 const Profile = () => {
-  const { data: articles } = useFetchArticleList();
+  const { data: articles, isFetching, isLoading } = useFetchArticleList();
 
   useCheckAuth();
 
@@ -25,6 +26,7 @@ const Profile = () => {
                   </li>
                 </ul>
               </div>
+              {(isFetching || isLoading) && <ArticleListSkeleton />}
               {articles?.map((article: ArticleType) => {
                 return (
                   <Feed
