@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import './articleSkeleton.scss';
+import './articleSkeleton.module.scss';
 
 const ArticleSkeleton: FC = () => {
   return (

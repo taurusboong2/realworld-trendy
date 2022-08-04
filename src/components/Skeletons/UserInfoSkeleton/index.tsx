@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import './UserInfoSkeleton.scss';
+import './UserInfoSkeleton.module.scss';
 
 const UserInfoSkeleton: FC = () => {
   return (
