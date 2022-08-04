@@ -11,7 +11,6 @@ import Profile from './pages/profile';
 import CreatePage from './pages/create';
 import ArticleDetail from './pages/articleDetail';
 import EditPage from './pages/edit';
-import Layout from './components/common/Layout';
 
 import './styles/_base.scss';
 
@@ -37,21 +36,19 @@ const App: FC = () => {
     <>
       <BrowserRouter>
         <QueryClientProvider client={queryClient}>
-          <Layout>
-            <Suspense fallback={<></>}>
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/register" element={<Register />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/settings" element={<Settings />} />
-                <Route path="/profile" element={<Profile />} />
-                <Route path="/create" element={<CreatePage />} />
-                <Route path="/article-detail/:slug" element={<ArticleDetail />} />
-                <Route path="/edit/:slug" element={<EditPage />} />
-                <Route path="*" element={<NotFound />} />
-              </Routes>
-            </Suspense>
-          </Layout>
+          <Suspense fallback={<></>}>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/settings" element={<Settings />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/create" element={<CreatePage />} />
+              <Route path="/article-detail/:slug" element={<ArticleDetail />} />
+              <Route path="/edit/:slug" element={<EditPage />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </Suspense>
           <ReactQueryDevtools initialIsOpen={false} />
         </QueryClientProvider>
       </BrowserRouter>

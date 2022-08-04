@@ -1,4 +1,5 @@
 import React, { KeyboardEvent } from 'react';
+import Layout from '@/components/common/Layout';
 import MyLink from '../components/common/MyLink';
 import classnames from 'classnames';
 import { useLogin } from '../hooks/auth.hook';
@@ -34,7 +35,7 @@ const Login = () => {
 
   if (isLoading) return <LoadingSpinner />;
   return (
-    <>
+    <Layout>
       <div className="auth-page">
         <div className="container page">
           <div className="row">
@@ -93,7 +94,7 @@ const Login = () => {
           </div>
         </div>
       </div>
-    </>
+    </Layout>
   );
 };
 

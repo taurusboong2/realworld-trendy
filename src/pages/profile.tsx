@@ -1,4 +1,5 @@
 import React from 'react';
+import Layout from '@/components/common/Layout';
 import UserInfo from '../components/Profile/UserInfo';
 import { useFetchArticleList } from '../hooks/article.hook';
 import { useCheckAuth } from '../hooks/auth.hook';
@@ -12,7 +13,7 @@ const Profile = () => {
   useCheckAuth();
 
   return (
-    <>
+    <Layout>
       <div className="profile-page">
         <UserInfo />
 
@@ -45,7 +46,7 @@ const Profile = () => {
           </div>
         </div>
       </div>
-    </>
+    </Layout>
   );
 };
 

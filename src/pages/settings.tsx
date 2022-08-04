@@ -1,4 +1,5 @@
 import React from 'react';
+import Layout from '@/components/common/Layout';
 import SettingsForm from '../components/Form/SettingsForm';
 import { useCheckAuth } from '../hooks/auth.hook';
 import { useLogout } from '../hooks/auth.hook';
@@ -12,7 +13,7 @@ const Settings = () => {
   };
 
   return (
-    <>
+    <Layout>
       <div className="settings-page">
         <div className="container page">
           <div className="row">
@@ -30,7 +31,7 @@ const Settings = () => {
           </div>
         </div>
       </div>
-    </>
+    </Layout>
   );
 };
 

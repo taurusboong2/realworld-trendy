@@ -1,5 +1,6 @@
 import React, { KeyboardEvent } from 'react';
 import { Link } from 'react-router-dom';
+import Layout from '@/components/common/Layout';
 import classnames from 'classnames';
 import LoadingSpinner from '../components/common/LoadingSpinner';
 import { useCreateNewAccount } from '../hooks/auth.hook';
@@ -31,7 +32,7 @@ const Register = () => {
 
   if (status === 'loading') return <LoadingSpinner />;
   return (
-    <>
+    <Layout>
       <div className="auth-page">
         <div className="container page">
           <div className="row">
@@ -105,7 +106,7 @@ const Register = () => {
           </div>
         </div>
       </div>
-    </>
+    </Layout>
   );
 };
 
