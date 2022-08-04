@@ -1,12 +1,17 @@
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { addComment, deleteComment, fetchComments } from '../networks/comment';
+import { createToast } from '@/components/common/Toast';
+import * as messages from '@/constants/messages';
 
 export const useAddComment = () => {
   const queryClient = useQueryClient();
 
   return useMutation(addComment, {
     onSuccess: _data => {
-      alert('댓글이 성공적으로 작성되었습니다.');
+      createToast({
+        message: messages.COMMENT_createSuccess,
+        type: 'info',
+      });
       queryClient.invalidateQueries('comment-list');
     },
   });
@@ -30,7 +35,10 @@ export const useDeleteComment = () => {
 
   return useMutation(deleteComment, {
     onSuccess: _data => {
-      alert('댓글이 삭제되었습니다.');
+      createToast({
+        message: messages.COMMENT_deleteSuccess,
+        type: 'warning',
+      });
       queryClient.invalidateQueries('comment-list');
     },
   });

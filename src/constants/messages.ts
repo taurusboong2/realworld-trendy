@@ -29,3 +29,7 @@ export const ARTICLE_updateDone = '게시글이 성공적으로 수정되었습�
 export const UNIQUE_title = '*title은 고유해야 합니다.';
 
 export const ARTICLE_failValidate = 'title은 고유해야 합니다.';
+
+export const COMMENT_createSuccess = '댓글이 성공적으로 생성되었습니다.';
+
+export const COMMENT_deleteSuccess = '댓글이 성공적으로 삭제되었습니다.';
