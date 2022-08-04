@@ -15,8 +15,8 @@ $backColor : #ddd;
 
   div[class$="skeletonItem"] {
     position: relative;
-    // width: 100%;
-    background-color: #ddd;
+    width: 100%;
+    background-color: $backColor;
     overflow: hidden;
     border-radius: 4px;
 

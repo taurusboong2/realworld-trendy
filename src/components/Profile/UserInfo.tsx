@@ -1,10 +1,11 @@
 import React, { FC } from 'react';
 import { useFetchCurrentUser } from '@/hooks/auth.hook';
+import UserInfoSkeleton from '../Skeletons/UserInfoSkeleton';
 
 const UserInfo: FC = () => {
   const { data: user } = useFetchCurrentUser();
 
-  if (!user) return <></>;
+  if (!user) return <UserInfoSkeleton />;
   const { username, bio, image } = user;
   return (
     <>
