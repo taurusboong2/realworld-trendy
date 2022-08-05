@@ -5,13 +5,15 @@ import { useInView } from 'react-intersection-observer';
 import { ArticleType } from '@/types/article';
 import { useFetchArticleListByOffset } from '@/hooks/article.hook';
 import ArticleListSkeleton from '@/components/Skeletons/ArticleListSkeleton';
+import ArticleSkeleton from '@/components/Skeletons/ArticleSkeleton';
+import UserInfoSkeleton from '@/components/Skeletons/UserInfoSkeleton';
 
 const Container: FC = () => {
   const { ref, inView } = useInView({
     threshold: 0.7,
   });
 
-  const { data, fetchNextPage, isFetching, isFetchingNextPage, hasNextPage } = useFetchArticleListByOffset();
+  const { data, fetchNextPage, isFetching, isLoading, isFetchingNextPage, hasNextPage } = useFetchArticleListByOffset();
 
   useEffect(() => {
     if (inView) {
@@ -31,7 +33,7 @@ const Container: FC = () => {
                 </li>
               </ul>
             </div>
-            {isFetching && <ArticleListSkeleton />}
+            {(isFetching || isLoading) && <ArticleListSkeleton />}
             <>
               {data?.pages.map((page, index) => {
                 return (
