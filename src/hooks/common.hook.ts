@@ -42,6 +42,8 @@ export const useNotFoundRedirect = () => {
     if (second === 0) {
       clearInterval(timer);
     }
+
+    return () => clearInterval(timer);
   }, [second]);
 
   return { second };
