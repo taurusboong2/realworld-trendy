@@ -1,10 +1,12 @@
 import React, { FC } from 'react';
 import { useFetchCurrentUser } from '@/hooks/auth.hook';
 import MyLink from '../MyLink';
+import NavBarSkeleton from '@/components/Skeletons/NavbarSkeleton';
 
 const NavBar: FC = () => {
-  const { data: loginUser } = useFetchCurrentUser();
+  const { data: loginUser, isFetching, isLoading } = useFetchCurrentUser();
 
+  if (isFetching || isLoading) return <NavBarSkeleton />;
   return (
     <>
       <nav className="navbar navbar-light">

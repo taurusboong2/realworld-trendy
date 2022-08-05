@@ -1,19 +1,21 @@
 import React, { FC } from 'react';
 import styles from './articleSkeleton.module.scss';
+import classnames from 'classnames/bind';
 
+const cx = classnames.bind(styles);
 const ArticleSkeleton: FC = () => {
   return (
     <div id="skeleton-wrap">
-      <div className={styles.articlePreviewSkeleton}>
-        <div className={styles.articleMetaSkeleton}>
-          <div className={`${styles.image} ${styles.skeletonItem}`} />
-          <div className={`${styles.profile} ${styles.skeletonItem}`} />
-          <div className={`${styles.favorite} ${styles.skeletonItem}`} />
+      <div className={cx('articlePreviewSkeleton')}>
+        <div className={cx('articleMetaSkeleton')}>
+          <div className={cx('image', 'skeletonItem')} />
+          <div className={cx('profile', 'skeletonItem')} />
+          <div className={cx('favorite', 'skeletonItem')} />
         </div>
-        <div className={styles.previewLinkSkeleton}>
-          <div className={`${styles.title} ${styles.skeletonItem}`} />
-          <div className={`${styles.description} ${styles.skeletonItem}`} />
-          <div className={`${styles.readmore} ${styles.skeletonItem}`} />
+        <div className={cx('previewLinkSkeleton')}>
+          <div className={cx('title', 'skeletonItem')} />
+          <div className={cx('description', 'skeletonItem')} />
+          <div className={cx('readmore', 'skeletonItem')} />
         </div>
       </div>
     </div>
