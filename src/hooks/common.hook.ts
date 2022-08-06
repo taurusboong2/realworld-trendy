@@ -4,7 +4,6 @@ import { FieldErrorsImpl, DeepRequired } from 'react-hook-form';
 import { LoginData } from '@/types/auth';
 import { isEmptyObj } from '@/commons/utils';
 import { useNavigate } from 'react-router';
-import * as messages from '@/constants/messages';
 
 export const useErrorToast = (formError: FieldErrorsImpl<DeepRequired<LoginData>>, errorMessage: string) => {
   useEffect(() => {
@@ -24,11 +23,6 @@ export const useNotFoundRedirect = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    createToast({
-      message: messages.REDIRECT_pageNotFound,
-      type: 'warning',
-      duration: 2500,
-    });
     setTimeout(() => {
       navigate('/');
     }, 3400);
