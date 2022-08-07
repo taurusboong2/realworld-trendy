@@ -1,17 +1,20 @@
-.form-control {
-  &.is_error {
-    border-color: $error;
-  }
-}
-
-.btn,
-.btn-lg {
-  &.is_error{
-    border-color: $error;
-    background-color: $error;
-
-    &:hover {
-      background-color: $error;
+:global {
+  .form-control {
+    &.is_error {
+      border-color: $error;
     }
   }
+
+  .btn,
+  .btn-lg {
+    &.is_error{
+      border-color: $error;
+      background-color: $error;
+
+      &:hover {
+        background-color: $error;
+      }
+    }
+  }
+
 }
