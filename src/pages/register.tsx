@@ -12,6 +12,7 @@ import { ErrorCode } from '@/constants/errorCodes';
 import { createToast } from '@/components/common/Toast';
 import * as messages from '../constants/messages';
 import * as regexes from '../constants/regexes';
+import { User } from '@sentry/react';
 
 const Register = () => {
   const {
@@ -31,17 +32,15 @@ const Register = () => {
           throw error;
         }
         const errorCode: number = error?.request.status;
-        const errorData: object = error.response?.data.errors;
+        const errorArray: string[] = Object.keys(error.response?.data.errors);
         if (errorCode === ErrorCode.FailValidation) {
           createToast({
-            message: messages.UNIQUE_idEmail,
+            message: messages.UNIQUE_idOrEmail(errorArray.join()),
             type: 'error',
           });
-          if (errorData.hasOwnProperty('email')) {
-            setError('user.email', { message: messages.AUTH_uniqueEmail });
-          } else if (errorData.hasOwnProperty('username')) {
-            setError('user.username', { message: messages.AUTH_uniqueUsername });
-          }
+          errorArray.forEach(e => {
+            setError(`user.${e}` as any, { message: messages.UNIQUE_idOrEmail(e) });
+          });
         }
       },
     });

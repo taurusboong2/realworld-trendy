@@ -6,7 +6,7 @@ export const MIN_length_2 = '*최소 2글자 이상이어야 합니다.';
 
 export const MIN_length_4 = '*최소 4글자 이상이어야 합니다.';
 
-export const UNIQUE_idEmail = 'username과 email은 고유해야 합니다!';
+export const UNIQUE_idOrEmail = (idOrEmail: string) => `*${idOrEmail}은 고유해야합니다.`;
 
 export const UNIQUE_title = '*title은 고유해야 합니다.';
 
@@ -15,10 +15,6 @@ export const AUTH_changedInfo = '사용자 정보 변경이 성공적으로 완�
 export const AUTH_required = '로그인이 필요한 페이지입니다!';
 
 export const AUTH_logoutDone = '로그아웃이 성공적으로 완료되었습니다.';
-
-export const AUTH_uniqueEmail = '*email은 고유해야합니다.';
-
-export const AUTH_uniqueUsername = '*username은 고유해야합니다.';
 
 export const AUTH_welcomeMessage = (userName: string) => {
   return `환영합니다 ${userName}님!`;
