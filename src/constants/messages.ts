@@ -16,6 +16,10 @@ export const AUTH_required = '로그인이 필요한 페이지입니다!';
 
 export const AUTH_logoutDone = '로그아웃이 성공적으로 완료되었습니다.';
 
+export const AUTH_uniqueEmail = '*email은 고유해야합니다.';
+
+export const AUTH_uniqueUsername = '*username은 고유해야합니다.';
+
 export const AUTH_welcomeMessage = (userName: string) => {
   return `환영합니다 ${userName}님!`;
 };

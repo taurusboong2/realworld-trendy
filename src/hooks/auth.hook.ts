@@ -22,18 +22,6 @@ export const useCreateNewAccount = () => {
       });
       navigate('/');
     },
-    onError: error => {
-      if (!axios.isAxiosError(error)) {
-        throw error;
-      }
-      const errorCode: number = error?.request.status;
-      if (errorCode === ErrorCode.FailValidation) {
-        createToast({
-          message: messages.UNIQUE_idEmail,
-          type: 'error',
-        });
-      }
-    },
   });
 };
 

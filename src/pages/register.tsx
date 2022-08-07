@@ -7,6 +7,9 @@ import { useCreateNewAccount } from '../hooks/auth.hook';
 import { useForm } from 'react-hook-form';
 import { NewAccountType } from '../types/auth';
 import { ErrorMessage } from '../commons/errorStyledComponents';
+import axios from 'axios';
+import { ErrorCode } from '@/constants/errorCodes';
+import { createToast } from '@/components/common/Toast';
 import * as messages from '../constants/messages';
 import * as regexes from '../constants/regexes';
 
@@ -15,13 +18,33 @@ const Register = () => {
     register,
     handleSubmit,
     formState: { errors },
+    setError,
   } = useForm<NewAccountType>();
   const errorUser = errors.user;
 
   const { mutate: signUp, status, isLoading } = useCreateNewAccount();
 
   const submitSignup = async (register: NewAccountType) => {
-    await signUp(register);
+    await signUp(register, {
+      onError: error => {
+        if (!axios.isAxiosError(error)) {
+          throw error;
+        }
+        const errorCode: number = error?.request.status;
+        const errorData: object = error.response?.data.errors;
+        if (errorCode === ErrorCode.FailValidation) {
+          createToast({
+            message: messages.UNIQUE_idEmail,
+            type: 'error',
+          });
+          if (errorData.hasOwnProperty('email')) {
+            setError('user.email', { message: messages.AUTH_uniqueEmail });
+          } else if (errorData.hasOwnProperty('username')) {
+            setError('user.username', { message: messages.AUTH_uniqueUsername });
+          }
+        }
+      },
+    });
   };
 
   const onEnterKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
