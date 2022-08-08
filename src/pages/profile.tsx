@@ -34,7 +34,6 @@ const Profile = () => {
                     key={article.slug}
                     author={article.author.username}
                     date={article.createdAt}
-                    heart={article.favoritesCount}
                     title={article.title}
                     description={article.description}
                     slug={article.slug}

@@ -77,6 +77,10 @@ export const useDeleteArticle = (slug: string) => {
 
   return useMutation(deleteArticle, {
     onSuccess: _data => {
+      createToast({
+        message: messages.ARTICLE_deleteComplete,
+        type: 'info',
+      });
       queryClient.invalidateQueries(['article-list']);
       queryClient.removeQueries(['article', slug]);
       navigate('/profile');

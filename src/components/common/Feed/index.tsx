@@ -4,7 +4,6 @@ import MyLink from '../MyLink';
 type Props = {
   author: string;
   date: string;
-  heart: number;
   title: string;
   description: string;
   inRef?: React.Dispatch<React.SetStateAction<HTMLDivElement | null>>;
@@ -12,7 +11,7 @@ type Props = {
   image?: string;
 };
 
-const Feed: FC<Props> = ({ slug, author, date, heart, title, description, image, inRef }) => {
+const Feed: FC<Props> = ({ slug, author, date, title, description, image, inRef }) => {
   return (
     <>
       <div className="article-preview" ref={inRef}>
@@ -26,9 +25,6 @@ const Feed: FC<Props> = ({ slug, author, date, heart, title, description, image,
             </a>
             <span className="date">{date}</span>
           </div>
-          <button className="btn btn-outline-primary btn-sm pull-xs-right">
-            <i className="ion-heart" /> {heart}
-          </button>
         </div>
         <MyLink href={`/article-detail/${slug}`} className="preview-link">
           <h1>{title}</h1>

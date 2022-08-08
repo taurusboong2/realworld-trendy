@@ -28,6 +28,8 @@ export const ARTICLE_notFound = '*존재하지 않는 게시글입니다.';
 
 export const ARTICLE_failValidate = 'title은 고유해야 합니다.';
 
+export const ARTICLE_deleteComplete = '게시글이 성공적으로 삭제되었습니다.';
+
 export const COMMENT_createSuccess = '댓글이 성공적으로 생성되었습니다.';
 
 export const COMMENT_deleteSuccess = '댓글이 성공적으로 삭제되었습니다.';

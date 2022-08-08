@@ -45,7 +45,6 @@ const Container: FC = () => {
                             slug={article.slug}
                             author={article.author.username}
                             date={article.createdAt}
-                            heart={article.favoritesCount}
                             title={article.title}
                             description={article.description}
                           />

@@ -10,7 +10,6 @@ const ArticleSkeleton: FC = () => {
         <div className={cx('articleMetaSkeleton')}>
           <div className={cx('image', 'skeletonItem')} />
           <div className={cx('profile', 'skeletonItem')} />
-          <div className={cx('favorite', 'skeletonItem')} />
         </div>
         <div className={cx('previewLinkSkeleton')}>
           <div className={cx('title', 'skeletonItem')} />
