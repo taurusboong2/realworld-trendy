@@ -33,7 +33,6 @@ const Login = () => {
 
   useErrorToast(errors, '로그인 정보를 다시 확인해주세요.');
 
-  if (isLoading) return <LoadingSpinner />;
   return (
     <Layout>
       <div className="auth-page">
@@ -86,7 +85,7 @@ const Login = () => {
                     type="button"
                     onClick={handleSubmit(loginSubmit)}
                     disabled={errorUser || isLoading ? true : false}>
-                    Sign in
+                    {isLoading ? '...' : 'Sign in'}
                   </button>
                 </fieldset>
               </form>

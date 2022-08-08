@@ -22,7 +22,7 @@ const Register = () => {
   } = useForm<NewAccountType>();
   const errorUser = errors.user;
 
-  const { mutate: signUp, status, isLoading } = useCreateNewAccount();
+  const { mutate: signUp, isLoading } = useCreateNewAccount();
 
   const submitSignup = async (register: NewAccountType) => {
     await signUp(register, {
@@ -51,7 +51,6 @@ const Register = () => {
     }
   };
 
-  if (status === 'loading') return <LoadingSpinner />;
   return (
     <Layout>
       <div className="auth-page">
@@ -119,7 +118,7 @@ const Register = () => {
                     type="button"
                     onClick={handleSubmit(submitSignup)}
                     disabled={errorUser || isLoading ? true : false}>
-                    Sign up
+                    {isLoading ? '...' : 'Sign Up'}
                   </button>
                 </fieldset>
               </form>
