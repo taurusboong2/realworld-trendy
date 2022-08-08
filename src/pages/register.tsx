@@ -12,7 +12,6 @@ import { ErrorCode } from '@/constants/errorCodes';
 import { createToast } from '@/components/common/Toast';
 import * as messages from '../constants/messages';
 import * as regexes from '../constants/regexes';
-import { User } from '@sentry/react';
 
 const Register = () => {
   const {

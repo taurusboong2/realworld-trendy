@@ -6,7 +6,7 @@ export const MIN_length_2 = '*최소 2글자 이상이어야 합니다.';
 
 export const MIN_length_4 = '*최소 4글자 이상이어야 합니다.';
 
-export const UNIQUE_idOrEmail = (idOrEmail: string) => `*${idOrEmail}은 고유해야합니다.`;
+export const UNIQUE_idOrEmail = (idOrEmail: string) => `*${idOrEmail}은 고유해야 합니다.`;
 
 export const UNIQUE_title = '*title은 고유해야 합니다.';
 
@@ -16,13 +16,9 @@ export const AUTH_required = '로그인이 필요한 페이지입니다!';
 
 export const AUTH_logoutDone = '로그아웃이 성공적으로 완료되었습니다.';
 
-export const AUTH_welcomeMessage = (userName: string) => {
-  return `환영합니다 ${userName}님!`;
-};
+export const AUTH_welcomeMessage = (userName: string) => `환영합니다 ${userName}님!`;
 
-export const AUTH_registerDone = (userName: string) => {
-  return `${userName}님의 회원가입이 성공적으로 진행되었습니다.`;
-};
+export const AUTH_registerDone = (userName: string) => `${userName}님의 회원가입이 성공적으로 진행되었습니다.`;
 
 export const ARTICLE_createDone = '게시글이 성공적으로 생성되었습니다.';
 
