@@ -20,6 +20,8 @@ export const AUTH_welcomeMessage = (userName: string) => `환영합니다 ${user
 
 export const AUTH_registerDone = (userName: string) => `${userName}님의 회원가입이 성공적으로 진행되었습니다.`;
 
+export const AUTH_Forbidden = 'email 또는 password를 확인해주세요!';
+
 export const ARTICLE_createDone = '게시글이 성공적으로 생성되었습니다.';
 
 export const ARTICLE_updateDone = '게시글이 성공적으로 수정되었습니다.';

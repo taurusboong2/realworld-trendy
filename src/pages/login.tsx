@@ -10,6 +10,9 @@ import { ErrorMessage } from '../commons/errorStyledComponents';
 import * as messages from '../constants/messages';
 import * as regexes from '../constants/regexes';
 import { useErrorToast } from '@/hooks/common.hook';
+import axios from 'axios';
+import { createToast } from '@/components/common/Toast';
+import { ErrorCode } from '@/constants/errorCodes';
 
 const Login = () => {
   const {
@@ -22,7 +25,19 @@ const Login = () => {
   const { mutateAsync: login, isLoading } = useLogin();
 
   const loginSubmit = async (register: LoginData) => {
-    await login(register);
+    await login(register, {
+      onError: error => {
+        if (!axios.isAxiosError(error)) {
+          throw error;
+        }
+        const errorStatus = error.response?.status;
+        if (errorStatus === ErrorCode.Forbidden)
+          createToast({
+            message: messages.AUTH_Forbidden,
+            type: 'error',
+          });
+      },
+    });
   };
 
   const onEnterKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
