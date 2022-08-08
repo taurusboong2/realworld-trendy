@@ -7,7 +7,6 @@ import ProfileBox from '../components/Article/ProfileBox';
 import List from '../components/Comment/List';
 import { useParams } from 'react-router';
 import { useDeleteArticle, useFetchArticle } from '../hooks/article.hook';
-import { ArticleType } from '../types/article';
 import Layout from '@/components/common/Layout';
 
 const ArticleDetail = () => {
@@ -23,18 +22,19 @@ const ArticleDetail = () => {
 
   const articleData = data?.data.article;
 
-  if (isLoading) return <LoadingSpinner />;
+  if (!articleData) return <></>;
   return (
     <Layout>
+      {/* {isLoading && <LoadingSpinner />} */}
       <div className="article-page">
-        <Banner articleData={articleData as ArticleType} />
+        <Banner articleData={articleData} />
 
         <div className="container page">
-          <Container articleData={articleData as ArticleType} />
+          <Container articleData={articleData} />
 
           <hr />
 
-          <ProfileBox articleData={articleData as ArticleType} deleteHandler={submitDeleteArticle} />
+          <ProfileBox articleData={articleData} deleteHandler={submitDeleteArticle} />
 
           <div className="row">
             <div className="col-xs-12 col-md-8 offset-md-2">

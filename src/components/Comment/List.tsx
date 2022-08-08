@@ -9,9 +9,10 @@ const List = () => {
   const { slug } = useParams();
   const { data: comments, isLoading } = useFetchComments(slug as string);
 
-  if (isLoading) return <LoadingSpinner />;
+  // if (isLoading) return <LoadingSpinner />;
   return (
     <div>
+      {isLoading && <LoadingSpinner />}
       {comments?.comments.map((comment: CommentDataType) => (
         <Comment key={comment.id} comment={comment} />
       ))}

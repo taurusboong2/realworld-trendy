@@ -1,6 +1,5 @@
 import React, { FC, useRef } from 'react';
 import MyLink from '../common/MyLink';
-import LoadingSpinner from '../common/LoadingSpinner';
 import { useFetchCurrentUser } from '@/hooks/auth.hook';
 import { useAddComment } from '@/hooks/comment.hook';
 import { useParams } from 'react-router';
@@ -24,6 +23,7 @@ const CommentForm: FC = () => {
         comments: commentData as AddCommentType,
       },
     });
+    commentRef.current!.value = '';
   };
 
   if (!user) {
@@ -37,7 +37,6 @@ const CommentForm: FC = () => {
     );
   }
 
-  if (isLoading) return <LoadingSpinner />;
   return (
     <form className="card comment-form" onSubmit={submitAddComment}>
       <div className="card-block">
