@@ -47,6 +47,7 @@ const Container: FC = () => {
                             date={article.createdAt}
                             title={article.title}
                             description={article.description}
+                            image={article.author.image}
                           />
                           <hr ref={ref} />
                         </Fragment>
