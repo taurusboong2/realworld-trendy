@@ -39,15 +39,16 @@ const Container: FC = () => {
                 return (
                   <div key={index}>
                     {page.articles.map((article: ArticleType) => {
+                      const { slug, author, createdAt, title, description } = article;
                       return (
-                        <Fragment key={article.slug}>
+                        <Fragment key={slug}>
                           <Feed
-                            slug={article.slug}
-                            author={article.author.username}
-                            date={article.createdAt}
-                            title={article.title}
-                            description={article.description}
-                            image={article.author.image}
+                            slug={slug}
+                            author={author.username}
+                            date={createdAt}
+                            title={title}
+                            description={description}
+                            image={author.image}
                           />
                           <hr ref={ref} />
                         </Fragment>
