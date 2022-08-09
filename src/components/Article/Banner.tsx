@@ -14,11 +14,11 @@ const Banner: FC<Props> = ({ articleData }) => {
           <h1>{articleData.title}</h1>
 
           <div className="article-meta">
-            <MyLink href="">
+            <MyLink href="/profile">
               <img src={articleData.author.image} />
             </MyLink>
             <div className="info">
-              <MyLink href="" className="author">
+              <MyLink href="/profile" className="author">
                 {articleData.author.username}
               </MyLink>
               <span className="date">{new Date(articleData.createdAt).toDateString()}</span>
