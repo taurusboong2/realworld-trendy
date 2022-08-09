@@ -9,24 +9,30 @@ type Props = {
   inRef?: React.Dispatch<React.SetStateAction<HTMLDivElement | null>>;
   slug?: string;
   image?: string;
+  noticeOpt?: {
+    isNotice?: boolean;
+    noticeSlug?: string;
+  };
 };
 
-const Feed: FC<Props> = ({ slug, author, date, title, description, image, inRef }) => {
+const Feed: FC<Props> = ({ slug, author, date, title, description, image, inRef, noticeOpt }) => {
   return (
     <>
       <div className="article-preview" ref={inRef}>
         <div className="article-meta">
-          <MyLink href="profile">
+          <a href={noticeOpt?.isNotice ? 'https://github.com/taurusboong2' : '/profile'}>
             <img src={image} />
-          </MyLink>
+          </a>
           <div className="info">
-            <a href="/profile" className="author">
+            <a href={noticeOpt?.isNotice ? 'https://github.com/taurusboong2' : '/profile'} className="author">
               {author}
             </a>
             <span className="date">{date}</span>
           </div>
         </div>
-        <MyLink href={`/article-detail/${slug}`} className="preview-link">
+        <MyLink
+          href={noticeOpt?.isNotice ? `/notice/${noticeOpt.noticeSlug}` : `/article-detail/${slug}`}
+          className="preview-link">
           <h1>{title}</h1>
           <p>{description}</p>
           <span>Read more...</span>

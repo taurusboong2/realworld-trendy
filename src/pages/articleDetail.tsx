@@ -1,6 +1,5 @@
 import React from 'react';
 import CommentForm from '../components/Comment/Form';
-import LoadingSpinner from '../components/common/LoadingSpinner';
 import Banner from '../components/Article/Banner';
 import Container from '../components/Article/Container';
 import ProfileBox from '../components/Article/ProfileBox';

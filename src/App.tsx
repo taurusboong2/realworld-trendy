@@ -11,6 +11,7 @@ import Profile from './pages/profile';
 import CreatePage from './pages/create';
 import ArticleDetail from './pages/articleDetail';
 import EditPage from './pages/edit';
+import Notice from './pages/notice';
 import NotFound from './components/common/NotFound';
 
 import './styles/_base.scss';
@@ -39,6 +40,7 @@ const App: FC = () => {
               <Route path="/create" element={<CreatePage />} />
               <Route path="/article-detail/:slug" element={<ArticleDetail />} />
               <Route path="/edit/:slug" element={<EditPage />} />
+              <Route path="/notice/:slug" element={<Notice />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Suspense>

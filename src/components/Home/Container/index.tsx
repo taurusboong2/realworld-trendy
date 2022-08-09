@@ -5,6 +5,7 @@ import { useInView } from 'react-intersection-observer';
 import { ArticleType } from '@/types/article';
 import { useFetchArticleListByOffset } from '@/hooks/article.hook';
 import ArticleListSkeleton from '@/components/Skeletons/ArticleListSkeleton';
+import { notice } from '@/constants/noticeFeeds';
 
 const Container: FC = () => {
   const { ref, inView } = useInView({
@@ -55,6 +56,15 @@ const Container: FC = () => {
                   </div>
                 );
               })}
+              <Feed
+                noticeOpt={{ isNotice: true, noticeSlug: '공지사항' }}
+                slug={notice.slug}
+                author={notice.author}
+                date={notice.date}
+                title={notice.title}
+                description={notice.description}
+                image={notice.image}
+              />
               {hasNextPage && isFetchingNextPage ? <LoadingSpinner /> : null}
             </>
           </div>
