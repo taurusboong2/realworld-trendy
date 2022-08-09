@@ -6,6 +6,10 @@ export const MIN_length_2 = '*최소 2글자 이상이어야 합니다.';
 
 export const MIN_length_4 = '*최소 4글자 이상이어야 합니다.';
 
+export const MAX_length_20 = '*최소 20글자 이하이어야 합니다.';
+
+export const MAX_length_40 = '*최소 40글자 이하이어야 합니다.';
+
 export const UNIQUE_idOrEmail = (idOrEmail: string) => `*${idOrEmail}은 고유해야 합니다.`;
 
 export const UNIQUE_title = '*title은 고유해야 합니다.';

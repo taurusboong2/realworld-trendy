@@ -106,6 +106,10 @@ const EditForm: FC<Props> = ({ isCreatePage }) => {
                     <input
                       {...register('article.title', {
                         required: messages.REQUIRED_message,
+                        maxLength: {
+                          value: 20,
+                          message: messages.MAX_length_20,
+                        },
                       })}
                       placeholder={articleError?.title ? '' : 'title'}
                       type="text"
@@ -115,25 +119,29 @@ const EditForm: FC<Props> = ({ isCreatePage }) => {
                   </fieldset>
                   <fieldset className="form-group">
                     <textarea
-                      {...register('article.description', {
-                        required: messages.REQUIRED_message,
-                      })}
-                      placeholder={articleError?.description ? '' : 'description'}
-                      className={classnames('form-control form-control-lg', { is_error: articleError?.description })}
-                      rows={8}
-                    />
-                    {articleError?.description && <ErrorMessage>{articleError?.description.message}</ErrorMessage>}
-                  </fieldset>
-                  <fieldset className="form-group">
-                    <input
                       {...register('article.body', {
                         required: messages.REQUIRED_message,
                       })}
                       placeholder={articleError?.body ? '' : 'body'}
-                      type="text"
+                      rows={8}
                       className={classnames('form-control form-control-lg', { is_error: articleError?.body })}
                     />
                     {articleError?.body && <ErrorMessage>{articleError?.body.message}</ErrorMessage>}
+                  </fieldset>
+                  <fieldset className="form-group">
+                    <input
+                      {...register('article.description', {
+                        required: messages.REQUIRED_message,
+                        maxLength: {
+                          value: 40,
+                          message: messages.MAX_length_40,
+                        },
+                      })}
+                      placeholder={articleError?.description ? '' : 'description'}
+                      className={classnames('form-control form-control-lg', { is_error: articleError?.description })}
+                      type="text"
+                    />
+                    {articleError?.description && <ErrorMessage>{articleError?.description.message}</ErrorMessage>}
                   </fieldset>
                   <TagInput tagList={tagList} pushTag={pushTag} deleteTag={deleteTag} />
                   <button

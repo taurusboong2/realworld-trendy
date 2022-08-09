@@ -5,8 +5,6 @@ import { useInView } from 'react-intersection-observer';
 import { ArticleType } from '@/types/article';
 import { useFetchArticleListByOffset } from '@/hooks/article.hook';
 import ArticleListSkeleton from '@/components/Skeletons/ArticleListSkeleton';
-import ArticleSkeleton from '@/components/Skeletons/ArticleSkeleton';
-import UserInfoSkeleton from '@/components/Skeletons/UserInfoSkeleton';
 
 const Container: FC = () => {
   const { ref, inView } = useInView({

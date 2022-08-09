@@ -11,7 +11,7 @@ import Layout from '@/components/common/Layout';
 
 const ArticleDetail = () => {
   const { slug } = useParams();
-  const { data, isLoading } = useFetchArticle(slug as string);
+  const { data } = useFetchArticle(slug as string);
   const { mutate: deleteArticle } = useDeleteArticle(slug as string);
 
   const submitDeleteArticle = async () => {
@@ -25,7 +25,6 @@ const ArticleDetail = () => {
   if (!articleData) return <></>;
   return (
     <Layout>
-      {/* {isLoading && <LoadingSpinner />} */}
       <div className="article-page">
         <Banner articleData={articleData} />
 

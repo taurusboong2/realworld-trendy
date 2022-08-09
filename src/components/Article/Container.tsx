@@ -10,8 +10,10 @@ const Container: FC<Props> = ({ articleData }) => {
     <>
       <div className="row article-content">
         <div className="col-md-12">
-          <p>{articleData.description}</p>
-          <p>body: {articleData.body}</p>
+          <p>{articleData.body}</p>
+          <hr />
+          <span className="description">description</span>
+          <p className="article-detail-description">{articleData.description}</p>
           <ul className="tag-list">
             {articleData.tagList.map(tag => (
               <li key={tag} className="tag-default tag-pill tag-outline">
