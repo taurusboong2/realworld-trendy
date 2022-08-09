@@ -5,8 +5,8 @@ const Banner = () => {
     <>
       <div className="banner">
         <div className="container">
-          <h1 className="logo-font">conduit</h1>
-          <p>A place to share your knowledge.</p>
+          <h1 className="logo-font">TauBoong</h1>
+          <p>Wanna be a developer who always grow up</p>
         </div>
       </div>
     </>
