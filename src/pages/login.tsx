@@ -3,7 +3,6 @@ import Layout from '@/components/common/Layout';
 import MyLink from '../components/common/MyLink';
 import classnames from 'classnames';
 import { useLogin } from '../hooks/auth.hook';
-import LoadingSpinner from '../components/common/LoadingSpinner';
 import { useForm } from 'react-hook-form';
 import { LoginData } from '../types/auth';
 import { ErrorMessage } from '../commons/errorStyledComponents';
@@ -56,7 +55,7 @@ const Login = () => {
             <div className="col-md-6 offset-md-3 col-xs-12">
               <h1 className="text-xs-center">Sign In</h1>
               <p className="text-xs-center">
-                <MyLink href="/signUp">Need an account?</MyLink>
+                <MyLink href="/register">Need an account?</MyLink>
               </p>
 
               <form onSubmit={handleSubmit(loginSubmit)}>

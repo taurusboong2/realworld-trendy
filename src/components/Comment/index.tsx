@@ -12,7 +12,6 @@ type Props = {
 
 const Comment: FC<Props> = ({ comment }) => {
   const { slug } = useParams();
-  const { data: user } = useFetchCurrentUser();
 
   const { mutate: deleteComment } = useDeleteComment();
 
