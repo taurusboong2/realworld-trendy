@@ -3,17 +3,18 @@ import MyLink from '../common/MyLink';
 import DeleteBtn from './DeleteBtn';
 import { useParams } from 'react-router';
 import { CommentDataType } from '@/types/comment';
-import { useFetchCurrentUser } from '@/hooks/auth.hook';
 import { useDeleteComment } from '@/hooks/comment.hook';
+import LoadingSpinner from '../common/LoadingSpinner';
 
 type Props = {
   comment: CommentDataType;
+  isFetching: boolean;
 };
 
-const Comment: FC<Props> = ({ comment }) => {
+const Comment: FC<Props> = ({ comment, isFetching }) => {
   const { slug } = useParams();
 
-  const { mutate: deleteComment } = useDeleteComment();
+  const { mutate: deleteComment, isLoading } = useDeleteComment();
 
   const handleDelete = async () => {
     if (confirm('댓글을 삭제하시겠습니까?')) {
@@ -26,6 +27,8 @@ const Comment: FC<Props> = ({ comment }) => {
     }
   };
 
+  if (isLoading) return <LoadingSpinner />;
+  if (isFetching) return <></>;
   return (
     <div className="card">
       <div className="card-block">

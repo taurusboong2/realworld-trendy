@@ -45,7 +45,7 @@ const CommentForm: FC = () => {
       <div className="card-footer">
         <img className="comment-author-img" src={user.image as string} />
         <button className="btn btn-sm btn-primary" type="button" onClick={submitAddComment} disabled={isLoading}>
-          Post Comment
+          {isLoading ? 'Loading...' : 'Post Comment'}
         </button>
       </div>
     </form>
