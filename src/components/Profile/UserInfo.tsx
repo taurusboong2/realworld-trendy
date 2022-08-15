@@ -16,10 +16,6 @@ const UserInfo: FC = () => {
               <img src={image} className="user-img" />
               <h4>{username}</h4>
               <p>{bio}</p>
-              <button className="btn btn-sm btn-outline-secondary action-btn">
-                <i className="ion-plus-round" />
-                &nbsp; Follow {username}
-              </button>
             </div>
           </div>
         </div>

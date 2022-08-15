@@ -13,7 +13,7 @@ import {
 export const fetchArticleList = async () => {
   if (!getTokenFromStorage()) return;
   if (getTokenFromStorage()) {
-    const response = await apiWithAuth.get<ArticleListType>(`/articles`);
+    const response = await apiWithAuth.get<ArticleListType>(`/articles?limit=70`);
     return response;
   }
   return null;

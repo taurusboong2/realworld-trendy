@@ -11,7 +11,6 @@ const UserInfoSkeleton: FC = () => {
         <div className={cx('userImage', 'skeletonItem')} />
         <div className={cx('userName', 'skeletonItem')} />
         <div className={cx('userBio', 'skeletonItem')} />
-        <div className={cx('followBtn', 'skeletonItem')} />
       </div>
     </div>
   );
