@@ -6,7 +6,7 @@ const Banner = () => {
       <div className="banner">
         <div className="container">
           <h1 className="logo-font">TauBoong</h1>
-          <p>Wanna be a developer who always grow up</p>
+          <p>I will become a developer who learns step by step</p>
         </div>
       </div>
     </>

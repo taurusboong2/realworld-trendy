@@ -1,11 +1,11 @@
 import React, { FC, Fragment, useEffect } from 'react';
-import Feed from '@/components/common/Feed';
-import LoadingSpinner from '@/components/common/LoadingSpinner';
 import { useInView } from 'react-intersection-observer';
-import { ArticleType } from '@/types/article';
+
 import { useFetchArticleListByOffset } from '@/hooks/article.hook';
+import { ArticleType } from '@/types';
+import { Feed, LoadingSpinner } from '@/components/common';
 import ArticleListSkeleton from '@/components/Skeletons/ArticleListSkeleton';
-import { notice } from '@/constants/noticeFeeds';
+import { notice } from '@/constants';
 
 const Container: FC = () => {
   const { ref, inView } = useInView({
