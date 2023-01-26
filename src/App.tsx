@@ -44,7 +44,6 @@ const App: FC = () => {
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Suspense>
-          <ReactQueryDevtools initialIsOpen={false} />
         </QueryClientProvider>
       </BrowserRouter>
     </>
