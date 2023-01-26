@@ -1,17 +1,15 @@
 import React, { KeyboardEvent } from 'react';
-import Layout from '@/components/common/Layout';
-import MyLink from '../components/common/MyLink';
-import classnames from 'classnames';
-import { useLogin } from '../hooks/auth.hook';
-import { useForm } from 'react-hook-form';
-import { LoginData } from '../types/auth';
-import { ErrorMessage } from '../commons/errorStyledComponents';
-import * as messages from '../constants/messages';
-import * as regexes from '../constants/regexes';
-import { useErrorToast } from '@/hooks/common.hook';
 import axios from 'axios';
+import { useForm } from 'react-hook-form';
+import classnames from 'classnames';
+
+import { useErrorToast } from '@/hooks/common.hook';
+import { useLogin } from '@/hooks/auth.hook';
+import { LoginData } from '@/types';
+import { ErrorMessage } from '@/commons/errorStyledComponents';
+import { Layout, MyLink } from '@/components/common';
 import { createToast } from '@/components/common/Toast';
-import { ErrorCode } from '@/constants/errorCodes';
+import { AUTH_Forbidden, REQUIRED_message, loginEmailFormat, WRONG_email, MIN_length_4, ErrorCode } from '@/constants';
 
 const Login = () => {
   const {
@@ -32,7 +30,7 @@ const Login = () => {
         const errorStatus = error.response?.status;
         if (errorStatus === ErrorCode.Forbidden)
           createToast({
-            message: messages.AUTH_Forbidden,
+            message: AUTH_Forbidden,
             type: 'error',
           });
       },
@@ -63,10 +61,10 @@ const Login = () => {
                   <fieldset className="form-group">
                     <input
                       {...register('user.email', {
-                        required: messages.REQUIRED_message,
+                        required: REQUIRED_message,
                         pattern: {
-                          value: regexes.loginEmailFormat,
-                          message: messages.WRONG_email,
+                          value: loginEmailFormat,
+                          message: WRONG_email,
                         },
                       })}
                       className={classnames('form-control form-control-lg', { is_error: errorUser?.email })}
@@ -79,10 +77,10 @@ const Login = () => {
                   <fieldset className="form-group">
                     <input
                       {...register('user.password', {
-                        required: messages.REQUIRED_message,
+                        required: REQUIRED_message,
                         minLength: {
                           value: 4,
-                          message: messages.MIN_length_4,
+                          message: MIN_length_4,
                         },
                       })}
                       className={classnames('form-control form-control-lg', { is_error: errorUser?.password })}
