@@ -23,14 +23,6 @@ export type ArticleDataType = {
   article: ArticleType;
 };
 
-// export type NewArticleData = {
-//   article: {
-//     title: string;
-//     description: string;
-//     body: string;
-//     tagList?: string[] | [];
-//   };
-// };
 export type NewArticleData = Partial<ArticleDataType>;
 
 export type updateMutation = {
